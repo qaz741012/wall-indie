@@ -10,12 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180313062950) do
+ActiveRecord::Schema.define(version: 20180314075037) do
 
   create_table "artists", force: :cascade do |t|
     t.string "name"
     t.string "photo"
     t.text "intro"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "name"
+    t.string "photo"
+    t.text "intro"
+    t.date "date"
+    t.string "time"
+    t.string "ticket_link"
+    t.string "organizer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "places", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "tel"
+    t.text "info"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
