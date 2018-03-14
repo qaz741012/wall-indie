@@ -9,6 +9,6 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :events, only: [:index, :edit, :update]
     resources :users, only: [:index, :destroy]
-    root "events#index"
+    root "users#index"
   end
 end
