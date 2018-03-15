@@ -38,7 +38,9 @@ Rails.application.configure do
 
   # 開發時先用這個gem來代替真實寄出email
   config.action_mailer.delivery_method = :letter_opener
-  config.action_mailer.smtp_settings = config_for(:email).symbolize_keys
+
+  #先把email.yml藏起來
+  #config.action_mailer.smtp_settings = config_for(:email).symbolize_keys
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
