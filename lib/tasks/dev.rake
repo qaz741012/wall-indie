@@ -9,7 +9,9 @@ namespace :dev do
         name: name,
         email: "#{name}@example.co",
         password: "12345678",
-        avatar: file
+        avatar: file,
+        # 繞過使用者email認證
+        confirmed_at: Time.now
       )
       user.save!
       puts user.name
@@ -22,7 +24,7 @@ namespace :dev do
       rand_user = User.select{|x| x!=user}.sample(5)
       rand(5).times do |i|
         user.friendships.create!(
-          user_id: user.id, 
+          user_id: user.id,
           friend_id: rand_user[i].id)
       end
     end
@@ -103,7 +105,7 @@ namespace :dev do
     Place.all.each do |place|
       rand(5).times do |i|
         place.cessions.create!(
-          place_id: place.id, 
+          place_id: place.id,
           event_id: Event.all.sample.id)
       end
     end
@@ -121,7 +123,7 @@ namespace :dev do
       rand_artist = Event.select{|x| x!=event}.sample(5)
       rand(5).times do |i|
         event.shows.create!(
-          event_id: event.id, 
+          event_id: event.id,
           artist_id: rand_artist[i].id)
       end
     end
@@ -134,7 +136,7 @@ namespace :dev do
     User.all.each do |user|
       rand(5).times do |i|
         user.favorits.create!(
-          user_id: user.id, 
+          user_id: user.id,
           artist_id: Artist.all.sample.id)
       end
     end
@@ -151,7 +153,7 @@ namespace :dev do
     User.all.each do |user|
       rand(5).times do |i|
         user.artist_followships.create!(
-          user_id: user.id, 
+          user_id: user.id,
           artist_id: Artist.all.sample.id)
       end
     end
@@ -168,7 +170,7 @@ namespace :dev do
     User.all.each do |user|
       rand(5).times do |i|
         user.event_followships.create!(
-          user_id: user.id, 
+          user_id: user.id,
           event_id: Event.all.sample.id)
       end
     end

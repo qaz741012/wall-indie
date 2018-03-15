@@ -11,22 +11,26 @@ User.destroy_all
 # Default admin
 User.create(
   id: "1",
-  name:"Tony", 
-  email: "qwe@qwe.qwe", 
-  password: "qweqwe", 
-  role: "admin", 
-  avatar: File.open("#{Rails.root}/public/avatar/user#{8}.jpg"))
+  name:"Tony",
+  email: "qwe@qwe.qwe",
+  password: "qweqwe",
+  role: "admin",
+  avatar: File.open("#{Rails.root}/public/avatar/user#{8}.jpg"),
+  # 繞過使用者email認證
+  confirmed_at: Time.now
+  )
 puts "Default admin created!"
 
 
 #Default user
 User.create(
   id: "2",
-  name:"Acow", 
-  email: "123@123.123", 
-  password: "123123", 
-  role: "normal", 
-  avatar: File.open("#{Rails.root}/public/avatar/user#{4}.jpg"))
+  name:"Acow",
+  email: "123@123.123",
+  password: "123123",
+  role: "normal",
+  avatar: File.open("#{Rails.root}/public/avatar/user#{4}.jpg"),
+  # 繞過使用者email認證
+  confirmed_at: Time.now
+  )
 puts "Default user created!"
-
-
