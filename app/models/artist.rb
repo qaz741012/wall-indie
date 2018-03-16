@@ -1,6 +1,9 @@
 class Artist < ApplicationRecord
   has_many :musics
+
+  #artist_event relationship
   has_many :shows
+  has_many :events, through: :shows
 
   #user followed
   has_many :artist_followships
