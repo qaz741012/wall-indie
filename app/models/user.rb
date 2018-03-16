@@ -10,11 +10,11 @@ class User < ApplicationRecord
   has_many :user_followed_events, through: :event_followships, source: :event
 
   #follow artist
-  has_many :artist_followships
+  has_many :artist_followships, dependent: :destroy
   has_many :user_followed_artists, through: :artist_followships, source: :artist
 
   #favorits artist
-  has_many :favorits
+  has_many :favorits, dependent: :destroy
   has_many :favorited_artists, through: :favorits, source: :artist
 
   #friends 自關聯
