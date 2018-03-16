@@ -284,4 +284,9 @@ Devise.setup do |config|
   info_fields: "email,name",
   callback_url: "http://localhost:3000/users/auth/facebook/callback"
 
+  #Spotify as provider
+  spotify_config = Rails.application.config_for(:spotify)
+  config.omniauth :spotify, spotify_config["app_id"], spotify_config["secret"],
+  scope: "user-read-email"
+
 end
