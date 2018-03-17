@@ -1,6 +1,8 @@
 
 <h3>音樂人資訊</h3>
 
+<%= render partial: "shared/user_followed_artist", locals: {artist: @artist} %>
+
 <table class="table">
     <tr>
       <th>名稱</th>
@@ -35,8 +37,17 @@
   </tbody>
 </table>
 
-
-
+<h3>人氣</h3>
+<table class="table table-sm">
+  <tr>
+    <th>喜愛人數</th>
+    <td><%= @artist.favorits_count %></td>
+  </tr>
+  <tr>
+    <th>追蹤人數</th>
+    <td><%= @artist.artist_followships_count %></td>
+  </tr>
+</table>
 
 
 <%= link_to 'Edit', edit_artist_path(@artist) %> |

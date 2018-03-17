@@ -34,6 +34,11 @@ class User < ApplicationRecord
     self.friends.include?(user)
   end
 
+  #判斷user是否有follow某個artist
+  def followed_this_artist?(artist)
+    self.user_followed_artists.include?(artist)
+  end
+
   # 處理facebook授權的資料
   def self.from_facebook_omniauth(auth)
     # Case 1: Find existing user by facebook uid

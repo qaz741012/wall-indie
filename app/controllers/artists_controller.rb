@@ -1,6 +1,7 @@
 class ArtistsController < ApplicationController
-  # before_action :authenticate_user!
-  before_action :set_artist, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:follow, :unfollow, :favorite, :unfavorite]
+  before_action :set_artist, only: [:show, :edit, :update, :destroy,
+  :follow, :unfollow, :favorite, :unfavorite]
 
   # GET /artists
   # GET /artists.json
@@ -61,6 +62,36 @@ class ArtistsController < ApplicationController
       format.html { redirect_to artists_url, notice: 'Artist was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+# 追蹤與加入最愛功能
+  def follow
+    artist_followship = @artist.artist_followships.build(user: current_user)
+    if artist_followship.save
+      flash[:notice] = "Successfully followed!"
+    else
+      flash[:alert] = artist_followship.errors.full_messages.to_sentence
+    end
+    redirect_back(fallback_location: root_path)
+  end
+
+  def unfollow
+    artist_followship = @artist.artist_followships.where(user_id: current_user.id)[0]
+    if artist_followship
+      artist_followship.destroy
+      flash[:notice] = "Successfully unfollowed!"
+    else
+      flash[:alert] = "You haven't followed the artist yet"
+    end
+    redirect_back(fallback_location: root_path)
+  end
+
+  def favorite
+    #code
+  end
+
+  def unfavorite
+    #code
   end
 
   private
