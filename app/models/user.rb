@@ -39,6 +39,11 @@ class User < ApplicationRecord
     self.user_followed_artists.include?(artist)
   end
 
+  #判斷user是否有favorite某個artist
+  def favorited_this_artist?(artist)
+    self.favorited_artists.include?(artist)
+  end
+
   # 處理facebook授權的資料
   def self.from_facebook_omniauth(auth)
     # Case 1: Find existing user by facebook uid

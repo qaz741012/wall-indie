@@ -87,11 +87,24 @@ class ArtistsController < ApplicationController
   end
 
   def favorite
-    #code
+    favorite = @artist.favorits.build(user: current_user)
+    if favorite.save
+      flash[:notice] = "Successfully favorited!"
+    else
+      flash[:alert] = favorite.errors.full_messages.to_sentence
+    end
+    redirect_back(fallback_location: root_path)
   end
 
   def unfavorite
-    #code
+    favorite = @artist.favorits.where(user_id: current_user.id)[0]
+    if favorite
+      favorite.destroy
+      flash[:notice] = "Successfully unfavorited!"
+    else
+      flash[:alert] = "You haven't favorited the artist yet"
+    end
+    redirect_back(fallback_location: root_path)
   end
 
   private

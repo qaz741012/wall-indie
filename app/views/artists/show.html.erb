@@ -1,7 +1,10 @@
 
 <h3>音樂人資訊</h3>
 
-<%= render partial: "shared/user_followed_artist", locals: {artist: @artist} %>
+<%= render partial: "shared/user_follow_artist", locals: {artist: @artist} %>
+<%= render partial: "shared/user_favorite_artist", locals: {artist: @artist} %>
+
+
 
 <table class="table">
     <tr>
