@@ -1,4 +1,7 @@
 class Event < ApplicationRecord
+  #carrierwave掛載
+  mount_uploader :photo, PhotoUploader
+
   has_many :shows
 
   #user follow event
