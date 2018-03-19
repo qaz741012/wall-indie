@@ -4,7 +4,7 @@ namespace :dev do
     User.destroy_all
     20.times do |i|
       name = FFaker::Name::first_name
-      file = File.open("#{Rails.root}/public/avatar/user#{i+1}.jpg")
+      file = File.new(Rails.root.join('app', 'assets', 'images', "user#{rand(19).to_s}.jpg"))
       user = User.new(
         id: i+3,
         name: name,
@@ -36,7 +36,7 @@ namespace :dev do
   task fake_artist: :environment do
     Artist.destroy_all
     20.times do |i|
-      file = File.open("#{Rails.root}/public/avatar/user#{i+1}.jpg")
+      file = File.new(Rails.root.join('app', 'assets', 'images', "user#{rand(19).to_s}.jpg"))
       artist = Artist.new(
         id: i+1,
         name: FFaker::Music::artist,
@@ -84,7 +84,7 @@ namespace :dev do
     Event.destroy_all
     20.times do |i|
       name = FFaker::Name::first_name
-      file = File.open("#{Rails.root}/public/avatar/user#{i+1}.jpg")
+      file = File.new(Rails.root.join('app', 'assets', 'images', "indie#{rand(2).to_s}.jpg"))
 
       event = Event.new(
         id: i+1,

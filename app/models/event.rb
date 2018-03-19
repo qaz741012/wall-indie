@@ -1,6 +1,7 @@
 class Event < ApplicationRecord
+  #carrierwave掛載
+  mount_uploader :photo, PhotoUploader
 
-  #artist_event relationship
   has_many :shows
   has_many :artists, through: :shows
 

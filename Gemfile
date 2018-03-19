@@ -72,6 +72,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-spotify'
 gem 'font-awesome-sass', '~> 5.0.6'
 gem 'gmaps4rails'
+gem 'carrierwave'
 
 # Bootstrap 4
 gem 'bootstrap', '~> 4.0.0'
