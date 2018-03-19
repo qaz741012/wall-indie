@@ -1,0 +1,29 @@
+// Place all the styles related to the events controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+* {
+  box-sizing: border-box;
+}
+
+#recent-events {
+  margin: 0;
+  background-color: silver;
+  padding-top: 20px;
+}
+
+.recent-event {
+  display: inline-block;
+}
+
+.event-detail {
+  padding: 10px 10px 5px 10px;
+}
+
+.event-detail .name {
+  height: 50px;
+}
+
+.event-detail .price p {
+  font-size: 12px;
+}
