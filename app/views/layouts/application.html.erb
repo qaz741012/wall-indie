@@ -18,34 +18,16 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <%= link_to 'Profile',edit_user_path(@user)%>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
-              <%# if current_user %>
-                <!-- Hi, --> <%#= current_user.email %>
-                  <%#= link_to('登出', destroy_user_session_path, method: :delete), class: "dropdown-item" %> |
-                  <%#= link_to('修改密碼', edit_user_registration_path), class: "dropdown-item" %>
-                <%# else %>
-                  <%#= link_to('註冊', new_user_registration_path), class: "dropdown-item" %> |
-                  <%#= link_to('登入', new_user_session_path), class: "dropdown-item" %>
-               <%# end %>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
+          <% if current_user %>
+            Hi, <%= current_user.email %>
+            <li><%= link_to '登出', destroy_user_session_path, method: :delete, class: "nav-link" %></li>
+            <li><%= link_to '修改密碼', edit_user_registration_path, class: "nav-link" %></li>
+          <% else %>
+            <li><%= link_to '註冊', new_user_registration_path, class: "nav-link" %></li>
+            <li><%= link_to '以信箱登入', new_user_session_path, class: "nav-link" %></li>
+            <li><%= link_to "以FB登入", user_facebook_omniauth_authorize_path, class: "nav-link" %></li>
+            <li><%= link_to "以Spotify登入", user_spotify_omniauth_authorize_path, class: "nav-link" %></li>
+          <% end %>
         </ul>
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -53,9 +35,24 @@
         </form>
       </div>
     </nav>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
 
-    <%= yield %>
+    <% if flash[:notice] %>
+      <div class="alert alert-success alert-dismissible fade show" role="alert"><%= notice %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% elsif flash[:alert] %>
+      <div class="alert alert-danger"><%= alert %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% end %>
+
+    <div class="container-fluid">
+      <%= yield %>
+    </div>
+
   </body>
 </html>

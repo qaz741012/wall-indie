@@ -1,19 +1,57 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @artist.name %>
-</p>
+<h3>音樂人資訊</h3>
 
-<p>
-  <strong>Photo:</strong>
-  <%= @artist.photo %>
-</p>
+<%= render partial: "shared/user_follow_artist", locals: {artist: @artist} %>
+<%= render partial: "shared/user_favorite_artist", locals: {artist: @artist} %>
 
-<p>
-  <strong>Intro:</strong>
-  <%= @artist.intro %>
-</p>
+
+
+<table class="table">
+    <tr>
+      <th>名稱</th>
+      <td><%= @artist.name %></td>
+    </tr>
+    <tr>
+      <th>照片</th>
+      <td><%= @artist.photo %></td>
+    </tr>
+    <tr>
+      <th>介紹</th>
+      <td><%= @artist.intro %></td>
+    </tr>
+</table>
+
+<h3>作品集</h3>
+
+<table class="table table-sm">
+  <thead>
+    <tr>
+      <th>樂名</th>
+      <th>試聽</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @artist.musics.each do |music| %>
+      <tr>
+        <td><%= music.name %></td>
+        <td><%= music.link %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h3>人氣</h3>
+<table class="table table-sm">
+  <tr>
+    <th>喜愛人數</th>
+    <td><%= @artist.favorits_count %></td>
+  </tr>
+  <tr>
+    <th>追蹤人數</th>
+    <td><%= @artist.artist_followships_count %></td>
+  </tr>
+</table>
+
 
 <%= link_to 'Edit', edit_artist_path(@artist) %> |
 <%= link_to 'Back', artists_path %>

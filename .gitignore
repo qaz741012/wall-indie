@@ -21,3 +21,7 @@
 /yarn-error.log
 
 .byebug_history
+
+/config/email.yml
+/config/facebook.yml
+/config/spotify.yml

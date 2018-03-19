@@ -1,0 +1,7 @@
+<!-- 此頁是user要最愛/取消最愛artist的按鈕 -->
+
+<% if current_user.favorited_this_artist?(artist) %>
+  <%= link_to "Unfavorite", unfavorite_artist_path(artist), method: :post %>
+<% else %>
+  <%= link_to "Favorite", favorite_artist_path(artist), method: :post %>
+<% end %>

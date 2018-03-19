@@ -1,9 +1,18 @@
 Rails.application.routes.draw do
-  devise_for :users
-  resources :artists
+
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  resources :artists do
+    member do
+      post :follow
+      post :unfollow
+      post :favorite
+      post :unfavorite
+    end
+  end
   resources :users, only: [:show, :edit, :update]
 
-  root "artists#index"
+
+  root "events#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   #後台admin routes

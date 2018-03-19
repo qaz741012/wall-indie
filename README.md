@@ -1,5 +1,14 @@
 # README
 
+after download
+
+bundle install
+
+rails dev:fake_all
+
+
+
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 

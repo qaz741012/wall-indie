@@ -138,7 +138,7 @@ Devise.setup do |config|
   # initial account confirmation) to be applied. Requires additional unconfirmed_email
   # db field (see migrations). Until confirmed, new email is stored in
   # unconfirmed_email column, and copied to email column on successful confirmation.
-  config.reconfirmable = true
+  config.reconfirmable = false
 
   # Defines which key will be used when confirming an account
   # config.confirmation_keys = [:email]
@@ -276,4 +276,17 @@ Devise.setup do |config|
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
+
+  #Facebook as provider
+  fb_config = Rails.application.config_for(:facebook)
+  config.omniauth :facebook, fb_config["app_id"], fb_config["secret"],
+  scope: "public_profile,email",
+  info_fields: "email,name",
+  callback_url: "http://localhost:3000/users/auth/facebook/callback"
+
+  #Spotify as provider
+  spotify_config = Rails.application.config_for(:spotify)
+  config.omniauth :spotify, spotify_config["app_id"], spotify_config["secret"],
+  scope: "user-read-email"
+
 end

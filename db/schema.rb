@@ -10,11 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180314121220) do
+ActiveRecord::Schema.define(version: 20180316170825) do
 
   create_table "artist_followships", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "artist_id"
   end
 
   create_table "artists", force: :cascade do |t|
@@ -23,16 +25,22 @@ ActiveRecord::Schema.define(version: 20180314121220) do
     t.text "intro"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "artist_followships_count", default: 0
+    t.integer "favorits_count", default: 0
   end
 
   create_table "cessions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "event_id"
+    t.integer "place_id"
   end
 
   create_table "event_followships", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "event_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -50,11 +58,15 @@ ActiveRecord::Schema.define(version: 20180314121220) do
   create_table "favorits", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "artist_id"
   end
 
   create_table "friendships", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "friend_id"
   end
 
   create_table "musics", force: :cascade do |t|
@@ -63,6 +75,7 @@ ActiveRecord::Schema.define(version: 20180314121220) do
     t.string "link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "artist_id"
   end
 
   create_table "places", force: :cascade do |t|
@@ -79,6 +92,8 @@ ActiveRecord::Schema.define(version: 20180314121220) do
     t.date "time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "artist_id"
+    t.integer "event_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -97,6 +112,15 @@ ActiveRecord::Schema.define(version: 20180314121220) do
     t.string "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "provider"
+    t.string "fb_uid"
+    t.string "fb_token"
+    t.string "spotify_uid"
+    t.string "spotify_token"
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
