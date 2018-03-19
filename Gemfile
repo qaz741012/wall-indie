@@ -68,6 +68,7 @@ gem 'ffaker'
 gem 'kaminari'
 gem 'omniauth-facebook'
 gem 'omniauth-spotify'
+gem 'font-awesome-sass', '~> 5.0.6'
 
 # Bootstrap 4
 gem 'bootstrap', '~> 4.0.0'
