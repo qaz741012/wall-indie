@@ -83,6 +83,7 @@ GEM
     ffi (1.9.23)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    gmaps4rails (2.1.2)
     hashie (3.5.7)
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
@@ -245,6 +246,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   ffaker
+  gmaps4rails
   jbuilder (~> 2.5)
   jquery-rails
   kaminari
