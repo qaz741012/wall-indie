@@ -8,6 +8,7 @@
 
 .container-fluid.row {
   margin-top: 30px;
+  margin-bottom: 100px;
 }
 
 .title {
@@ -46,4 +47,9 @@
 
 .event-detail .price p {
   font-size: 12px;
+}
+
+/*Follow按鈕*/
+.follow-box {
+  float: right;
 }
