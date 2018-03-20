@@ -1,0 +1,51 @@
+<div class="container">
+
+  <h1>The Wall後台</h1>
+  <div>
+    <!-- 管理者可以瀏覽所有的推播與推播回覆內容
+          管理者可以刪除使用者的推播 -->
+    <%= link_to 'Events', admin_events_path %>
+    |
+    <%= link_to 'Users', admin_users_path %><!-- catogory -->
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <br>
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Event</th>
+            <th>date</th>
+            <th>organizer</th>
+            <th>ticket_link</th>
+            <th>Feature?</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @events.each do |event| %>
+          <tr>
+            <!-- 推播數量、關注人數、跟隨者人數、推播被like的數量 -->
+            <!-- 管理者可以瀏覽站內所有的使用者清單，該清單按推播文數排序 -->
+            <th scope="row"><%= event.id %></th>
+            <td>[<%= event.name %>]</td>
+            <td><%= event.date%></td>
+            <td><%= event.organizer%></td>
+            <td><%= event.ticket_link %></td>
+            <td>checkbox</td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <div class="text-center">
+        <%#= paginate @events %>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
