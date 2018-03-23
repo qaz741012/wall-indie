@@ -74,6 +74,7 @@ gem 'font-awesome-sass', '~> 5.0.6'
 gem 'gmaps4rails'
 gem 'carrierwave'
 gem 'geocoder'
+gem 'rubocop', '~> 0.53.0', require: false
 
 # Bootstrap 4
 gem 'bootstrap', '~> 4.0.0'
