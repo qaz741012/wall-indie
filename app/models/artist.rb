@@ -2,7 +2,7 @@ class Artist < ApplicationRecord
   has_many :musics
 
   #artist_event relationship
-  has_many :shows
+  has_many :shows, dependent: :destroy
   has_many :events, through: :shows
 
   #user followed
