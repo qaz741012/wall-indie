@@ -6,6 +6,11 @@ class EventsController < ApplicationController
     @features = Event.all
   end
 
+  # 顯示所有event的頁面
+  def all_events
+    @events = Event.all.includes(:artists, :places).order(:date)
+  end
+
   private
 
   def event_params

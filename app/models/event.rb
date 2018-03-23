@@ -10,4 +10,5 @@ class Event < ApplicationRecord
   has_many :event_followed, through: :event_followships, source: :user
 
   has_many :cessions, dependent: :destroy
+  has_many :places, through: :cessions
 end

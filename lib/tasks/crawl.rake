@@ -47,7 +47,7 @@ namespace :crawl do
       # 存 Event
       if !Event.find_by_name(name)
         Event.create( name: name,
-                      photo: photo,
+                      remote_photo_url: photo,
                       date: date,
                       week: week,
                       price: price,
@@ -68,9 +68,9 @@ namespace :crawl do
           end
         end
       end
-
-      puts "Finish the wall crawling"
     end
+    puts "Finish the wall crawling"
+
   end
 
 
