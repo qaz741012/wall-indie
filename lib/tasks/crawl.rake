@@ -7,7 +7,6 @@ namespace :crawl do
     page = agent.get(url)
 
     page.search('.show-item').each do |item|
-
       photo = item.search('.poster img').attr("src").value
 
       date = "2018/" + item.search('.date').text[0..4]
@@ -28,6 +27,8 @@ namespace :crawl do
       price = info[1-n].text[2..-1]
 
       place = "The Wall-" + info[2-n].text[2..-1]
+      place_data = { "name" => place,
+                     "address" => "臺北市羅斯福路四段200號B1" }
 
       begin
         time = info[3-n].text[2..-1]
@@ -35,47 +36,7 @@ namespace :crawl do
         time = "Need to Check"
       end
 
-      # 存 Artist
-      if artists != "Need to Check"
-        artists.each do |artist|
-          if !Artist.find_by_name(artist)
-            Artist.create(name: artist)
-            puts "Create artist #{artist}"
-          end
-        end
-      end
-
-      # 存 Place
-      if !Place.find_by_name(place)
-        Place.create(name: place,
-                     address: "臺北市羅斯福路四段200號B1")
-        puts "Create place #{place}"
-      end
-
-      # 存 Event
-      if !Event.find_by_name(name)
-        Event.create( name: name,
-                      remote_photo_url: photo,
-                      date: date,
-                      week: week,
-                      price: price,
-                      time: time )
-        puts "Create event #{name}"
-
-        # Event有建再存 Cession
-        Cession.create( event_id: Event.find_by_name(name).id,
-                        place_id: Place.find_by_name(place).id )
-        puts "Create cession!"
-
-        # Event有建再存 Show
-        if artists != "Need to Check"
-          artists.each do |artist|
-            Show.create( event_id: Event.find_by_name(name).id,
-                         artist_id: Artist.find_by_name(artist).id )
-            puts "Create shows!"
-          end
-        end
-      end
+      save_data(artists, place_data, name, photo, date, week, price, time)
     end
     puts "Finish the wall crawling"
   end
@@ -121,52 +82,115 @@ namespace :crawl do
 
       price = info[4+n]
 
-      place = "Revolver"
+      place_data = { "name" => "Revolver",
+                     "address" => "臺北市羅斯福路一段一之一號" }
 
-      # 存 Artist
-      artists.each do |artist|
-        if !Artist.find_by_name(artist)
-          Artist.create(name: artist)
-          puts "Create artist #{artist}"
-        end
-      end
-
-      # 存 Place
-      if !Place.find_by_name(place)
-        Place.create( name: place,
-                      address: "臺北市羅斯福路一段一之一號" )
-        puts "Create place #{place}"
-      end
-
-      # 存 Event
-      if !Event.find_by_name(name)
-        Event.create( name: name,
-                      remote_photo_url: photo,
-                      date: date,
-                      week: week,
-                      price: price,
-                      time: time )
-        puts "Create event #{name}"
-
-        # Event有建再存 Cession
-        Cession.create( event_id: Event.find_by_name(name).id,
-                        place_id: Place.find_by_name(place).id )
-        puts "Create cession!"
-
-        # Event有建再存 Show
-        if artists != "Need to Check"
-          artists.each do |artist|
-            Show.create( event_id: Event.find_by_name(name).id,
-                         artist_id: Artist.find_by_name(artist).id )
-            puts "Create shows!"
-          end
-        end
-      end
-
+      save_data(artists, place_data, name, photo, date, week, price, time)
     end
-
+    puts "Finish Revolver crawling"
   end
 
+  # 爬 witchhouse
+  task witchhouse: :environment do
+    agent = Mechanize.new
+    url = "http://www.witchhouse.org/"
+    page = agent.get(url)
+
+    page.search('.w-dyn-item').each do |item|
+      begin
+        photo = item.search('.event-img img').attr("src").value
+      rescue NoMethodError
+        photo = "https://uploads-ssl.webflow.com/5766db8ec26632fe60967e7a/5766df00b2250fc97eb60be0_logo.png" if !photo
+      end
+
+      date = "2018.0" + item.search('.event-title-group').text[0..3]
+
+      week = week_convert(item.search('.event-title-group').text[4..6])
+
+      time = item.search('.event-title-group').text[7..-1]
+
+      name = item.search('.event-name').text
+
+      begin
+        price = /本場次票價：.*?。/.match(item.search('.event-desc').text)[0][6..-2]
+      rescue NoMethodError
+        price = ""
+      end
+
+      place_data = { "name" => "女巫店",
+                     "address" => "臺北市新生南路三段56巷7號" }
+
+      artists = []
+      item.search('.event-desc strong').each do |strong|
+        if name.include?(strong.text)
+          artists << strong.text
+        end
+      end
+      artists = "Need to Check" if artists == []
+      artists = artists.uniq if artists != "Need to Check"
+
+      save_data(artists, place_data, name, photo, date, week, price, time)
+    end
+  end
+
+  
+
+end
 
 
+private
+
+def save_data(artists, place_data, name, photo, date, week, price, time)
+  # 存 Artist
+  if artists != "Need to Check"
+    artists.each do |artist|
+      if !Artist.find_by_name(artist)
+        Artist.create(name: artist)
+        puts "Create artist #{artist}"
+      end
+    end
+  end
+
+  # 存 Place
+  if !Place.find_by_name(place_data["name"])
+    Place.create(name: place_data["name"],
+                 address: place_data["address"] )
+    puts "Create place #{place_data["name"]}"
+  end
+
+  # 存 Event
+  if !Event.find_by_name(name)
+    Event.create( name: name,
+                  remote_photo_url: photo,
+                  date: date,
+                  week: week,
+                  price: price,
+                  time: time )
+    puts "Create event #{name}"
+
+    # Event有建再存 Cession
+    Cession.create( event_id: Event.find_by_name(name).id,
+                    place_id: Place.find_by_name(place_data["name"]).id )
+    puts "Create cession!"
+
+    # Event有建再存 Show
+    if artists != "Need to Check"
+      artists.each do |artist|
+        Show.create( event_id: Event.find_by_name(name).id,
+                     artist_id: Artist.find_by_name(artist).id )
+        puts "Create shows!"
+      end
+    end
+  end
+end
+
+def week_convert(week)
+  week_convert_hash = { "Sun" => "日",
+                        "Mon" => "一",
+                        "Tue" => "二",
+                        "Wed" => "三",
+                        "Thu" => "四",
+                        "Fri" => "五",
+                        "Sat" => "六" }
+  week_convert_hash[week]
 end
