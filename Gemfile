@@ -39,7 +39,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver', '>= 3.10.0'
   ## heroku 資料庫修正
   gem 'sqlite3'
 end
@@ -75,6 +75,7 @@ gem 'carrierwave'
 gem 'rubocop', '~> 0.53.0', require: false
 gem 'nokogiri'
 gem 'mechanize'
+gem 'rest-client'
 
 # Bootstrap 4
 gem 'bootstrap', '~> 4.0.0'
