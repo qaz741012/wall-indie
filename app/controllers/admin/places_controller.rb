@@ -16,7 +16,21 @@ class Admin::PlacesController < ApplicationController
       flash[:alert] = "place was failed to create"
       render :new
     end
+  end
 
+  def edit
+    @place = Place.find(params[:id])
+  end
+
+  def update
+    @place = Place.find(params[:id])
+    if @place.update(place_params)
+      flash[:notice] = "place was successfully update"
+      redirect_to admin_places_path
+    else
+      flash[:alert] = "place was failed to create"
+      render :edit
+    end
   end
 
   private
