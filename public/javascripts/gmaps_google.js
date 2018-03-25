@@ -258,8 +258,8 @@
         singleInfowindow: true,
         maxRandomDistance: 0,
         clusterer: {
-          maxZoom: 20,
-          gridSize: 50
+          maxZoom: 200,
+          gridSize: 1000
         }
       });
     };
@@ -477,7 +477,7 @@
       return {
         mapTypeId: this.primitives().mapTypes('ROADMAP'),
         center: new (this.primitives().latLng)(0, 0),
-        zoom: 20
+        zoom: 200
       };
     };
 
