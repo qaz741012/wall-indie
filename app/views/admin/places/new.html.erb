@@ -1,0 +1,21 @@
+<%= form_for  [:admin, @place] do |f| %>
+  <%= f.label :name, "Name" %>
+  <%= f.text_field :name %>
+
+  <%= f.label :address, "Address" %>
+  <%= f.text_field :address %>
+
+  <%= f.label :tel, "Tel" %>
+  <%= f.text_field :tel %>
+
+  <%= f.label :info, "Imformation" %>
+  <%= f.text_area :info %>
+
+  <%= f.label :latitude, "Latitude" %>
+  <%= f.text_field :latitude %>
+  
+  <%= f.label :longitude, "Longitude" %>
+  <%= f.text_field :longitude %>  
+
+  <%= f.submit %>
+<% end %>
