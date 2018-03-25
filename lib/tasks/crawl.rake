@@ -133,7 +133,14 @@ namespace :crawl do
     end
   end
 
-  
+  task indievox: :environment do
+    agent = Mechanize.new
+    url = "https://www.indievox.com/event/"
+    page = agent.get(url)
+
+    page.links.each {|link| pp link}
+  end
+
 
 end
 

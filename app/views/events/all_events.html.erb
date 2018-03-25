@@ -3,7 +3,7 @@
     <tr>
       <th>Poster</th>
       <th>Event</th>
-      <th>Date</th>
+      <th colspan="2">Date</th>
       <th>Artists</th>
       <th>Price</th>
       <th>Place</th>
@@ -17,6 +17,7 @@
         <td><%= image_tag event.photo, width: "200px" %></td>
         <td><%= event.name %></td>
         <td><%= event.date %></td>
+        <td><%= event.week %></td>
         <td>
           <ul>
             <% event.artists.each do |artist| %>
