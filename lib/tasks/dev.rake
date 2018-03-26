@@ -3,7 +3,9 @@ namespace :dev do
   task fake_user: :environment do
     20.times do |i|
       name = FFaker::Name::first_name
+      file = File.open("#{Rails.root}/public/avatar/user1.jpg")#user#{i+1}.jpg
       file = File.new(Rails.root.join('app', 'assets', 'images', "user#{rand(19).to_s}.jpg"))
+
       user = User.new(
         id: i+3,
         name: name,
@@ -63,13 +65,10 @@ namespace :dev do
   end
 
   task fake_place: :environment do
-    Place.destroy_all
     20.times do |i|
-      name = FFaker::Name::last_name
-
       place = Place.new(
         id: i+1,
-        name: name,
+        name: FFaker::Name::last_name,
         address: FFaker::Address::street_address,
         tel: FFaker::PhoneNumberAU::phone_number,
         info: FFaker::Lorem::sentence(20),
@@ -199,6 +198,7 @@ namespace :dev do
     Rake::Task['dev:fake_favorit'].execute
     Rake::Task['dev:fake_artist_followship'].execute
     Rake::Task['dev:fake_event_followship'].execute
+    Rake::Task['crawl:all'].execute
   end
 
 end
