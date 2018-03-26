@@ -12,7 +12,8 @@ class ArtistsController < ApplicationController
   # GET /artists/1
   # GET /artists/1.json
   def show
-    @musics = @artist.musics
+    @musics = @artist.musics.limit(5)
+    @events = @artist.events
   end
 
   # GET /artists/new
