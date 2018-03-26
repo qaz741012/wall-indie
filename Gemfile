@@ -76,6 +76,8 @@ gem 'rubocop', '~> 0.53.0', require: false
 gem 'rest-client'
 gem 'nokogiri'
 gem 'mechanize'
+gem 'mini_magick'
+gem 'koala'
 
 # Bootstrap 4
 gem 'bootstrap', '~> 4.0.0'
