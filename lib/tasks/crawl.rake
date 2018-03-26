@@ -28,7 +28,7 @@ namespace :crawl do
 
       place = "The Wall-" + info[2-n].text[2..-1]
       place_data = { "name" => place,
-                     "address" => "臺北市羅斯福路四段200號B1" }
+                     "address" => "臺灣臺北市羅斯福路四段200號B1" }
 
       begin
         time = info[3-n].text[2..-1]
@@ -76,7 +76,7 @@ namespace :crawl do
       price = info[4+n]
 
       place_data = { "name" => "Revolver",
-                     "address" => "臺北市羅斯福路一段一之一號" }
+                     "address" => "臺灣臺北市羅斯福路一段一之一號" }
 
       save_data(artists, place_data, name, photo, date, week, price, time)
     end
@@ -111,7 +111,7 @@ namespace :crawl do
       end
 
       place_data = { "name" => "女巫店",
-                     "address" => "臺北市新生南路三段56巷7號" }
+                     "address" => "臺灣臺北市新生南路三段56巷7號" }
 
       artists = []
       item.search('.event-desc strong').each do |strong|
@@ -154,45 +154,45 @@ namespace :crawl do
         #Url
       end
 
-        # 存 Artist
-        if artists != "Need to Check"
-          artists.each do |artist|
-            if !Artist.find_by_name(artist)
-              Artist.create(name: artist)
-              puts "Create artist #{artist}"
-            end
-          end
-        end
-
-        # 存 Place
-        if !Place.find_by_name(place)
-          Place.create(name: place)
-          puts "Create place #{place}"
-        end
-
-        # 存 Event
-        if !Event.find_by_name(name)
-          Event.create( name: name,
-                        remote_photo_url: photo,
-                        date: date,
-                        week: week,
-                        time: time, )
-          puts "Create event #{name}"
-
-          # Event有建再存 Cession
-          Cession.create( event_id: Event.find_by_name(name).id,
-                          place_id: Place.find_by_name(place).id )
-          puts "Create cession!"
-
-          # Event有建再存 Show
-          if artists != "Need to Check"
-            artists.each do |artist|
-              Show.create( event_id: Event.find_by_name(name).id,
-                           artist_id: Artist.find_by_name(artist).id )
-              puts "Create shows!"
-            end
-          end
-        end
+        # # 存 Artist
+        # if artists != "Need to Check"
+        #   artists.each do |artist|
+        #     if !Artist.find_by_name(artist)
+        #       Artist.create(name: artist)
+        #       puts "Create artist #{artist}"
+        #     end
+        #   end
+        # end
+        #
+        # # 存 Place
+        # if !Place.find_by_name(place)
+        #   Place.create(name: place)
+        #   puts "Create place #{place}"
+        # end
+        #
+        # # 存 Event
+        # if !Event.find_by_name(name)
+        #   Event.create( name: name,
+        #                 remote_photo_url: photo,
+        #                 date: date,
+        #                 week: week,
+        #                 time: time, )
+        #   puts "Create event #{name}"
+        #
+        #   # Event有建再存 Cession
+        #   Cession.create( event_id: Event.find_by_name(name).id,
+        #                   place_id: Place.find_by_name(place).id )
+        #   puts "Create cession!"
+        #
+        #   # Event有建再存 Show
+        #   if artists != "Need to Check"
+        #     artists.each do |artist|
+        #       Show.create( event_id: Event.find_by_name(name).id,
+        #                    artist_id: Artist.find_by_name(artist).id )
+        #       puts "Create shows!"
+        #     end
+        #   end
+        # end
 
       puts "Finish songkick crawling"
     end

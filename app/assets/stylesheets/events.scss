@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+///////////*events#index*/////////////
 * {
   box-sizing: border-box;
 }
@@ -45,6 +47,15 @@
   height: 50px;
 }
 
+.event-detail .name a {
+  text-decoration: none;
+  color: black;
+}
+
+.event-detail .name a:hover {
+  color: gray;
+}
+
 .event-detail .price p {
   font-size: 12px;
 }
@@ -52,4 +63,26 @@
 /*Follow按鈕*/
 .follow-box {
   float: right;
+}
+
+
+///////////*events#show*/////////////
+#bar {
+  width: 80%;
+  height: 2px;
+  background-color: gray;
+  margin-bottom: 20px;
+}
+
+.event-show .badge {
+  font-size: 14px;
+}
+
+.event-show .artist a {
+  text-decoration: none;
+  color: black;
+}
+
+.event-show .artist a:hover {
+  color: gray;
 }

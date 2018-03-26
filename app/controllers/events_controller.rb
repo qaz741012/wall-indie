@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:follow, :unfollow]
+  before_action :set_event, only: [:follow, :unfollow, :show]
   before_action :authenticate_user!, only: [:follow, :unfollow]
 
   def index
@@ -39,6 +39,11 @@ class EventsController < ApplicationController
       flash[:alert] = "You haven't followed the event yet"
     end
     redirect_back(fallback_location: root_path)
+  end
+
+  def show
+    @artists = @event.artists
+    @place = @event.places[0]
   end
 
   private
