@@ -1,0 +1,21 @@
+<!-- Need @tweets -->
+<!-- <div class="panel panel-default">
+  <div class="panel-body"> -->
+    <% @events.each do |event| %>
+    <div class= "box-border">
+      <div class="avatar">
+        <%= image_tag event.user.avatar, class: "img-responsive img-circle" %>
+      </div>
+      <h4><%= link_to "@#{event.user.name}, #{event.created_at.strftime("%Y-%m-%d, %H:%M")}", events_user_path(event.user) %></h4>
+      <h4><%= event.description %></h4>
+      <!-- 使用者能回覆別人的推播 -->
+      <h4><%= link_to "Reply(#{event.replies.count})", event_replies_path(event) %>
+        <%#= render "shared/like", :event => event %></h4>
+    </div>
+    <div class="clearfix"></div>
+    <br />
+
+    <% end %>
+ <!--  </div> 
+</div>
+ -->
