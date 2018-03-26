@@ -139,70 +139,70 @@ namespace :crawl do
     page.links.each {|link| pp link}
   end
 
-  # # 爬 songkick
-  # task songkick: :environment do
-  #   agent = Mechanize.new
-  #   # url = 'https://www.songkick.com/metro_areas/32574-taiwan-taichung'
-  #   url = 'https://www.songkick.com/metro_areas/32576-taiwan-taipei'
-  #   page = agent.get(url)
-  #   page.search('.event-listings li').each do |item|
-  #     if item.attr('class') != 'with-date'
-  #       artist = item.search('p strong').text
-  #       name = item.search('p a span').text
-  #       place = item.search('.venue-name').text
-  #       date = item.search('time').attr('datetime').text[0..9]
-  #       time = item.search('time').attr('datetime').text[11,5]
-  #       #2018-03-25
-  #       week = week_convert(item.attr('title')[0..2])
-  #       #Sun
-  #       photo = item.search('img').attr('src').value
-  #       #Url
-  #     end
-  #
-  #       # 存 Artist
-  #       if artists != "Need to Check"
-  #         artists.each do |artist|
-  #           if !Artist.find_by_name(artist)
-  #             Artist.create(name: artist)
-  #             puts "Create artist #{artist}"
-  #           end
-  #         end
-  #       end
-  #
-  #       # 存 Place
-  #       if !Place.find_by_name(place)
-  #         Place.create(name: place)
-  #         puts "Create place #{place}"
-  #       end
-  #
-  #       # 存 Event
-  #       if !Event.find_by_name(name)
-  #         Event.create( name: name,
-  #                       remote_photo_url: photo,
-  #                       date: date,
-  #                       week: week,
-  #                       time: time, )
-  #         puts "Create event #{name}"
-  #
-  #         # Event有建再存 Cession
-  #         Cession.create( event_id: Event.find_by_name(name).id,
-  #                         place_id: Place.find_by_name(place).id )
-  #         puts "Create cession!"
-  #
-  #         # Event有建再存 Show
-  #         if artists != "Need to Check"
-  #           artists.each do |artist|
-  #             Show.create( event_id: Event.find_by_name(name).id,
-  #                          artist_id: Artist.find_by_name(artist).id )
-  #             puts "Create shows!"
-  #           end
-  #         end
-  #       end
-  #
-  #     puts "Finish songkick crawling"
-  #   end
-  #
-  # end
+  # 爬 songkick
+  task songkick: :environment do
+    agent = Mechanize.new
+    # url = 'https://www.songkick.com/metro_areas/32574-taiwan-taichung'
+    url = 'https://www.songkick.com/metro_areas/32576-taiwan-taipei'
+    page = agent.get(url)
+    page.search('.event-listings li').each do |item|
+      if item.attr('class') != 'with-date'
+        artist = item.search('p strong').text
+        name = item.search('p a span').text
+        place = item.search('.venue-name').text
+        date = item.search('time').attr('datetime').text[0..9]
+        time = item.search('time').attr('datetime').text[11,5]
+        #2018-03-25
+        week = item.attr('title')[0..2]
+        #Sun
+        photo = item.search('img').attr('src').value
+        #Url
+      end
+
+        # 存 Artist
+        if artists != "Need to Check"
+          artists.each do |artist|
+            if !Artist.find_by_name(artist)
+              Artist.create(name: artist)
+              puts "Create artist #{artist}"
+            end
+          end
+        end
+
+        # 存 Place
+        if !Place.find_by_name(place)
+          Place.create(name: place)
+          puts "Create place #{place}"
+        end
+
+        # 存 Event
+        if !Event.find_by_name(name)
+          Event.create( name: name,
+                        remote_photo_url: photo,
+                        date: date,
+                        week: week,
+                        time: time, )
+          puts "Create event #{name}"
+
+          # Event有建再存 Cession
+          Cession.create( event_id: Event.find_by_name(name).id,
+                          place_id: Place.find_by_name(place).id )
+          puts "Create cession!"
+
+          # Event有建再存 Show
+          if artists != "Need to Check"
+            artists.each do |artist|
+              Show.create( event_id: Event.find_by_name(name).id,
+                           artist_id: Artist.find_by_name(artist).id )
+              puts "Create shows!"
+            end
+          end
+        end
+      puts "Finish songkick crawling"
+    end
+
+  end
+
 
 end
 

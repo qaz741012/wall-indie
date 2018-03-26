@@ -81,6 +81,7 @@ gem 'geocoder'
 gem 'mini_magick'
 gem 'koala'
 
+
 # Bootstrap 4
 gem 'bootstrap', '~> 4.0.0'
 gem 'sprockets-rails'

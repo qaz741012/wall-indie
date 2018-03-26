@@ -6,13 +6,13 @@ class EventsController < ApplicationController
     #application template flag
     @fix = true
     @features = Event.all
+    @events = Event.all.includes(:artists, :places)
     @places = Place.all
     @hash = Gmaps4rails.build_markers(@places) do |place, marker|
       marker.lat place.latitude
       marker.lng place.longitude
-      marker.infowindow place.info
+      marker.infowindow place.name
     end
-    @events = Event.all.includes(:artists, :places)
   end
 
   # 顯示所有event的頁面

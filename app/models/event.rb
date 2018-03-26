@@ -11,4 +11,9 @@ class Event < ApplicationRecord
 
   has_many :cessions, dependent: :destroy
   has_many :places, through: :cessions
+
+  def gmaps4rails_infowindow
+    "#{self.name}"
+  end
+
 end

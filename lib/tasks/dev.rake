@@ -63,7 +63,7 @@ namespace :dev do
   end
 
   task fake_place: :environment do
-    Place.destroy_all
+
     20.times do |i|
       name = FFaker::Name::last_name
 
