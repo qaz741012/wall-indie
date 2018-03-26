@@ -8,10 +8,9 @@ class EventsController < ApplicationController
     @hash = Gmaps4rails.build_markers(@places) do |place, marker|
       marker.lat place.latitude
       marker.lng place.longitude
-      marker.infowindow place.info 
+      marker.infowindow place.name
     end
   end
-
 
   # 顯示所有event的頁面
   def all_events
