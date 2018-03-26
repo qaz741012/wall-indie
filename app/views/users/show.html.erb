@@ -1,16 +1,30 @@
-    <div class="page-header">
+<!-- 任何登入使用者都可以瀏覽特定使用者的以下資料 -->
 
-       <div class="col-md-3 col-sm-4">
-        <div class="text-center">
-          <%= image_tag @user.avatar, class: "img-responsive img-circle" %>    
-        </div>
-      </div> 
-      <div class="col-md-9 col-sm-8">
-        <h1><%= @user.name %></h1>
-        <h4><%= @user.email %></h4>   
-        <%if @user.email == current_user.email %> 
-        <%= link_to 'Edit Profile', edit_user_path(@user),:class => 'btn btn-primary'%>
-        <% end %>  
-      </div> 
-      <div class="clearfix"></div> 
+<div class="row">
+  <div class="col-md-3">
+    <%= render partial: "shared/user_profile" %>
+  </div>
+
+  <div class="col-md-offset-1 col-md-8">
+    <h2>Tweet</h2>
+    <%= render partial: "shared/following_event" %>
+  </div>
+</div>
+
+
+<div class="page-header">
+
+   <div class="col-md-3 col-sm-4">
+    <div class="text-center">
+      <%#= image_tag @user.avatar, class: "img-responsive img-circle" %>   
     </div>
+  </div> 
+  <div class="col-md-9 col-sm-8">
+    <h1><%= @user.name %></h1>
+    <h4><%= @user.email %></h4>   
+    <%if @user.email == current_user.email %> 
+    <%= link_to 'Edit Profile', edit_user_path(@user),:class => 'btn btn-primary'%>
+    <% end %>  
+  </div> 
+  <div class="clearfix"></div> 
+</div>
