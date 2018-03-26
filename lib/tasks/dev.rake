@@ -1,7 +1,6 @@
 namespace :dev do
 
   task fake_user: :environment do
-    User.destroy_all
     20.times do |i|
       name = FFaker::Name::first_name
       file = File.new(Rails.root.join('app', 'assets', 'images', "user#{rand(19).to_s}.jpg"))
@@ -64,7 +63,7 @@ namespace :dev do
   end
 
   task fake_place: :environment do
-    Place.destroy_all
+
     20.times do |i|
       name = FFaker::Name::last_name
 
@@ -84,7 +83,7 @@ namespace :dev do
     Event.destroy_all
     20.times do |i|
       name = FFaker::Name::first_name
-      file = File.new(Rails.root.join('app', 'assets', 'images', "indie#{rand(2).to_s}.jpg"))
+      file = File.new(Rails.root.join('app', 'assets', 'images', "indie#{rand(2).to_s}.jpeg"))
 
       event = Event.new(
         id: i+1,
@@ -134,11 +133,12 @@ namespace :dev do
 
   task fake_favorit: :environment do
     Favorit.destroy_all
+    rand_artist = Artist.all.sample(5)
     User.all.each do |user|
       rand(5).times do |i|
         user.favorits.create!(
           user_id: user.id,
-          artist_id: Artist.all.sample.id)
+          artist_id: rand_artist[i].id)
       end
     end
     # Artist.all.each do |artist|
@@ -151,11 +151,12 @@ namespace :dev do
 
   task fake_artist_followship: :environment do
     ArtistFollowship.destroy_all
+    rand_artist = Artist.all.sample(5)
     User.all.each do |user|
       rand(5).times do |i|
         user.artist_followships.create!(
           user_id: user.id,
-          artist_id: Artist.all.sample.id)
+          artist_id: rand_artist[i].id)
       end
     end
     # Artist.all.each do |artist|
@@ -168,11 +169,12 @@ namespace :dev do
 
   task fake_event_followship: :environment do
     EventFollowship.destroy_all
+    rand_event = Event.all.sample(5)
     User.all.each do |user|
       rand(5).times do |i|
         user.event_followships.create!(
           user_id: user.id,
-          event_id: Event.all.sample.id)
+          event_id: rand_event[i].id)
       end
     end
     # Artist.all.each do |artist|

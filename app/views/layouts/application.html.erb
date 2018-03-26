@@ -11,7 +11,7 @@
   <body>
     <!-- 套用Bootstrap 4的navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <a class="navbar-brand" href="#">The Wall</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -25,8 +25,8 @@
           <% else %>
             <li><%= link_to '註冊', new_user_registration_path, class: "nav-link" %></li>
             <li><%= link_to '以信箱登入', new_user_session_path, class: "nav-link" %></li>
-            <li><%= link_to "以FB登入", user_facebook_omniauth_authorize_path, class: "nav-link" %></li>
-            <li><%= link_to "以Spotify登入", user_spotify_omniauth_authorize_path, class: "nav-link" %></li>
+            <li><%= link_to '以FB登入', user_facebook_omniauth_authorize_path, class: "nav-link" %></li>
+            <li><%= link_to '以Spotify登入', user_spotify_omniauth_authorize_path, class: "nav-link" %></li>
           <% end %>
         </ul>
         <form class="form-inline my-2 my-lg-0">
@@ -46,13 +46,13 @@
       </ol>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <%= image_tag "indie0.jpeg", class: "img_responsive", alt:"First slide" %>
+          <%= image_tag "event0.jpg", class: "img_responsive", alt:"First slide" %>
         </div>
         <div class="carousel-item">
-          <%= image_tag "indie1.jpeg", alt:"Second slide" %>
+          <%= image_tag "event1.jpg", alt:"Second slide" %>
         </div>
         <div class="carousel-item">
-          <%= image_tag "indie2.jpeg", alt:"Third slide" %>
+          <%= image_tag "event2.jpg", alt:"Third slide" %>
         </div>
       </div>
       <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -83,6 +83,13 @@
 
     <div class="container-fluid">
       <%= yield %>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer">
+      <div>
+        <p>© 2018 MTH</p>
+      </div>
     </div>
 
   </body>

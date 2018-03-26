@@ -11,11 +11,15 @@ Rails.application.routes.draw do
   end
   resources :users, only: [:show, :edit, :update]
 
-  resources :events
+  resources :events do
+    collection do
+      get :all_events
+    end
+  end
 
   root "events#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  
+
 
   #後台admin routes
   namespace :admin do

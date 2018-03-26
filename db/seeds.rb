@@ -34,3 +34,6 @@ User.create(
   confirmed_at: Time.now
   )
 puts "Default user created!"
+
+Place.create(
+  )

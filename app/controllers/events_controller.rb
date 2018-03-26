@@ -9,13 +9,18 @@ class EventsController < ApplicationController
       marker.lat place.latitude
       marker.lng place.longitude
       marker.infowindow place.info 
+    end
   end
+
+
+  # 顯示所有event的頁面
+  def all_events
+    @events = Event.all.includes(:artists, :places).order(:date)
   end
 
   private
 
   def event_params
     params.require(:event).permit(:name, :photo, :intro, :date, :time, :orgnization)
-
   end
 end
