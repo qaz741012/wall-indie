@@ -152,70 +152,76 @@ namespace :crawl do
   # 爬 songkick
   task songkick: :environment do
     agent = Mechanize.new
-    # url = 'https://www.songkick.com/metro_areas/32574-taiwan-taichung'
-    url = 'https://www.songkick.com/metro_areas/32576-taiwan-taipei'
-    page = agent.get(url)
-    links = []
-    page.search('.summary').each do |item|
-      link = item.search('a').attr('href').value
-      links<<link
-    end
+    urls = [
+      'https://www.songkick.com/metro_areas/32574-taiwan-taichung',
+    'https://www.songkick.com/metro_areas/32576-taiwan-taipei',
+    'https://www.songkick.com/metro_areas/32555-taiwan-kaohsiung'
+    ]
+    urls.each do |url|
+      page = agent.get(url)
 
-    links.each do |link|
-      event_page = page.link_with(href: link).click
-
-      # 如果是發現有不同樂團，就會加入artists
-      artists = []
-      artists<<event_page.search('.h0.summary a').text
-      event_page.search('.line-up a').each do |artist|
-        artists<<artist.text
+      links = []
+      page.search('.summary').each do |item|
+        link = item.search('a').attr('href').value
+        links<<link
       end
-      artists = artists[1..-1] if artists.length != 1
-      pp artists
 
-      place = event_page.search('.location .name a').text
-      place = "No Place!!!" if place == ""
-      pp place
-      address = event_page.search('p>span>span').text
-      address = "No Address!!!" if address == ""
-      pp address
+      links.each do |link|
+        event_page = page.link_with(href: link).click
 
-      place_data = { "name" => place, "address" => address}
-      pp place_data
+        # 如果是發現有不同樂團，就會加入artists
+        artists = []
+        artists<<event_page.search('.h0 a').text
+        event_page.search('.line-up a').each do |artist|
+          artists<<artist.text
+        end
+        artists = artists[1..-1] if artists.length != 1
+        pp artists
 
-      name = event_page.search('.h0.summary a').text
-      name = "No Name!!!" if name == ""
-      pp name
-      puts name.class
+        place = event_page.search('.location .name a').text
+        place = "No Place!!!" if place == ""
+        pp place
+        address = event_page.search('p>span>span').text
+        address = "No Address!!!" if address == ""
+        pp address
 
-      begin
-        photo = 'http:'+event_page.search('.profile-picture-wrapper img').attr('src').value
-      rescue NoMethodError
-        photo = 'http://via.placeholder.com/350x150'
+        place_data = { "name" => place, "address" => address}
+        pp place_data
+
+        name = event_page.search('.h0.summary a').text
+        name = "No Name!!!" if name == ""
+        pp name
+        puts name.class
+
+        begin
+          photo = 'http:'+event_page.search('.profile-picture-wrapper img').attr('src').value
+        rescue NoMethodError
+          photo = 'http://via.placeholder.com/350x150'
+        end
+        pp photo
+        puts photo.class
+
+        date = event_page.search('.date-and-name p').text.split('-')[0]
+        pp date
+
+        week = Time.parse(date).strftime('%a')
+        week = week_convert(week)
+        pp week
+        puts week.class
+
+        price = "未定價"
+
+        time = Time.parse(date).strftime("%H:%M")
+        pp time
+        puts time.class
+
+        date = Time.parse(date).strftime("%Y-%m-%d")
+        pp date
+        puts date.class
+
+        save_data(artists, place_data, name, photo, date, week, price, time)
+        puts "#{artists} will arrange #{name} in #{date}. "
       end
-      pp photo
-      puts photo.class
-
-      date = event_page.search('.date-and-name').text
-      pp date
-
-      week = Time.parse(date).strftime('%a')
-      week = week_convert(week)
-      pp week
-      puts week.class
-
-      price = "未定價"
-
-      time = Time.parse(date).strftime("%H:%M")
-      pp time
-      puts time.class
-
-      date = Time.parse(date).strftime("%Y-%m-%d")
-      pp date
-      puts date.class
-
-      save_data(artists, place_data, name, photo, date, week, price, time)
-      puts "#{artists} will arrange #{name} in #{date}. "
     end
 
     puts "Finish songkick crawling"
