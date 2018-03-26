@@ -73,11 +73,13 @@ gem 'font-awesome-sass', '~> 5.0.6'
 gem 'gmaps4rails'
 gem 'carrierwave'
 gem 'rubocop', '~> 0.53.0', require: false
+gem 'rest-client'
 gem 'nokogiri'
 gem 'mechanize'
 gem 'rest-client'
 gem 'geocoder'
-
+gem 'mini_magick'
+gem 'koala'
 
 # Bootstrap 4
 gem 'bootstrap', '~> 4.0.0'

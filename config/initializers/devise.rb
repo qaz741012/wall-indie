@@ -287,6 +287,6 @@ Devise.setup do |config|
   #Spotify as provider
   spotify_config = Rails.application.config_for(:spotify)
   config.omniauth :spotify, spotify_config["app_id"], spotify_config["secret"],
-  scope: "user-read-email"
+  scope: "user-read-email user-follow-read user-library-read user-read-private"
 
 end
