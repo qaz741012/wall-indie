@@ -1,9 +1,17 @@
-<% if !current_user.followed_this_event?(event) %>
-  <%= link_to follow_event_path(event), method: :post do  %>
-    <button type="button" class="follow-event btn btn-warning btn-sm">Follow</button>
+<!-- 此頁是user要追蹤/取消追蹤event的按鈕 -->
+
+<% if current_user %>
+  <% if !current_user.followed_this_event?(event) %>
+    <%= link_to follow_event_path(event), method: :post do  %>
+      <button type="button" class="follow-event btn btn-warning btn-sm">Follow</button>
+    <% end %>
+  <% else %>
+    <%= link_to unfollow_event_path(event), method: :post do  %>
+      <button type="button" class="follow-event btn btn-warning btn-sm">Unfollow</button>
+    <% end %>
   <% end %>
 <% else %>
-  <%= link_to unfollow_event_path(event), method: :post do  %>
-    <button type="button" class="follow-event btn btn-warning btn-sm">Unfollow</button>
+  <%= link_to new_user_session_path do  %>
+    <button type="button" class="follow-event btn btn-warning btn-sm">Follow</button>
   <% end %>
 <% end %>

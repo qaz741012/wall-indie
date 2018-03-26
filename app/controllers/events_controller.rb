@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:follow, :unfollow]
+  before_action :authenticate_user!, only: [:follow, :unfollow]
 
   def index
     #application template flag
