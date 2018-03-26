@@ -76,6 +76,8 @@ gem 'rubocop', '~> 0.53.0', require: false
 gem 'nokogiri'
 gem 'mechanize'
 gem 'rest-client'
+gem 'geocoder'
+
 
 # Bootstrap 4
 gem 'bootstrap', '~> 4.0.0'

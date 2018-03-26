@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
   #後台admin routes
   namespace :admin do
+    resources :places
     resources :events, only: [:index, :edit, :update]
     resources :users, only: [:index, :destroy]
     root "users#index"

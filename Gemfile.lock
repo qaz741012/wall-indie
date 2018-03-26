@@ -90,6 +90,7 @@ GEM
     ffi (1.9.23)
     font-awesome-sass (5.0.6.2)
       sass (>= 3.2)
+    geocoder (1.4.7)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     gmaps4rails (2.1.2)
@@ -295,6 +296,7 @@ DEPENDENCIES
   devise
   ffaker
   font-awesome-sass (~> 5.0.6)
+  geocoder
   gmaps4rails
   jbuilder (~> 2.5)
   jquery-rails
