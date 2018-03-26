@@ -1,57 +1,63 @@
+<div class="artist-header">
+  <div class="row">
+    <div class="col-md-8">
+      <h1><%= @artist.name %></h1>
+      <h6><%= @artist.intro %> </h6>          
+      <div class="row">
+        <div class="col-md-4">
+          <%= render partial: "shared/user_follow_artist", locals: {artist: @artist} %>
+          <strong><%= @artist.favorits_count %></strong> Favorites              
+        </div>
+        <div class="col-md-8">
+          <%= render partial: "shared/user_favorite_artist", locals: {artist: @artist} %>
+          <strong><%= @artist.artist_followships_count %></strong> Follower 
+        </div>
+      </div>                    
+    </div> 
+    <div class="col-md-4">
+      <%= @artist.photo %>
+    </div> 
+  </div>
+  <div class="clearfix"></div>
+  <hr>
+</div>
 
-<h3>音樂人資訊</h3>
+<div class="recent-events">
+  <div class="row">
+    <div class="col-md-8">
+      <h2>Music Review</h2>
+        <div class="youtube">
 
-<%= render partial: "shared/user_follow_artist", locals: {artist: @artist} %>
-<%= render partial: "shared/user_favorite_artist", locals: {artist: @artist} %>
+          <iframe width="100%" height="500" src="https://www.youtube.com/embed/PMivT7MJ41M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="spotify">
+          <h4> Spotify Top 5 Song</h4>
+          <% @musics.each do |music| %>
+            <h6><%= link_to "#{music.name}", music.link %></h6> 
+          <% end %>
+        </div>
+    </div>
+    <div class="col-md-4">
+      <h2>Recent Perform</h2>
+      <% @events.each do |event| %>
+        <div class="event-item">
+          <h4><%= event.name %></h4>
+          <h6><%= event.date %></h6>
+          <h6><%= event.info %></h6>
+          <hr>
+        </div>
+      <% end %>
+    </div>
 
+  </div>
+</div>
 
+<hr>
 
-<table class="table">
-    <tr>
-      <th>名稱</th>
-      <td><%= @artist.name %></td>
-    </tr>
-    <tr>
-      <th>照片</th>
-      <td><%= @artist.photo %></td>
-    </tr>
-    <tr>
-      <th>介紹</th>
-      <td><%= @artist.intro %></td>
-    </tr>
-</table>
-
-<h3>作品集</h3>
-
-<table class="table table-sm">
-  <thead>
-    <tr>
-      <th>樂名</th>
-      <th>試聽</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @artist.musics.each do |music| %>
-      <tr>
-        <td><%= music.name %></td>
-        <td><%= music.link %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<h3>人氣</h3>
-<table class="table table-sm">
-  <tr>
-    <th>喜愛人數</th>
-    <td><%= @artist.favorits_count %></td>
-  </tr>
-  <tr>
-    <th>追蹤人數</th>
-    <td><%= @artist.artist_followships_count %></td>
-  </tr>
-</table>
+<div class="music-review">
+  <div class="row">
+    
+  </div>
+</div>
 
 
-<%= link_to 'Edit', edit_artist_path(@artist) %> |
-<%= link_to 'Back', artists_path %>
