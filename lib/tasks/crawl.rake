@@ -1,4 +1,9 @@
 namespace :crawl do
+  task all: :environment do
+    Rake::Task['crawl:the_wall'].execute
+    Rake::Task['crawl:revolver'].execute
+    Rake::Task['crawl:witchhouse'].execute
+  end
 
   # 爬 the wall
   task the_wall: :environment do
@@ -134,70 +139,70 @@ namespace :crawl do
     page.links.each {|link| pp link}
   end
 
-  # 爬 songkick
-  task songkick: :environment do
-    agent = Mechanize.new
-    # url = 'https://www.songkick.com/metro_areas/32574-taiwan-taichung'
-    url = 'https://www.songkick.com/metro_areas/32576-taiwan-taipei'
-    page = agent.get(url)
-    page.search('.event-listings li').each do |item|
-      if item.attr('class') != 'with-date'
-        artist = item.search('p strong').text
-        name = item.search('p a span').text
-        place = item.search('.venue-name').text
-        date = item.search('time').attr('datetime').text[0..9]
-        time = item.search('time').attr('datetime').text[11,5]
-        #2018-03-25
-        week = week_convert(item.attr('title')[0..2])
-        #Sun
-        photo = item.search('img').attr('src').value
-        #Url
-      end
-
-        # # 存 Artist
-        # if artists != "Need to Check"
-        #   artists.each do |artist|
-        #     if !Artist.find_by_name(artist)
-        #       Artist.create(name: artist)
-        #       puts "Create artist #{artist}"
-        #     end
-        #   end
-        # end
-        #
-        # # 存 Place
-        # if !Place.find_by_name(place)
-        #   Place.create(name: place)
-        #   puts "Create place #{place}"
-        # end
-        #
-        # # 存 Event
-        # if !Event.find_by_name(name)
-        #   Event.create( name: name,
-        #                 remote_photo_url: photo,
-        #                 date: date,
-        #                 week: week,
-        #                 time: time, )
-        #   puts "Create event #{name}"
-        #
-        #   # Event有建再存 Cession
-        #   Cession.create( event_id: Event.find_by_name(name).id,
-        #                   place_id: Place.find_by_name(place).id )
-        #   puts "Create cession!"
-        #
-        #   # Event有建再存 Show
-        #   if artists != "Need to Check"
-        #     artists.each do |artist|
-        #       Show.create( event_id: Event.find_by_name(name).id,
-        #                    artist_id: Artist.find_by_name(artist).id )
-        #       puts "Create shows!"
-        #     end
-        #   end
-        # end
-
-      puts "Finish songkick crawling"
-    end
-
-  end
+  # # 爬 songkick
+  # task songkick: :environment do
+  #   agent = Mechanize.new
+  #   # url = 'https://www.songkick.com/metro_areas/32574-taiwan-taichung'
+  #   url = 'https://www.songkick.com/metro_areas/32576-taiwan-taipei'
+  #   page = agent.get(url)
+  #   page.search('.event-listings li').each do |item|
+  #     if item.attr('class') != 'with-date'
+  #       artist = item.search('p strong').text
+  #       name = item.search('p a span').text
+  #       place = item.search('.venue-name').text
+  #       date = item.search('time').attr('datetime').text[0..9]
+  #       time = item.search('time').attr('datetime').text[11,5]
+  #       #2018-03-25
+  #       week = week_convert(item.attr('title')[0..2])
+  #       #Sun
+  #       photo = item.search('img').attr('src').value
+  #       #Url
+  #     end
+  #
+  #       # 存 Artist
+  #       if artists != "Need to Check"
+  #         artists.each do |artist|
+  #           if !Artist.find_by_name(artist)
+  #             Artist.create(name: artist)
+  #             puts "Create artist #{artist}"
+  #           end
+  #         end
+  #       end
+  #
+  #       # 存 Place
+  #       if !Place.find_by_name(place)
+  #         Place.create(name: place)
+  #         puts "Create place #{place}"
+  #       end
+  #
+  #       # 存 Event
+  #       if !Event.find_by_name(name)
+  #         Event.create( name: name,
+  #                       remote_photo_url: photo,
+  #                       date: date,
+  #                       week: week,
+  #                       time: time, )
+  #         puts "Create event #{name}"
+  #
+  #         # Event有建再存 Cession
+  #         Cession.create( event_id: Event.find_by_name(name).id,
+  #                         place_id: Place.find_by_name(place).id )
+  #         puts "Create cession!"
+  #
+  #         # Event有建再存 Show
+  #         if artists != "Need to Check"
+  #           artists.each do |artist|
+  #             Show.create( event_id: Event.find_by_name(name).id,
+  #                          artist_id: Artist.find_by_name(artist).id )
+  #             puts "Create shows!"
+  #           end
+  #         end
+  #       end
+  #
+  #     puts "Finish songkick crawling"
+  #   end
+  #
+  # end
 
 end
 
@@ -246,9 +251,10 @@ def save_data(artists, place_data, name, photo, date, week, price, time)
       end
     end
   end
+  image_square_shave(Event.find_by_name(name).photo)
 end
 
-
+# 把星期轉成中文
 def week_convert(week)
   week_convert_hash = { "Sun" => "日",
                         "Mon" => "一",
@@ -258,4 +264,22 @@ def week_convert(week)
                         "Fri" => "五",
                         "Sat" => "六" }
   week_convert_hash[week]
+end
+
+# 將圖片剪裁成正方形
+def image_square_shave(photo)
+  path = photo.path
+  image = MiniMagick::Image.new(path)
+  h = image[:height]
+  w = image[:width]
+  image.combine_options do |img|
+    if h >= w
+      shave_off = (h - w) / 2
+      img.shave "0x#{shave_off}"
+    else
+      shave_off = (w - h) / 2
+      img.shave "#{shave_off}x0"
+    end
+    img.resize "400x400"
+  end
 end
