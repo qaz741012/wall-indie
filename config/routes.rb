@@ -15,6 +15,10 @@ Rails.application.routes.draw do
     collection do
       get :all_events
     end
+    member do
+      post :follow
+      post :unfollow
+    end
   end
 
   root "events#index"

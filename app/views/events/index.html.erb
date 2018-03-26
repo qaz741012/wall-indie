@@ -30,103 +30,44 @@
   <div class="title col-sm-12">
     <h2>近期表演資訊</h2>
   </div>
-  <div class="recent-event col-md-4">
-    <%= image_tag "1.png", class: "img-fluid mx-auto d-block img-thumbnail"  %>
-    <div class="event-detail">
-      <div class="follow-box">
-        <%= render partial: "shared/user_follow_event" %>
-      </div>
-      <div class="date">
-        <h3>3/23(五)</h3>
-      </div>
-      <div class="name">
-        <h5>THE BIRD WAVE - Se So Neon 1st LIVE IN TAIPEI</h5>
-      </div>
-      <hr>
-      <div class="artist">
-        <span class="badge badge-secondary">演出</span>
-        <p>Manic Sheep, VOOID, Se So Neon</p>
-      </div>
-      <div class="place">
-        <span class="badge badge-secondary">場地</span>
-        <p>公館</p>
-      </div>
-      <div class="price">
-        <span class="badge badge-secondary">票價</span>
-        <p>預售票 NT$ 1000<br>現場票 NT$ 1200</p>
-      </div>
-      <div class="time">
-        <span class="badge badge-secondary">時間</span>
-        <p>20:00</p>
-      </div>
-    </div>
-  </div>
-  <div class="recent-event col-md-4">
-    <%= image_tag "2.png", class: "img-fluid mx-auto d-block img-thumbnail"  %>
-    <div class="event-detail">
-      <div class="follow-box">
-        <%= render partial: "shared/user_follow_event" %>
-      </div>
-      <div class="date">
-        <h3>3/24(六)</h3>
-      </div>
-      <div class="name">
-        <h5>Somke Machine Night</h5>
-      </div>
-      <hr>
-      <div class="artist">
-        <span class="badge badge-secondary">演出</span>
-        <p>XU FENG, CHRIS SSG, AL BURRO, diskonnected, TOSS WANG, Sa Pa, BEZIER</p>
-      </div>
-      <div class="place">
-        <span class="badge badge-secondary">場地</span>
-        <p>KORNER</p>
-      </div>
-      <div class="price">
-        <span class="badge badge-secondary">票價</span>
-        <p>W/ 1 DRINK Before 12:30AM NT.399<br>
-          W/ 1 DRINK Before 1AM NT.500<br>
-          W/ 1 DRINK After 1AM NT.650<br>
-          W/ 1 DRINK After 4AM NT.400</p>
-      </div>
-      <div class="time">
-        <span class="badge badge-secondary">時間</span>
-        <p>23:50</p>
+
+
+
+  <% @events.each do |event| %>
+    <div class="recent-event col-md-4">
+      <%= image_tag event.photo, class: "img-fluid mx-auto d-block img-thumbnail"  %>
+      <div class="event-detail">
+        <div class="follow-box">
+          <%= render partial: "shared/user_follow_event", locals: {event: event} %>
+        </div>
+        <div class="date">
+          <h3><%= event.date %>(<%= event.week %>)</h3>
+        </div>
+        <div class="name">
+          <h5><%= event.name %></h5>
+        </div>
+        <hr>
+        <div class="artist">
+          <span class="badge badge-secondary">演出</span>
+          <p>
+            <%= event.artists.map {|artist| artist.name}.join(", ") %>
+          </p>
+        </div>
+        <div class="place">
+          <span class="badge badge-secondary">場地</span>
+          <p><%= event.places[0].name %></p>
+        </div>
+        <div class="price">
+          <span class="badge badge-secondary">票價</span>
+          <p><%= event.price %></p>
+        </div>
+        <div class="time">
+          <span class="badge badge-secondary">時間</span>
+          <p><%= event.time %></p>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="recent-event col-md-4">
-    <%= image_tag "3.png", class: "img-fluid mx-auto d-block img-thumbnail"  %>
-    <div class="event-detail">
-      <div class="follow-box">
-        <%= render partial: "shared/user_follow_event" %>
-      </div>
-      <div class="date">
-        <h3>4/18(三)</h3>
-      </div>
-      <div class="name">
-        <h5>德國傳奇之聲 THE NOTWIST 首度來台</h5>
-      </div>
-      <hr>
-      <div class="artist">
-        <span class="badge badge-secondary">演出</span>
-        <p>The Notwist</p>
-      </div>
-      <div class="place">
-        <span class="badge badge-secondary">場地</span>
-        <p>公館</p>
-      </div>
-      <div class="price">
-        <span class="badge badge-secondary">票價</span>
-        <p>預售票 NT$ 1200<br>
-          現場票 NT$ 1500</p>
-      </div>
-      <div class="time">
-        <span class="badge badge-secondary">時間</span>
-        <p>20:00</p>
-      </div>
-    </div>
-  </div>
+  <% end %>
 </div>
 
 

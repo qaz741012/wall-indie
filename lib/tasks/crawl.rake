@@ -56,14 +56,7 @@ namespace :crawl do
 
       date = "2018/" + info[0][0..4]
 
-      week_convert_hash = { "Sun" => "日",
-                            "Mon" => "一",
-                            "Tue" => "二",
-                            "Wed" => "三",
-                            "Thu" => "四",
-                            "Fri" => "五",
-                            "Sat" => "六" }
-      week = week_convert_hash[/\(.*\./.match(info[0])[0][1..-2]]
+      week = week_convert(/\(.*\./.match(info[0])[0][1..-2])
 
       begin
         name = /\[.*\]/.match(info[1])[0][1..-2]
@@ -155,7 +148,7 @@ namespace :crawl do
         date = item.search('time').attr('datetime').text[0..9]
         time = item.search('time').attr('datetime').text[11,5]
         #2018-03-25
-        week = item.attr('title')[0..2]
+        week = week_convert(item.attr('title')[0..2])
         #Sun
         photo = item.search('img').attr('src').value
         #Url
@@ -200,7 +193,7 @@ namespace :crawl do
             end
           end
         end
-      end
+
       puts "Finish songkick crawling"
     end
 
