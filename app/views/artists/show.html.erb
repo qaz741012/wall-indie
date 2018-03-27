@@ -2,21 +2,21 @@
   <div class="row">
     <div class="col-md-8">
       <h1><%= @artist.name %></h1>
-      <h6><%= @artist.intro %> </h6>          
+      <h6><%= @artist.intro %> </h6>
       <div class="row">
         <div class="col-md-4">
           <%= render partial: "shared/user_follow_artist", locals: {artist: @artist} %>
-          <strong><%= @artist.favorits_count %></strong> Favorites              
+          <strong><%= @artist.favorits_count %></strong> Favorites
         </div>
         <div class="col-md-8">
           <%= render partial: "shared/user_favorite_artist", locals: {artist: @artist} %>
-          <strong><%= @artist.artist_followships_count %></strong> Follower 
+          <strong><%= @artist.artist_followships_count %></strong> Follower
         </div>
-      </div>                    
-    </div> 
+      </div>
+    </div>
     <div class="col-md-4">
       <%= @artist.photo %>
-    </div> 
+    </div>
   </div>
   <div class="clearfix"></div>
   <hr>
@@ -32,8 +32,10 @@
         </div>
         <div class="spotify">
           <h4> Spotify Top 5 Song</h4>
-          <% @musics.each do |music| %>
-            <h6><%= link_to "#{music.name}", music.link %></h6> 
+          <% @top_tracks.each do |track| %>
+            <iframe src="https://open.spotify.com/embed?uri=<%= track.uri %>"
+            width="300" height="80" frameborder="0" allowtransparency="true"
+            allow="encrypted-media"></iframe>
           <% end %>
         </div>
     </div>
@@ -43,7 +45,7 @@
         <div class="event-item">
           <h4><%= event.name %></h4>
           <h6><%= event.date %></h6>
-          <h6><%= event.info %></h6>
+          <h6><%= event.intro %></h6>
           <hr>
         </div>
       <% end %>
@@ -56,8 +58,6 @@
 
 <div class="music-review">
   <div class="row">
-    
+
   </div>
 </div>
-
-

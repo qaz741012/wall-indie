@@ -50,9 +50,16 @@
         <hr>
         <div class="artist">
           <span class="badge badge-secondary">演出</span>
-          <p>
-            <%= event.artists.map {|artist| artist.name}.join(", ") %>
-          </p>
+          <div class="artist-list">
+            <% count = event.artists.count - 1 %>
+            <% event.artists.each_with_index do |artist, index| %>
+              <% if index != count %>
+                <%= link_to artist.name, artist_path(artist) %>,
+              <% else %>
+                <%= link_to artist.name, artist_path(artist) %>
+              <% end %>
+            <% end %>
+          </div>
         </div>
         <div class="place">
           <span class="badge badge-secondary">場地</span>

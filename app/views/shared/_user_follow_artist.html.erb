@@ -1,7 +1,8 @@
 <!-- 此頁是user要追蹤/取消追蹤artist的按鈕 -->
-
-<% if current_user.followed_this_artist?(artist) %>
-  <%= link_to "Unfollow", unfollow_artist_path(artist), method: :post, class: "btn btn-default" %>
-<% else %>
-  <%= link_to "Follow", follow_artist_path(artist), method: :post, class: "btn btn-danger" %>
+<% if current_user %>
+  <% if current_user.followed_this_artist?(artist) %>
+    <%= link_to "Unfollow", unfollow_artist_path(artist), method: :post, class: "btn btn-default" %>
+  <% else %>
+    <%= link_to "Follow", follow_artist_path(artist), method: :post, class: "btn btn-danger" %>
+  <% end %>
 <% end %>

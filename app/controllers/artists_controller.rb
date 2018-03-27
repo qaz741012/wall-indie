@@ -14,6 +14,12 @@ class ArtistsController < ApplicationController
   def show
     @musics = @artist.musics.limit(5)
     @events = @artist.events
+
+    # 取 Spotify Top 5 Tracks
+    spotify_config = Rails.application.config_for(:spotify)
+    RSpotify.authenticate(spotify_config["app_id"], spotify_config["secret"])
+    @top_tracks = RSpotify::Artist.search(@artist.name)[0].top_tracks("TW")[0..4]
+
   end
 
   # GET /artists/new
