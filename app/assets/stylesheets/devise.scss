@@ -1,3 +1,4 @@
+/////////////////*Login*////////////////
 #login {
   width: 80%;
   margin: auto;
@@ -7,6 +8,12 @@
   color: gray;
   font-size: 16px;
   margin-bottom: 20px;
+}
+
+#login .bar {
+  height: 2px;
+  background-color: 	#DCDCDC;
+  margin: 20px auto;
 }
 
 #email-login .email-login {
@@ -85,3 +92,5 @@
   font-size: 30px;
   color: white;
 }
+
+/////////////////*Sign up*////////////////

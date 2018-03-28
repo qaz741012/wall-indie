@@ -1,7 +1,24 @@
 <div class="container">
   <div id="login">
+    <div id="oauth-login">
+      <div>
+        <div class="oauth-login fb-login">
+          <%= link_to user_facebook_omniauth_authorize_path, class: "nav-link" do %>
+            <%= icon('fab', 'facebook-square') %>
+            <span>Facebook 登入</span>
+          <% end %>
+        </div>
+        <div class="oauth-login spotify-login">
+          <%= link_to user_spotify_omniauth_authorize_path, class: "nav-link" do %>
+            <%= icon('fab', 'spotify') %>
+            <span>Spotify 登入</span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="bar"></div>
     <div id="email-login">
-      <h5>用信箱登入</h5>
+      <h5>或是...</h5>
       <div class="email-login">
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class="field form-group row">
@@ -32,31 +49,14 @@
           </div>
         <% end %>
       </div>
-      <div class="email-login">
-        <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-          <%= link_to "註冊", new_registration_path(resource_name) %><br />
-        <% end -%>
+      <br>
+      <div class="email-login text-center">
         <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
           <%= link_to "忘記密碼?", new_password_path(resource_name) %><br />
         <% end -%>
-      </div>
-    </div>
-    <hr>
-    <div id="oauth-login">
-      <h5>或是...</h5>
-      <div>
-        <div class="oauth-login fb-login">
-          <%= link_to user_facebook_omniauth_authorize_path, class: "nav-link" do %>
-            <%= icon('fab', 'facebook-square') %>
-            <span>Facebook 登入</span>
-          <% end %>
-        </div>
-        <div class="oauth-login spotify-login">
-          <%= link_to user_spotify_omniauth_authorize_path, class: "nav-link" do %>
-            <%= icon('fab', 'spotify') %>
-            <span>Spotify 登入</span>
-          <% end %>
-        </div>
+        <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+          <%= link_to "註冊", new_registration_path(resource_name) %><br />
+        <% end -%>
       </div>
     </div>
   </div>
