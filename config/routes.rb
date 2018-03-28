@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       post :unfavorite
     end
   end
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: [:index, :show, :edit, :update]
 
   resources :events, only: [:index, :show] do
     collection do
