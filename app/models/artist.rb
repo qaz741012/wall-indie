@@ -12,13 +12,8 @@ class Artist < ApplicationRecord
   #user favorit
   has_many :favorits, dependent: :destroy
   has_many :favorited, through: :favorits, source: :user
-end
 
-def youtube(user)
-  agent = Mechanize.new
-  url = 'https://www.youtube.com/results?search_query=' + '許含光'
-  page = agent.get(url)
+  
 
-  page.search('#thumbnail').attr('href').value
 
 end

@@ -146,7 +146,7 @@ namespace :crawl do
 
     links.each do |link|
       event_page = page.link_with(href: link).click
-    
+
       artists = event_page.search('tbody tr:nth-child(3) td').text.strip.split(/[,x]/)
       pp artists
 
@@ -332,6 +332,36 @@ namespace :crawl do
     end
 
     puts "Finish Legacy crawling"
+  end
+
+  # Youtube
+  task youtube: :environment do
+    url = "https://www.youtube.com/results?search_query="
+
+    Artist.find_each do |artist|
+      str = artist.name
+
+      agent = Mechanize.new
+      page = agent.get(url+str)
+
+      a = []
+      page.links.each do |link|
+        s = /#{str}.*/.match(link.text)
+        if s
+          a << s[0]
+        end
+      end
+
+      begin
+        youtube_link = "https://www.youtube.com/embed" + page.links_with(text: a[1])[0].href.split('=')[-1]
+      rescue NoMethodError
+        youtube_link = nil
+      end
+
+      puts youtube_link
+      # artist.intro = youtube_link
+      # artist.save
+    end
   end
 
 
