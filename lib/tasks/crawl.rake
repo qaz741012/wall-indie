@@ -353,7 +353,7 @@ namespace :crawl do
       end
 
       begin
-        youtube_link = "https://www.youtube.com/embed" + page.links_with(text: a[1])[0].href.split('=')[-1]
+        youtube_link = "https://www.youtube.com/embed/" + page.links_with(text: a[1])[0].href.split('=')[-1]
       rescue NoMethodError
         youtube_link = nil
       end
