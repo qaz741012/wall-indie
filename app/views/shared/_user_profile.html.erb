@@ -1,13 +1,18 @@
 <div class = "box">
-  <%= image_tag @user.avatar, class: "img-responsive img-circle" %>
+  <%#= image_tag @user.avatar, class: "img-responsive img-circle" %>
   <h1><%= @user.name %></h1>
-  <p><%= @user.introduction %></p>
+  <p><%= @user.email %></p>
+
   <br />
 
-  <h4> <%= link_to "Following #{@user.followings.count}", followings_user_path(@user)  %></h4>
-  <h4> <%= link_to "like #{@user.likes.count}",likes_user_path(@user) %></h4>
+  <h4> <%#= link_to "Following Artists", follow_artist_path(@art)  %></h4>
+  <h4> <%#= link_to "Following Events", follow_event_path(@user)  %></h4>
+  <h4> <%#= link_to "like #{@user.likes.count}",likes_user_path(@user) %></h4>
   <br>
   <%#= render partial: "shared/follow_button", locals: {user: @user} %>
+  <%if @user.email == current_user.email %> 
+    <%= link_to 'Edit Profile', edit_user_path(@user),:class => 'btn btn-primary'%>
+    <% end %> 
 
 </div>
 <div class="clearfix"></div>
