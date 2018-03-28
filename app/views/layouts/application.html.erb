@@ -23,10 +23,7 @@
             <li><%= link_to '登出', destroy_user_session_path, method: :delete, class: "nav-link" %></li>
             <li><%= link_to '修改密碼', edit_user_registration_path, class: "nav-link" %></li>
           <% else %>
-            <li><%= link_to '註冊', new_user_registration_path, class: "nav-link" %></li>
-            <li><%= link_to '以信箱登入', new_user_session_path, class: "nav-link" %></li>
-            <li><%= link_to '以FB登入', user_facebook_omniauth_authorize_path, class: "nav-link" %></li>
-            <li><%= link_to '以Spotify登入', user_spotify_omniauth_authorize_path, class: "nav-link" %></li>
+            <li><%= link_to '登入', new_user_session_path, class: "nav-link" %></li>
           <% end %>
         </ul>
         <form class="form-inline my-2 my-lg-0">
