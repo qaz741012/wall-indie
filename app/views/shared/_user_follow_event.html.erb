@@ -2,13 +2,9 @@
 
 <% if current_user %>
   <% if !current_user.followed_this_event?(event) %>
-    <%= link_to follow_event_path(event), method: :post do  %>
-      <button type="button" class="follow-event btn btn-warning btn-sm">Follow</button>
-    <% end %>
+    <button type="button" class="follow-a follow-event btn btn-warning btn-sm">Follow</button>
   <% else %>
-    <%= link_to unfollow_event_path(event), method: :post do  %>
-      <button type="button" class="follow-event btn btn-warning btn-sm">Unfollow</button>
-    <% end %>
+    <button type="button" class="unfollow-a follow-event btn btn-warning btn-sm">Unfollow</button>
   <% end %>
 <% else %>
   <%= link_to new_user_session_path do  %>
