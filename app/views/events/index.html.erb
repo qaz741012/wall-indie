@@ -31,7 +31,7 @@
     <h2>近期表演資訊</h2>
   </div>
   <% @events.each do |event| %>
-    <div class="recent-event col-md-4" id="<%= event.id %>">
+    <div class="recent-event col-md-4">
       <%= link_to event_path(event) do %>
         <%= image_tag event.photo, class: "img-fluid mx-auto d-block img-thumbnail"  %>
       <% end %>
@@ -114,39 +114,40 @@
 
   </script>
 
-<!-- Follow Ajax -->
-<script>
-  $('.follow-box').on("click", ".follow-a", function(event) {
-    var id = event.target.parentNode.parentNode.parentNode.id
-    $.ajax({
-      url: "/events/" + id + "/follow",
-      method: "POST",
-      dataType: "json",
-      success: function(data) {
-        $('#'+data["id"]).find('.follow-box').html($('#event-unfollow-template').html());
-      }
+  <!-- Follow Ajax -->
+  <script>
+    $('.follow-box').on("click", ".follow-a", function(event) {
+      var id = event.target.parentNode.id;
+      console.log(id);
+      $.ajax({
+        url: "/events/" + id + "/follow",
+        method: "POST",
+        dataType: "json",
+        success: function(data) {
+          $('#'+data["id"]).html($('#event-unfollow-template').html());
+        }
+      });
     });
-  });
-</script>
+  </script>
 
-<!-- Unfollow Ajax -->
-<script>
-  $('.follow-box').on("click", ".unfollow-a", function(event) {
-    var id = event.target.parentNode.parentNode.parentNode.id
-    $.ajax({
-      url: "/events/" + id + "/unfollow",
-      method: "POST",
-      dataType: "json",
-      success: function(data) {
-        $('#'+data["id"]).find('.follow-box').html($('#event-follow-template').html());
-      }
+  <!-- Unfollow Ajax -->
+  <script>
+    $('.follow-box').on("click", ".unfollow-a", function(event) {
+      var id = event.target.parentNode.id;
+      $.ajax({
+        url: "/events/" + id + "/unfollow",
+        method: "POST",
+        dataType: "json",
+        success: function(data) {
+          $('#'+data["id"]).html($('#event-follow-template').html());
+        }
+      });
     });
-  });
-</script>
+  </script>
 
-<script type="text/template" id="event-follow-template">
+  <script type="text/template" id="event-follow-template">
     <button type="button" class="follow-a follow-event btn btn-warning btn-sm">Follow</button>
-</script>
-<script type="text/template" id="event-unfollow-template">
+  </script>
+  <script type="text/template" id="event-unfollow-template">
     <button type="button" class="unfollow-a follow-event btn btn-warning btn-sm">Unfollow</button>
-</script>
+  </script>

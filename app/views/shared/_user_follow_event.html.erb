@@ -1,11 +1,13 @@
 <!-- 此頁是user要追蹤/取消追蹤event的按鈕 -->
 
 <% if current_user %>
-  <% if !current_user.followed_this_event?(event) %>
-    <button type="button" class="follow-a follow-event btn btn-warning btn-sm">Follow</button>
-  <% else %>
-    <button type="button" class="unfollow-a follow-event btn btn-warning btn-sm">Unfollow</button>
-  <% end %>
+  <div id="<%= event.id %>">
+    <% if !current_user.followed_this_event?(event) %>
+      <button type="button" class="follow-a follow-event btn btn-warning btn-sm">Follow</button>
+    <% else %>
+      <button type="button" class="unfollow-a follow-event btn btn-warning btn-sm">Unfollow</button>
+    <% end %>
+  </div>
 <% else %>
   <%= link_to new_user_session_path do  %>
     <button type="button" class="follow-event btn btn-warning btn-sm">Follow</button>
