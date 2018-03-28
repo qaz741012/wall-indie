@@ -138,7 +138,56 @@ namespace :crawl do
     url = "https://www.indievox.com/event/"
     page = agent.get(url)
 
-    page.links.each {|link| pp link}
+    links = []
+    page.search('td h5').each do |item|
+      link = item.search('a').attr('href').value
+      links<<link
+    end
+
+    links.each do |link|
+      event_page = page.link_with(href: link).click
+    
+      artists = event_page.search('tbody tr:nth-child(3) td').text.strip.split(/[,x]/)
+      pp artists
+
+      place = event_page.search('tbody tr:nth-child(5) td a').text#[0..9]
+      place = place.split(" ")[0]
+      pp place
+      address = event_page.search('tbody tr:nth-child(6) td').text#[0..9]
+      address = address.split(" ")[0]
+      pp address
+
+      place_data = { 'name' => place, 'address' => address }
+      pp place_data
+
+      name = event_page.search('.col-lg-8 h1').text.strip
+      name = "No Name!!!" if name == ""
+      pp name
+
+      photo = event_page.search('img.post-img').attr('src').value
+      pp photo
+
+      price = event_page.search('tbody tr:first-child td').text.strip
+      pp price
+
+      date = event_page.search('tbody tr:nth-child(2) td').text.strip
+      pp date
+
+      week = Time.parse(date).strftime('%a')
+      week = week_convert(week)
+      pp week
+
+      time = Time.parse(date).strftime("%H:%M")
+      pp time
+
+      date = Time.parse(date).strftime("%Y-%m-%d")
+      pp date
+
+      save_data(artists, place_data, name, photo, date, week, price, time)
+      puts "#{artists} will arrange #{name} in #{date}. "
+    end
+
+    puts "Finish indievox crawling"
   end
 
   # 爬 songkick
@@ -183,7 +232,6 @@ namespace :crawl do
         name = event_page.search('.h0.summary a').text
         name = "No Name!!!" if name == ""
         pp name
-        puts name.class
 
         begin
           photo = 'http:'+event_page.search('.profile-picture-wrapper img').attr('src').value
@@ -191,7 +239,6 @@ namespace :crawl do
           photo = 'http://via.placeholder.com/350x150'
         end
         pp photo
-        puts photo.class
 
         date = event_page.search('.date-and-name p').text.split('-')[0]
         pp date
@@ -199,17 +246,14 @@ namespace :crawl do
         week = Time.parse(date).strftime('%a')
         week = week_convert(week)
         pp week
-        puts week.class
 
         price = "未定價"
 
         time = Time.parse(date).strftime("%H:%M")
         pp time
-        puts time.class
 
         date = Time.parse(date).strftime("%Y-%m-%d")
         pp date
-        puts date.class
 
         save_data(artists, place_data, name, photo, date, week, price, time)
         puts "#{artists} will arrange #{name} in #{date}. "
@@ -218,6 +262,79 @@ namespace :crawl do
 
     puts "Finish songkick crawling"
   end
+  # 爬legacy
+  task legacy: :environment do
+    agent = Mechanize.new
+    x = 60
+    url = 'http://www.legacy.com.tw/page/programlist/
+          ?year=2018&month=-1&area_id=&per_page=' + x.to_s
+
+    urls.each do |url|
+      page = agent.get(url)
+
+      links = []
+      page.search('.summary').each do |item|
+        link = item.search('a').attr('href').value
+        links<<link
+      end
+
+      links.each do |link|
+        event_page = page.link_with(href: link).click
+
+        # # 如果是發現有不同樂團，就會加入artists
+        # artists = []
+        # artists<<event_page.search('.h0 a').text
+        # event_page.search('.line-up a').each do |artist|
+        #   artists<<artist.text
+        # end
+        # artists = artists[1..-1] if artists.length != 1
+        # pp artists
+
+        # place = event_page.search('.location .name a').text
+        # place = "No Place!!!" if place == ""
+        # pp place
+        # address = event_page.search('p>span>span').text
+        # address = "No Address!!!" if address == ""
+        # pp address
+
+        # place_data = { "name" => place, "address" => address}
+        # pp place_data
+
+        # name = event_page.search('.h0.summary a').text
+        # name = "No Name!!!" if name == ""
+        # pp name
+
+        # begin
+        #   photo = 'http:'+event_page.search('.profile-picture-wrapper img').attr('src').value
+        # rescue NoMethodError
+        #   photo = 'http://via.placeholder.com/350x150'
+        # end
+        # pp photo
+
+        # date = event_page.search('.date-and-name p').text.split('-')[0]
+        # pp date
+
+        # week = Time.parse(date).strftime('%a')
+        # week = week_convert(week)
+        # pp week
+
+        # price = "未定價"
+
+        # time = Time.parse(date).strftime("%H:%M")
+        # pp time
+
+        # date = Time.parse(date).strftime("%Y-%m-%d")
+        # pp date
+
+        # save_data(artists, place_data, name, photo, date, week, price, time)
+        # puts "#{artists} will arrange #{name} in #{date}. "
+      end
+    end
+
+    puts "Finish Legacy crawling"
+  end
+
+
 end
 
 private
