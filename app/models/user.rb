@@ -113,6 +113,7 @@ class User < ApplicationRecord
     user.spotify_token = auth.credentials.token
     user.email = auth.info.email
     user.password = Devise.friendly_token[0,20]
+    user.follow_artist_from_spotify(auth)
     user.skip_confirmation!
     user.save!
     return user
