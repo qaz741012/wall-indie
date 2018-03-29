@@ -1,7 +1,7 @@
 namespace :crawl do
   task all: :environment do
-    Rake::Task['db:migrate'].execute
-    Rake::Task['db:seed'].execute
+    #Rake::Task['db:migrate'].execute
+    #Rake::Task['db:seed'].execute
     Rake::Task['crawl:the_wall'].execute
     Rake::Task['crawl:revolver'].execute
     Rake::Task['crawl:witchhouse'].execute
