@@ -374,7 +374,20 @@ def save_data(artists, place_data={}, name, photo, date, week, price, time)
   if artists != "Need to Check"
     artists.each do |artist|
       if !Artist.find_by_name(artist)
-        Artist.create(name: artist)
+        new_artist = Artist.new
+        new_artist.name = artist  # 先存name
+
+        spotify_config = Rails.application.config_for(:spotify)
+        RSpotify.authenticate(spotify_config["app_id"], spotify_config["secret"])
+        sp_artist = RSpotify::Artist.search(artist)  # 去spotify找找看有沒有這個artist
+        if sp_artist != []
+          if (sp_artist[0].images != []) && (sp_artist[0].name == artist)
+            photo = sp_artist[0].images[0]["url"]
+            new_artist.photo = photo  # 有的話就把他的圖片抓下來
+          end
+        end
+        new_artist.save
+
         puts "Create artist #{artist}"
       end
     end

@@ -13,10 +13,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def spotify
-    # auth = request.env["omniauth.auth"]
-    # me = RSpotify::User.new(auth)
-    # render json: me.following(type: 'artist')[0].images[0]["url"]
-
     @user = User.from_spotify_omniauth(request.env["omniauth.auth"])
 
     if @user.persisted?

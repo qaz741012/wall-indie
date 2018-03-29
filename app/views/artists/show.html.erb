@@ -32,10 +32,12 @@
         </div>
         <div class="spotify">
           <h4> Spotify Top Tracks</h4>
-          <% @top_tracks.each do |track| %>
-            <iframe src="https://open.spotify.com/embed?uri=<%= track.uri %>"
-            width="300" height="80" frameborder="0" allowtransparency="true"
-            allow="encrypted-media"></iframe>
+          <% if @top_tracks %>
+            <% @top_tracks.each do |track| %>
+              <iframe src="https://open.spotify.com/embed?uri=<%= track.uri %>"
+              width="300" height="80" frameborder="0" allowtransparency="true"
+              allow="encrypted-media"></iframe>
+            <% end %>
           <% end %>
         </div>
     </div>
