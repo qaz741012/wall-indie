@@ -32,6 +32,26 @@ class EventsController < ApplicationController
     render json: {id: @event.id}
   end
 
+  # ========mail test========= 
+  #If there is something new in event data, 
+  #the create method will be triggered.
+  # def create
+  #   @event = Event.new(params[:id])
+  #   respond_to do |format|
+  #     if @event.save
+  #       #trigger
+  #       notice_user_new_event(@event)
+  #       format.html {
+  #         redirect_to(@Event, notice: 'Event was successfully created.') }
+  #       format.json {
+  #         render json: @event, status: :created, location: @event }
+  #     else
+  #       format.html { render action: 'new' }
+  #       format.json { render json: @event.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
+
   def show
     @artists = @event.artists
     @place = @event.places[0]
@@ -46,4 +66,18 @@ class EventsController < ApplicationController
   def set_event
     @event = Event.find(params[:id])
   end
+
+  # ========mail test========= 
+  # send to [a,b,c],[e,f],[a,f,h,j]fans
+  # of following A,B,C artist
+
+  # def notice_user_new_event(event)
+  #   @artists = event.artists
+  #   @artists.each do |artist|
+  #     @users = artist.artist_followed
+  #     @users.each do |user|
+  #       UserMailer.artist_new_evnet(@users).deliver_later
+  #     end
+  #   end
+  # end
 end

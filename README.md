@@ -2,9 +2,11 @@
 
 after download
 
-bundle install
+* bundle install
 
-rails dev:fake_all
+* rails crawl:all (include migrate and seed)
+
+* rails dev:fake_all (user and user's hit)
 
 
 

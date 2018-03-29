@@ -1,15 +1,27 @@
 namespace :dev do
+  task fake_all: :environment do
+    Rake::Task['dev:fake_user'].execute
+    Rake::Task['dev:fake_friendship'].execute
+    # Rake::Task['dev:fake_artist'].execute
+    # Rake::Task['dev:fake_music'].execute
+    # Rake::Task['dev:fake_place'].execute
+    # Rake::Task['dev:fake_event'].execute
+    # Rake::Task['dev:fake_cession'].execute
+    # Rake::Task['dev:fake_show'].execute
+    Rake::Task['dev:fake_favorit'].execute
+    Rake::Task['dev:fake_artist_followship'].execute
+    Rake::Task['dev:fake_event_followship'].execute
+  end
 
   task fake_user: :environment do
-    20.times do |i|
+    1000.times do |i|
       name = FFaker::Name::first_name
-      file = File.open("#{Rails.root}/public/avatar/user1.jpg")#user#{i+1}.jpg
-      file = File.new(Rails.root.join('app', 'assets', 'images', "user#{rand(19).to_s}.jpg"))
+      file = File.new(Rails.root.join('app', 'assets', 'images', "pic1_#{rand(72).to_s.rjust(3,'0')}.jpg"))
 
       user = User.new(
         id: i+3,
         name: name,
-        email: "#{name}@example.co",
+        email: FFaker::Internet.email,
         password: "12345678",
         avatar: file,
         # 繞過使用者email認證
@@ -22,9 +34,10 @@ namespace :dev do
 
   task fake_friendship: :environment do
     Friendship.destroy_all
+    num_users = User.count/5
     User.all.each do |user|
-      rand_user = User.select{|x| x!=user}.sample(5)
-      rand(5).times do |i|
+      rand_user = User.select{|x| x!=user}.sample(num_users)
+      rand(num_users).times do |i|
         user.friendships.create!(
           user_id: user.id,
           friend_id: rand_user[i].id)
@@ -80,14 +93,9 @@ namespace :dev do
   end
 
   task fake_event: :environment do
-    Event.destroy_all
-    20.times do |i|
-      name = FFaker::Name::first_name
-      file = File.new(Rails.root.join('app', 'assets', 'images', "indie#{rand(2).to_s}.jpeg"))
-
+      file = File.new(Rails.root.join('app', 'assets', 'images', "indie#{rand(3).to_s}.jpeg"))
       event = Event.new(
-        id: i+1,
-        name: name,
+        name: FFaker::Music::album,
         intro: FFaker::Lorem::sentence(20),
         date: FFaker::Time::date,
         time: FFaker::Time::datetime,
@@ -101,7 +109,7 @@ namespace :dev do
   end
 
   task fake_cession: :environment do
-    Cession.destroy_all
+    # Cession.destroy_all
     Place.all.each do |place|
       rand(5).times do |i|
         place.cessions.create!(
@@ -133,12 +141,13 @@ namespace :dev do
 
   task fake_favorit: :environment do
     Favorit.destroy_all
-    rand_artist = Artist.all.sample(5)
+    num_artists = Artist.count/5
+    rand_artists = Artist.all.sample(num_artists)
     User.all.each do |user|
-      rand(5).times do |i|
+      rand(num_artists).times do |i|
         user.favorits.create!(
           user_id: user.id,
-          artist_id: rand_artist[i].id)
+          artist_id: rand_artists[i].id)
       end
     end
     # Artist.all.each do |artist|
@@ -151,12 +160,13 @@ namespace :dev do
 
   task fake_artist_followship: :environment do
     ArtistFollowship.destroy_all
-    rand_artist = Artist.all.sample(5)
+    num_artists = Artist.count/5
+    rand_artists = Artist.all.sample(num_artists)
     User.all.each do |user|
-      rand(5).times do |i|
+      rand(num_artists).times do |i|
         user.artist_followships.create!(
           user_id: user.id,
-          artist_id: rand_artist[i].id)
+          artist_id: rand_artists[i].id)
       end
     end
     # Artist.all.each do |artist|
@@ -169,12 +179,13 @@ namespace :dev do
 
   task fake_event_followship: :environment do
     EventFollowship.destroy_all
-    rand_event = Event.all.sample(5)
+    num_evets = Event.count/5
+    rand_events = Event.all.sample(num_evets)
     User.all.each do |user|
-      rand(5).times do |i|
+      rand(num_evets).times do |i|
         user.event_followships.create!(
           user_id: user.id,
-          event_id: rand_event[i].id)
+          event_id: rand_events[i].id)
       end
     end
     # Artist.all.each do |artist|
@@ -185,21 +196,6 @@ namespace :dev do
     puts "now you have #{EventFollowship.count} event_followships data"
   end
 
-  task fake_all: :environment do
-    Rake::Task['db:migrate'].execute
-    Rake::Task['db:seed'].execute
-    Rake::Task['dev:fake_user'].execute
-    Rake::Task['dev:fake_friendship'].execute
-    Rake::Task['dev:fake_artist'].execute
-    Rake::Task['dev:fake_music'].execute
-    Rake::Task['dev:fake_place'].execute
-    Rake::Task['dev:fake_event'].execute
-    Rake::Task['dev:fake_cession'].execute
-    Rake::Task['dev:fake_show'].execute
-    Rake::Task['dev:fake_favorit'].execute
-    Rake::Task['dev:fake_artist_followship'].execute
-    Rake::Task['dev:fake_event_followship'].execute
-    Rake::Task['crawl:all'].execute
-  end
+  
 
 end

@@ -1,5 +1,7 @@
 namespace :crawl do
   task all: :environment do
+    Rake::Task['db:migrate'].execute
+    Rake::Task['db:seed'].execute
     Rake::Task['crawl:the_wall'].execute
     Rake::Task['crawl:revolver'].execute
     Rake::Task['crawl:witchhouse'].execute
@@ -346,7 +348,11 @@ namespace :crawl do
 
       a = []
       page.links.each do |link|
-        s = /#{str}.*/.match(link.text)
+        begin
+          s = /#{str}.*/.match(link.text)
+        rescue
+          pp link.text
+        end
         if s
           a << s[0]
         end
