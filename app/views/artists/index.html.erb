@@ -14,7 +14,11 @@
     <% @artists.each do |artist| %>
       <tr>
         <td><%= artist.name %></td>
-        <td><%= image_tag "user#{rand(19).to_s}.jpg" %></td>
+        <% if artist.photo? %>
+          <td><%= image_tag artist.photo %></td>
+        <% else %>
+          <td><%= image_tag "user#{rand(19).to_s}.jpg" %></td>
+        <% end %>
         <td><%= artist.intro %></td>
         <td><%= link_to 'Show', artist %></td>
         <td><%= link_to 'Edit', edit_artist_path(artist) %></td>
