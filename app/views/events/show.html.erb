@@ -4,7 +4,7 @@
     <h4><%= @event.date %>(<%= @event.week %>)</h4>
     <div>
       <h3 class="d-inline-block"><%= @event.name %></h3>
-      <div class="d-inline-block">
+      <div class="d-inline-block follow-box">
         <%= render partial: "shared/user_follow_event", locals: {event: @event} %>
       </div>
     </div>
@@ -42,3 +42,40 @@
     <%= image_tag @event.photo, class: "img-fluid mx-auto d-block" %>
   </div>
 </div>
+
+<!-- Follow Ajax -->
+<script>
+  $('.follow-box').on("click", ".follow-a", function(event) {
+    var id = event.target.parentNode.id;
+    $.ajax({
+      url: "/events/" + id + "/follow",
+      method: "POST",
+      dataType: "json",
+      success: function(data) {
+        $('#'+data["id"]).html($('#event-unfollow-template').html());
+      }
+    });
+  });
+</script>
+
+<!-- Unfollow Ajax -->
+<script>
+  $('.follow-box').on("click", ".unfollow-a", function(event) {
+    var id = event.target.parentNode.id;
+    $.ajax({
+      url: "/events/" + id + "/unfollow",
+      method: "POST",
+      dataType: "json",
+      success: function(data) {
+        $('#'+data["id"]).html($('#event-follow-template').html());
+      }
+    });
+  });
+</script>
+
+<script type="text/template" id="event-follow-template">
+  <button type="button" class="follow-a follow-event btn btn-warning btn-sm">Follow</button>
+</script>
+<script type="text/template" id="event-unfollow-template">
+  <button type="button" class="unfollow-a follow-event btn btn-warning btn-sm">Unfollow</button>
+</script>

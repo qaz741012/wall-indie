@@ -5,4 +5,8 @@
   <% else %>
     <%= link_to "Follow", follow_artist_path(artist), method: :post, class: "btn btn-danger" %>
   <% end %>
+<% else %>
+  <%= link_to new_user_session_path do  %>
+    <button type="button" class="btn btn-danger">Follow</button>
+  <% end %>
 <% end %>

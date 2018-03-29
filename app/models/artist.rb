@@ -13,7 +13,5 @@ class Artist < ApplicationRecord
   has_many :favorits, dependent: :destroy
   has_many :favorited, through: :favorits, source: :user
 
-  
-
 
 end

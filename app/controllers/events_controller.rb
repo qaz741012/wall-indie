@@ -22,23 +22,14 @@ class EventsController < ApplicationController
 
   def follow
     event_followship = @event.event_followships.build(user: current_user)
-    if event_followship.save
-      flash[:notice] = "Successfully followed!"
-    else
-      flash[:alert] = event_followship.errors.full_messages.to_sentence
-    end
-    redirect_back(fallback_location: root_path)
+    event_followship.save
+    render json: {id: @event.id}
   end
 
   def unfollow
     event_followship = @event.event_followships.where(user_id: current_user.id)[0]
-    if event_followship
-      event_followship.destroy
-      flash[:notice] = "Successfully unfollowed!"
-    else
-      flash[:alert] = "You haven't followed the event yet"
-    end
-    redirect_back(fallback_location: root_path)
+    event_followship.destroy
+    render json: {id: @event.id}
   end
 
   # ========mail test========= 

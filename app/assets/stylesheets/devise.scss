@@ -1,0 +1,96 @@
+/////////////////*Login*////////////////
+#login {
+  width: 80%;
+  margin: auto;
+}
+
+#login h5 {
+  color: gray;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+#login .bar {
+  height: 2px;
+  background-color: 	#DCDCDC;
+  margin: 20px auto;
+}
+
+#email-login .email-login {
+  margin: auto 20px;
+}
+
+#email-login input[type="submit"] {
+  background-color: silver;
+  border: none;
+}
+
+#email-login input[type="submit"]:hover {
+  background-color: gray;
+}
+
+#oauth-login .oauth-login {
+  margin: auto;
+  width: 240px;
+  border-radius: 50px;
+  margin: 10px auto;
+  text-align: center;
+  position: relative;
+}
+
+#oauth-login .oauth-login a {
+  font-size: 20px;
+  color: white;
+  height: 46px;
+}
+
+#oauth-login .oauth-login span {
+  position: absolute;
+  top: 9px;
+  left: 70px;
+  font-weight: bold;
+}
+
+#oauth-login .fb-login {
+  background-color: #208aFF;
+}
+
+#oauth-login .fb-login:hover {
+  background-color: white;
+  border: 2px solid #208aFF;
+}
+
+#oauth-login .fb-login:hover a {
+  color: #208aFF;
+}
+
+#oauth-login .fb-login:hover i {
+  color: #208aFF;
+}
+
+#oauth-login .spotify-login {
+  background-color: #12AD12;
+}
+
+#oauth-login .spotify-login:hover {
+  background-color: white;
+  border: 2px solid #12AD12;
+}
+
+#oauth-login .spotify-login:hover a {
+  color: #12AD12;
+}
+
+#oauth-login .spotify-login:hover i {
+  color: #12AD12;
+}
+
+#oauth-login i {
+  position: absolute;
+  top: 8px;
+  left: 30px;
+  font-size: 30px;
+  color: white;
+}
+
+/////////////////*Sign up*////////////////
