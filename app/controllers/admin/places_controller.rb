@@ -1,4 +1,4 @@
-class Admin::PlacesController < ApplicationController
+class Admin::PlacesController < Admin::BaseController
   def index
     @places = Place.all
   end
