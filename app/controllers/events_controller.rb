@@ -75,9 +75,6 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
-  def method_name
-    
-  end
 
   # ========mail test========= 
   # send to [a,b,c],[e,f],[a,f,h,j]fans
