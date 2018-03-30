@@ -36,5 +36,5 @@ User.create(
   )
 puts "Default user created!"
 
-Place.create(
-  )
+# Place.create(
+#   )

@@ -14,7 +14,7 @@ namespace :dev do
   end
 
   task fake_user: :environment do
-    1000.times do |i|
+    100.times do |i|
       name = FFaker::Name::first_name
       file = File.new(Rails.root.join('app', 'assets', 'images', "pic1_#{rand(72).to_s.rjust(3,'0')}.jpg"))
 
@@ -105,7 +105,7 @@ namespace :dev do
       )
       event.save!
       puts event.name
-    end
+  
   end
 
   task fake_cession: :environment do
