@@ -76,23 +76,14 @@ class ArtistsController < ApplicationController
 # 追蹤與加入最愛功能
   def follow
     artist_followship = @artist.artist_followships.build(user: current_user)
-    if artist_followship.save
-      flash[:notice] = "Successfully followed!"
-    else
-      flash[:alert] = artist_followship.errors.full_messages.to_sentence
-    end
-    redirect_back(fallback_location: root_path)
+    artist_followship.save
+    render json: {id: @artist.id}
   end
 
   def unfollow
     artist_followship = @artist.artist_followships.where(user_id: current_user.id)[0]
-    if artist_followship
-      artist_followship.destroy
-      flash[:notice] = "Successfully unfollowed!"
-    else
-      flash[:alert] = "You haven't followed the artist yet"
-    end
-    redirect_back(fallback_location: root_path)
+    artist_followship.destroy
+    render json: {id: @artist.id}
   end
 
   def favorite

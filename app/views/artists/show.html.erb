@@ -8,7 +8,7 @@
           <%= render partial: "shared/user_follow_artist", locals: {artist: @artist} %>
         </div>
         <div class="col-md-8">
-          <strong><%= @artist.artist_followships_count %></strong> Follower
+          <strong id="artist-follow-count"><%= @artist.artist_followships_count %></strong> Follower
         </div>
       </div>
     </div>
@@ -52,10 +52,51 @@
   </div>
 </div>
 
+<!-- Follow Artist Ajax -->
+<script>
+  $('.follow-artist-box').on("click", ".follow-b", function(event) {
+    var id = event.target.parentNode.id;
+    $.ajax({
+      url: id + "/follow",
+      method: "POST",
+      dataType: "json",
+      success: function(data) {
+        $('#' + data["id"]).html($('#artist-unfollow-template').html());
+        var count = parseInt($('#artist-follow-count').html());
+        $('#artist-follow-count').html(count + 1);
+      }
+    });
+  });
+</script>
+
+<!-- Unfollow Artist Ajax -->
+<script>
+  $('.follow-artist-box').on("click", ".unfollow-b", function(event) {
+    var id = event.target.parentNode.id;
+    $.ajax({
+      url: id + "/unfollow",
+      method: "POST",
+      dataType: "json",
+      success: function(data) {
+        $('#' + data["id"]).html($('#artist-follow-template').html());
+        var count = parseInt($('#artist-follow-count').html());
+        $('#artist-follow-count').html(count - 1);
+      }
+    });
+  });
+</script>
+
+<script type="text/template" id="artist-follow-template">
+  <button type="button" class="follow-b follow-artist btn btn-danger">Follow</button>
+</script>
+<script type="text/template" id="artist-unfollow-template">
+  <button type="button" class="unfollow-b follow-artist btn btn-danger">Unfollow</button>
+</script>
+
+<!-- Follow Event Ajax -->
 <script>
   $('.follow-box').on("click", ".follow-a", function(event) {
     var id = event.target.parentNode.id;
-    console.log(id);
     $.ajax({
       url: "/events/" + id + "/follow",
       method: "POST",
@@ -67,7 +108,7 @@
   });
 </script>
 
-<!-- Unfollow Ajax -->
+<!-- Unfollow Event Ajax -->
 <script>
   $('.follow-box').on("click", ".unfollow-a", function(event) {
     var id = event.target.parentNode.id;
