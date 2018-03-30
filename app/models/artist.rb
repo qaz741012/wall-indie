@@ -1,4 +1,6 @@
 class Artist < ApplicationRecord
+  #掛載 carrierwave
+  mount_uploader :photo, PhotoUploader
   has_many :musics
 
   #artist_event relationship

@@ -5,6 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :confirmable,
          :omniauthable, omniauth_providers: [:facebook, :spotify]
 
+  #掛載carrierwave
+  mount_uploader :avatar, PhotoUploader
+
   #follow event
   has_many :event_followships
   has_many :user_followed_events, through: :event_followships, source: :event
@@ -30,7 +33,7 @@ class User < ApplicationRecord
   end
 
   #friend and unfriend judgement
-  def friends?(user)
+  def friend?(user)
     self.friends.include?(user)
   end
 

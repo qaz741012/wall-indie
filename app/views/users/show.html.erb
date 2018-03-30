@@ -13,21 +13,3 @@
     <%= render partial: "shared/followed_artists" %>
   </div>
 </div>
-
-
-<div class="page-header">
-
-   <div class="col-md-3 col-sm-4">
-    <div class="text-center">
-      <%#= image_tag @user.avatar, class: "img-responsive img-circle" %>   
-    </div>
-  </div> 
-  <div class="col-md-9 col-sm-8">
-    <h1><%= @user.name %></h1>
-    <h4><%= @user.email %></h4>   
-    <%if @user.email == current_user.email %> 
-    <%= link_to 'Edit Profile', edit_user_path(@user),:class => 'btn btn-primary'%>
-    <% end %>  
-  </div> 
-  <div class="clearfix"></div> 
-</div>

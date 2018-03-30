@@ -1,21 +1,15 @@
+<!-- 任何登入使用者都可以瀏覽特定使用者的以下資料 -->
 
-<h1><%= "Edit Profile" %></h1>
-<div class="form container">
-  <%= form_for @user do |f|%>
-
-  <div class="form-group">
-    <h3><%= f.label :name, "Name" %></h3>
-    <%= f.text_field :name , class: "form-control"%>
+<div class="row">
+  <div class="col-md-3">
+    <%= render partial: "shared/user_edit_profile" %>
   </div>
-  
-  <div class="form-group">
 
-    <h3><%= f.label :avatar, "大頭照上傳" %></h3>
-    <%= image_tag @user.avatar, width: '300px' if @user.avatar? %>
-    <%= f.file_field :avatar %>
+  <div class="col-md-offset-1 col-md-8">
+    <h2>已追蹤的活動</h2>
+    <%= render partial: "shared/followed_events" %>
+
+    <h2>已追蹤的藝人</h2>
+    <%= render partial: "shared/followed_artists" %>
   </div>
-  <%= f.submit "Update" ,:class => 'btn btn-primary'%>
-  <%= link_to 'Cancel', user_path(@user), :class => 'btn btn-default'%>
-<% end %>
-
-</div> 
+</div>
