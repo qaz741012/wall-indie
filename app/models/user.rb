@@ -89,6 +89,7 @@ class User < ApplicationRecord
     user = User.find_by_spotify_uid(auth.uid)
     if user
       user.spotify_token = auth.credentials.token
+      user.follow_artist_from_spotify(auth)
       user.skip_confirmation!
       user.save!
       return user
@@ -139,7 +140,9 @@ class User < ApplicationRecord
       artist.save
 
       ## 建立user-follow-artist關聯
-      artist_followship = self.artist_followships.build(artist_id: artist.id)
+      if !followed_this_artist?(artist)
+        artist_followship = self.artist_followships.build(artist_id: artist.id)
+      end
     end
   end
 
