@@ -20,4 +20,33 @@ class UsersController < ApplicationController
     @followers = @user.followers
   end
 
+  def edit
+    @user = User.find(params[:id])
+    unless @user == current_user
+      redirect_to user_path(@user)
+    end
+      @followed_events = @user.user_followed_events
+      @followed_artists = @user.user_followed_artists
+      @favorited_artists = @user.favorited_artists
+      @friends = @user.friends
+      @followers = @user.followers
+    
+  end
+
+  def update
+    if current_user.update(user_params)
+      redirect_to user_path(current_user)
+      flash[:notice] = "#{current_user.name} was successfully updated"
+    else
+      render :edit
+      flash[:alert] = "#{current_user.name} was failed to update"
+    end
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:name, :email)
+  end
+
 end
