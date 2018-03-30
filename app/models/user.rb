@@ -33,7 +33,7 @@ class User < ApplicationRecord
   end
 
   #friend and unfriend judgement
-  def friends?(user)
+  def friend?(user)
     self.friends.include?(user)
   end
 
