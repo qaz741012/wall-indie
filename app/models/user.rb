@@ -138,7 +138,7 @@ class User < ApplicationRecord
       elsif !artist
         artist = Artist.new
         artist.name = sp_artist.name
-        artist.photo = sp_artist.images[0]["url"]
+        artist.remote_photo_url = sp_artist.images[0]["url"]
       end
       artist.save
 
