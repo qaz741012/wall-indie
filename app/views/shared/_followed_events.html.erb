@@ -1,21 +1,10 @@
-<!-- Need @tweets -->
-<!-- <div class="panel panel-default">
-  <div class="panel-body"> -->
-    <% @followed_events.each do |event| %>
-    <div class= "box-border">
-      <div class="avatar">
-        <%= image_tag event.photo, class: "img-responsive img-circle" %>
-      </div>
-      <h4><%= link_to "@#{event.name}, #{event.date}  (#{event.week})", event_path(event) %></h4>
-      <h4><%= event.intro %></h4>
-      <!-- 使用者能回覆別人的推播 -->
-      <h4><%#= link_to "Reply(#{event.replies.count})", event_replies_path(event) %>
-        <%#= render "shared/like", :event => event %></h4>
+<div class="row">
+  <% @followed_events.each do |event| %>
+    <div class="col-md-4">
+      <%= render partial: "shared/event_template", locals: {event: event} %>
     </div>
-    <div class="clearfix"></div>
-    <br />
-
-    <% end %>
- <!--  </div> 
+  <% end %>
 </div>
- -->
+
+<div class="clearfix"></div>
+<br />
