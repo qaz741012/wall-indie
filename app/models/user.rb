@@ -5,6 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :confirmable,
          :omniauthable, omniauth_providers: [:facebook, :spotify]
 
+  #掛載carrierwave
+  mount_uploader :avatar, PhotoUploader
+
   #follow event
   has_many :event_followships
   has_many :user_followed_events, through: :event_followships, source: :event
@@ -30,7 +33,7 @@ class User < ApplicationRecord
   end
 
   #friend and unfriend judgement
-  def friends?(user)
+  def friend?(user)
     self.friends.include?(user)
   end
 
@@ -89,6 +92,7 @@ class User < ApplicationRecord
     user = User.find_by_spotify_uid(auth.uid)
     if user
       user.spotify_token = auth.credentials.token
+      user.follow_artist_from_spotify(auth)
       user.skip_confirmation!
       user.save!
       return user
@@ -134,12 +138,14 @@ class User < ApplicationRecord
       elsif !artist
         artist = Artist.new
         artist.name = sp_artist.name
-        artist.photo = sp_artist.images[0]["url"]
+        artist.remote_photo_url = sp_artist.images[0]["url"]
       end
       artist.save
 
       ## 建立user-follow-artist關聯
-      artist_followship = self.artist_followships.build(artist_id: artist.id)
+      if !followed_this_artist?(artist)
+        artist_followship = self.artist_followships.build(artist_id: artist.id)
+      end
     end
   end
 

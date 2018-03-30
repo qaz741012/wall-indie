@@ -36,7 +36,59 @@
 }
 
 .recent-event {
+  margin-bottom: 20px;
+}
+
+.event-img-frame {
+  position: relative;
+}
+
+.event-img-frame {
+  position: relative;
+}
+
+.event-img-frame:hover {
+  background-color: white;
+}
+
+.event-img-frame:hover img {
+  width: 100%;
+  position: relative;
+  opacity: 0.1;
+  transition-duration: 0.5s;
+  z-index: 2;
+}
+
+.event-img-frame:hover .event-hover {
+  transition-duration: 0.5s;
+  z-index: 1;
+  display: block;
+}
+
+.event-hover {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  padding: 5px 10px;
+  height: 100%;
+  z-index: -1;
+  display: none;
+}
+
+.event-hover .place * {
   display: inline-block;
+}
+
+.event-hover .time * {
+  display: inline-block;
+}
+
+.event-hover .price p {
+  font-size: 12px;
+}
+
+.event-hover p {
+  color: #222222;
 }
 
 .event-detail {
@@ -56,12 +108,8 @@
   color: gray;
 }
 
-.event-detail .price p {
-  font-size: 12px;
-}
-
 /*Follow按鈕*/
-#recent-events .follow-box {
+.follow-box {
   float: right;
 }
 

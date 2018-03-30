@@ -12,7 +12,6 @@ class ArtistsController < ApplicationController
   # GET /artists/1
   # GET /artists/1.json
   def show
-    @musics = @artist.musics.limit(5)
     @events = @artist.events
 
     # 取 Spotify Top 5 Tracks
@@ -20,9 +19,8 @@ class ArtistsController < ApplicationController
     RSpotify.authenticate(spotify_config["app_id"], spotify_config["secret"])
 
     if RSpotify::Artist.search(@artist.name) != []
-      @top_tracks = RSpotify::Artist.search(@artist.name)[0].top_tracks("TW")[0..4]
+      @top_tracks = RSpotify::Artist.search(@artist.name)[0].top_tracks("TW")[0..5]
     end
-
   end
 
   # GET /artists/new
@@ -77,23 +75,14 @@ class ArtistsController < ApplicationController
 # 追蹤與加入最愛功能
   def follow
     artist_followship = @artist.artist_followships.build(user: current_user)
-    if artist_followship.save
-      flash[:notice] = "Successfully followed!"
-    else
-      flash[:alert] = artist_followship.errors.full_messages.to_sentence
-    end
-    redirect_back(fallback_location: root_path)
+    artist_followship.save
+    render json: {id: @artist.id}
   end
 
   def unfollow
     artist_followship = @artist.artist_followships.where(user_id: current_user.id)[0]
-    if artist_followship
-      artist_followship.destroy
-      flash[:notice] = "Successfully unfollowed!"
-    else
-      flash[:alert] = "You haven't followed the artist yet"
-    end
-    redirect_back(fallback_location: root_path)
+    artist_followship.destroy
+    render json: {id: @artist.id}
   end
 
   def favorite

@@ -389,7 +389,7 @@ def save_data(artists, place_data={}, name, photo, date, week, price, time)
         if sp_artist != []
           if (sp_artist[0].images != []) && (sp_artist[0].name == artist)
             photo = sp_artist[0].images[0]["url"]
-            new_artist.photo = photo  # 有的話就把他的圖片抓下來
+            new_artist.remote_photo_url = photo  # 有的話就把他的圖片抓下來
           end
         end
         new_artist.save

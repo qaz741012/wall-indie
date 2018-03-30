@@ -6,7 +6,7 @@
       <div class="avatar">
         <%= image_tag event.photo, class: "img-responsive img-circle" %>
       </div>
-      <h4><%= link_to "@#{event.name}, #{event.date}  (#{event.week})", events_path(event) %></h4>
+      <h4><%= link_to "@#{event.name}, #{event.date}  (#{event.week})", event_path(event) %></h4>
       <h4><%= event.intro %></h4>
       <!-- 使用者能回覆別人的推播 -->
       <h4><%#= link_to "Reply(#{event.replies.count})", event_replies_path(event) %>

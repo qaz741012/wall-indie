@@ -6,7 +6,6 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"/>
   </head>
 
   <body>
@@ -33,81 +32,6 @@
         </form>
       </div>
     </nav>
-
-    <!-- surprise! -->
-    <div id="surprise">
-
-    </div>
-
-
-
-    <script type="text/template" id="surprise-template">
-      <div class="surprise-container">
-        <div class="word-frame text-center">
-        </div>
-      </div>
-    </script>
-    <script type="text/template" id="tony-template">
-      <div id="tony">
-        <h1 style = "color:red; text-align:center">生日快樂呀！</h1>
-        <div class="row">
-          <div class="col-md-6">
-            <img src="http://i1.wp.com/inews.gtimg.com/newsapp_bt/0/2083536752/641" alt="">
-          </div>
-          <div class="col-md-6">
-            <p>雖然今天你生日，但還是一起在寫code度過。真的是莎莎給油了！</p>
-            <p>傻笑的樣子是真的蠻可愛的，但是心裡有不開心還是要說啊，別悶著。</p>
-            <p>不然再好的工作都會被你悶壞了。</p>
-            <p>恭喜你找到份好工作，往後的日子再請你多多指教呀！</p>
-            <h3 style = "text-align:center; color:blue"></h3>
-          </div>
-        </div>
-      </div>
-    </script>
-    <script>
-      function start() {
-        $('#surprise').html($('#surprise-template').html());
-        setTimeout(function(){
-          var change1 = document.getElementsByClassName('surprise-container')[0];
-          change1.classList.add("change1");
-        }, 1000);
-        setTimeout(function() {
-          $('.word-frame').append('<h1 class="animated fadeInUpBig">M</h1>');
-        }, 2000);
-        setTimeout(function() {
-          $('.word-frame').append('<h1 class="animated fadeInUpBig">a</h1>');
-        }, 2500);
-        setTimeout(function() {
-          $('.word-frame').append('<h1 class="animated fadeInUpBig">r</h1>');
-        }, 3000);
-        setTimeout(function() {
-          $('.word-frame').append('<h1 class="animated fadeInUpBig">k</h1>');
-        }, 3500);
-        setTimeout(function() {
-          var bounce = document.getElementsByClassName('word-frame')[0];
-          bounce.classList.add('animated', 'bounce')
-        }, 4500);
-        setTimeout(function() {
-          var change2 = document.getElementsByClassName('surprise-container')[0];
-          change2.classList.add("change2");
-        }, 5200);
-        setTimeout(function() {
-          $('.word-frame').append('<h3 class="animated bounceInLeft">Happy Birthday !!!</h3>');
-        }, 5800);
-        setTimeout(function() {
-          var final = document.getElementsByClassName('word-frame')[0];
-          for (var i = 0; i < 4; i++) {
-            final.children[i].classList.remove("fadeInUpBig");
-            final.children[i].classList.add("infinite", "wobble");
-          }
-        }, 7000);
-        setTimeout(function() {
-          $('.surprise-container').html($('#tony-template').html());
-        }, 8000);
-      }
-      setTimeout(start, 1000);
-    </script>
-    <!-- surprise! -->
 
     <!-- carousel -->
     <% if @fix %>
