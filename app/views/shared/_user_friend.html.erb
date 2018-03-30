@@ -1,0 +1,12 @@
+<!-- 此頁是user要追蹤/取消追蹤friend的按鈕 -->
+<% if user != current_user %>
+  <% if current_user.friend?(user) %>
+    <%= link_to "Unfriend", friendship_path(user), method: :delete, class: "btn btn-outline-warning" %>
+  <% else %>
+    <%= link_to "Friend", friendships_path(friend_id: user), method: :post, class: "btn btn-warning" %>
+  <% end %>
+<% else %>
+  <%= link_to "Edit Profile", edit_user_path(current_user), class: "btn btn-primary" %>
+<% end %>
+
+<!-- Need user -->
