@@ -6,14 +6,22 @@ class EventsController < ApplicationController
     #application template flag
     @fix = true
     @features = Event.all
-    @events = Event.all.includes(:artists, :places)
+    @events_search = Event.ransack(params[:q])
+
+    if @events_search.present?
+      @events = @events_search.result(distinct: true).order(:date)
+    else
+      @events = Event.all.includes(:artists, :places).order(:date)
+    end
     @places = Place.all
     @hash = Gmaps4rails.build_markers(@places) do |place, marker|
       marker.lat place.latitude
       marker.lng place.longitude
       marker.infowindow place.name
     end
+
   end
+
 
   # 顯示所有event的頁面
   def all_events
@@ -67,6 +75,10 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
+  def method_name
+    
+  end
+
   # ========mail test========= 
   # send to [a,b,c],[e,f],[a,f,h,j]fans
   # of following A,B,C artist
@@ -80,4 +92,5 @@ class EventsController < ApplicationController
   #     end
   #   end
   # end
+
 end
