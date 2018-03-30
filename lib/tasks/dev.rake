@@ -105,6 +105,7 @@ namespace :dev do
       )
       event.save!
       puts event.name
+
   end
 
   task fake_cession: :environment do

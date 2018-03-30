@@ -1,0 +1,43 @@
+  <script>
+      function start() {
+        $('#surprise').html($('#surprise-template').html());
+        setTimeout(function(){
+          var change1 = document.getElementsByClassName('surprise-container')[0];
+          change1.classList.add("change1");
+        }, 1000);
+        setTimeout(function() {
+          $('.word-frame').append('<h1 class="animated fadeInUpBig">M</h1>');
+        }, 2000);
+        setTimeout(function() {
+          $('.word-frame').append('<h1 class="animated fadeInUpBig">a</h1>');
+        }, 2500);
+        setTimeout(function() {
+          $('.word-frame').append('<h1 class="animated fadeInUpBig">r</h1>');
+        }, 3000);
+        setTimeout(function() {
+          $('.word-frame').append('<h1 class="animated fadeInUpBig">k</h1>');
+        }, 3500);
+        setTimeout(function() {
+          var bounce = document.getElementsByClassName('word-frame')[0];
+          bounce.classList.add('animated', 'bounce')
+        }, 4500);
+        setTimeout(function() {
+          var change2 = document.getElementsByClassName('surprise-container')[0];
+          change2.classList.add("change2");
+        }, 5200);
+        setTimeout(function() {
+          $('.word-frame').append('<h3 class="animated bounceInLeft">Happy Birthday !!!</h3>');
+        }, 5800);
+        setTimeout(function() {
+          var final = document.getElementsByClassName('word-frame')[0];
+          for (var i = 0; i < 4; i++) {
+            final.children[i].classList.remove("fadeInUpBig");
+            final.children[i].classList.add("infinite", "wobble");
+          }
+        }, 7000);
+        setTimeout(function() {
+          $('.surprise-container').html($('#tony-template').html());
+        }, 8000);
+      }
+      setTimeout(start, 1000);
+    </script> -->

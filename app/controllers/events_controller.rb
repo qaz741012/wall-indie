@@ -8,13 +8,22 @@ class EventsController < ApplicationController
     @features = Event.all
     @events = Event.includes(:artists, :places).where('date >= ?', Date.today)
     .order(date: :asc).limit(9)
+    @events_search = Event.ransack(params[:q])
+
+    if @events_search.present?
+      @events = @events_search.result(distinct: true).order(:date)
+    else
+      @events = Event.all.includes(:artists, :places).order(:date)
+    end
     @places = Place.all
     @hash = Gmaps4rails.build_markers(@places) do |place, marker|
       marker.lat place.latitude
       marker.lng place.longitude
       marker.infowindow place.name
     end
+
   end
+
 
   # 顯示所有event的頁面
   def all_events
@@ -70,10 +79,19 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
+<<<<<<< HEAD
   # ========mail test=========
+=======
+  def method_name
+
+  end
+
+  # ========mail test=========
+>>>>>>> f88bead94237ef1a085f38010ef10c1813c2dd34
   # send to [a,b,c],[e,f],[a,f,h,j]fans
   # of following A,B,C artists
 
+<<<<<<< HEAD
   def notice_user_new_event(event)
     @artists = event.artists
     @artists.each do |artist|
@@ -83,4 +101,16 @@ class EventsController < ApplicationController
       end
     end
   end
+=======
+  # def notice_user_new_event(event)
+  #   @artists = event.artists
+  #   @artists.each do |artist|
+  #     @users = artist.artist_followed
+  #     @users.each do |user|
+  #       UserMailer.artist_new_evnet(@users).deliver_later
+  #     end
+  #   end
+  # end
+
+>>>>>>> f88bead94237ef1a085f38010ef10c1813c2dd34
 end
