@@ -21,7 +21,6 @@ class ArtistsController < ApplicationController
     if RSpotify::Artist.search(@artist.name) != []
       @top_tracks = RSpotify::Artist.search(@artist.name)[0].top_tracks("TW")[0..5]
     end
-
   end
 
   # GET /artists/new
