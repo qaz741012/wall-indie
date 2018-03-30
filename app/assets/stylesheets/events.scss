@@ -36,7 +36,6 @@
 }
 
 .recent-event {
-  display: inline-block;
   margin-bottom: 20px;
 }
 
@@ -53,6 +52,7 @@
 }
 
 .event-img-frame:hover img {
+  width: 100%;
   position: relative;
   opacity: 0.1;
   transition-duration: 0.5s;
@@ -62,6 +62,7 @@
 .event-img-frame:hover .event-hover {
   transition-duration: 0.5s;
   z-index: 1;
+  display: block;
 }
 
 .event-hover {
@@ -71,6 +72,7 @@
   padding: 5px 10px;
   height: 100%;
   z-index: -1;
+  display: none;
 }
 
 .event-hover .place * {
@@ -107,7 +109,7 @@
 }
 
 /*Follow按鈕*/
-#recent-events .follow-box {
+.follow-box {
   float: right;
 }
 

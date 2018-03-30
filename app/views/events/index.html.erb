@@ -31,7 +31,9 @@
     <h2>近期表演資訊</h2>
   </div>
   <% @events.each do |event| %>
-    <%= render partial: "shared/event_template", locals: {event: event} %>
+    <div class="recent-event col-md-4">
+      <%= render partial: "shared/event_template", locals: {event: event} %>
+    </div>
   <% end %>
 </div>
 

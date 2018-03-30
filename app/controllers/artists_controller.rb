@@ -12,7 +12,6 @@ class ArtistsController < ApplicationController
   # GET /artists/1
   # GET /artists/1.json
   def show
-    @musics = @artist.musics.limit(5)
     @events = @artist.events
 
     # 取 Spotify Top 5 Tracks
@@ -20,7 +19,7 @@ class ArtistsController < ApplicationController
     RSpotify.authenticate(spotify_config["app_id"], spotify_config["secret"])
 
     if RSpotify::Artist.search(@artist.name) != []
-      @top_tracks = RSpotify::Artist.search(@artist.name)[0].top_tracks("TW")[0..4]
+      @top_tracks = RSpotify::Artist.search(@artist.name)[0].top_tracks("TW")[0..5]
     end
 
   end
