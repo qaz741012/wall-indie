@@ -32,8 +32,8 @@ class EventsController < ApplicationController
     render json: {id: @event.id}
   end
 
-  # ========mail test========= 
-  #If there is something new in event data, 
+  # ========mail test=========
+  #If there is something new in event data,
   #the create method will be triggered.
   # def create
   #   @event = Event.new(params[:id])
@@ -67,7 +67,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
-  # ========mail test========= 
+  # ========mail test=========
   # send to [a,b,c],[e,f],[a,f,h,j]fans
   # of following A,B,C artist
 

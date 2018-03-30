@@ -105,7 +105,6 @@ namespace :dev do
       )
       event.save!
       puts event.name
-    end
   end
 
   task fake_cession: :environment do
@@ -196,6 +195,6 @@ namespace :dev do
     puts "now you have #{EventFollowship.count} event_followships data"
   end
 
-  
+
 
 end

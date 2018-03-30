@@ -37,6 +37,7 @@
 
 .recent-event {
   display: inline-block;
+  margin-bottom: 20px;
 }
 
 .event-img-frame {
@@ -53,8 +54,9 @@
 
 .event-img-frame:hover img {
   position: relative;
-  opacity: 0.08;
+  opacity: 0.1;
   transition-duration: 0.5s;
+  z-index: 2;
 }
 
 .event-img-frame:hover .event-hover {
