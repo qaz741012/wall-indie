@@ -1,4 +1,16 @@
-<h1>Place</h1>
+<div class="container">
+
+  <h1>The Wall後台</h1>
+  <div>
+    <%= link_to 'Places', admin_places_path %>
+    |
+    <%= link_to 'Events', admin_events_path %>
+    |
+    <%#= link_to 'Artists', admin_artists_path %>
+    <!-- | -->
+    <%= link_to 'Users', admin_users_path %>
+    <%= link_to 'New place', new_admin_place_path, class: "float-right" %>
+  </div>
 
 <table class="table">
   <thead class="thead-light">
@@ -27,7 +39,7 @@
     <% end %>
   </tbody>
 </table>
+</div>
 
 <br>
 
-<%= link_to 'New place', new_admin_place_path %>
