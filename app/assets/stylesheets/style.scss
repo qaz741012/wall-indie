@@ -22,3 +22,31 @@
 #content {
   margin-top: 50px;
 }
+
+// avatar img
+.box{
+  min-height: 120px;
+  overflow: inline;
+  /*margin: 40px;*/
+  display: block;
+}
+
+.avatar-navi {
+  height: 40px;
+  width: 40px;
+  /*margin: 0px,80px,-40px,80px;*/
+  display: block;
+}
+
+.avatar-user{
+  width: 120px;
+  float: left;
+  margin: 0px 0px 10px 0px;
+  // display: block;
+}
+
+.avatar .avatar-navi .avatar-user img{
+  height: 100%;
+  width: 100%;
+  margin: auto;
+}
