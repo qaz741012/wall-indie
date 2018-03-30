@@ -1,4 +1,16 @@
-<table class="table table-bordered">
+<div class="title col-sm-12">
+    <h2>提供您 完整的活動資訊</h2>
+  </div>
+<div class="row">
+  <% @events.each do |event| %>
+    <div class="recent-event col-md-4">
+      <%= render partial: "shared/event_template", locals: {event: event} %>
+    </div>
+  <% end %>
+</div>
+
+
+<!-- <table class="table table-bordered">
   <thead class="thead-dark">
     <tr>
       <th>Poster</th>
@@ -31,4 +43,4 @@
       </tr>
     <% end %>
   </tbody>
-</table>
+</table> -->

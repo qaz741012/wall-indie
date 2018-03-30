@@ -18,7 +18,8 @@ class EventsController < ApplicationController
 
   # 顯示所有event的頁面
   def all_events
-    @events = Event.all.includes(:artists, :places).order(:date)
+    @events = Event.all.includes(:artists, :places).where('date >= ?', Date.today)
+    .order(date: :asc)
   end
 
   def follow
