@@ -1,68 +1,51 @@
+# Events controller so gooood
 class EventsController < ApplicationController
-  before_action :set_event, only: [:follow, :unfollow, :show]
-  before_action :authenticate_user!, only: [:follow, :unfollow]
+  before_action :set_event, only: %i[follow unfollow show]
+  before_action :authenticate_user!, only: %i[follow unfollow]
 
   def index
-    #application template flag
+    # application template flag
     @fix = true
     @features = Event.all
-    @events_search = Event.ransack(params[:q])
-    @events = @events_search.result(distinct: true).order(:date)
-
-    if params[:q].nil?||params[:q].values[0].blank?
-      @events = Event.includes(:artists, :places).where('date >= ?', Date.today)
-    .order(date: :asc).limit(8)
-    end
-    
+    sorting_event(params[:q])
     @places = Place.all
-    @hash = Gmaps4rails.build_markers(@places) do |place, marker|
-      marker.lat place.latitude
-      marker.lng place.longitude
-      marker.infowindow place.name
-    end
-
+    build_markers(@places)
   end
 
-
-  # 顯示所有event的頁面
+  # show all the events
   def all_events
-    @events = Event.all.includes(:artists, :places).where('date >= ?', Date.today)
-    .order(date: :asc)
+    @events = Event.where('date >= ?', Date.today).order(date: :asc)
   end
 
   def follow
     event_followship = @event.event_followships.build(user: current_user)
     event_followship.save
-    render json: {id: @event.id}
+    render json: { id: @event.id }
   end
 
   def unfollow
-    event_followship = @event.event_followships.where(user_id: current_user.id)[0]
+    event_followship = @event.where(user_id: current_user.id)[0]
     event_followship.destroy
-    render json: {id: @event.id}
+    render json: { id: @event.id }
   end
 
   # ========mail test=========
-  #If there is something new in event data,
-  #the create method will be triggered.
+  # If there is something new in event data,
+  # the create method will be triggered.
   def create
     @event = Event.new(params[:id])
     respond_to do |format|
       if @event.save
-        #trigger
+        # trigger
         # notice_user_new_event(@event)
-        format.html {
-          redirect_to(@Event, notice: 'Event was successfully created.') }
-        format.json {
-          render json: @event, status: :created, location: @event }
+        format.html { redirect_to(@Event, notice: 'Event was created.') }
+        format.json { render json: @event, status: :created, location: @event }
       else
         format.html { render action: 'new' }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+        format.json render json: @event.errors, status: :unprocessable_entity
       end
     end
   end
-
-
 
   def show
     @artists = @event.artists
@@ -72,15 +55,11 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:name, :photo, :intro, :date, :time, :orgnization)
+    params.permit(:name, :photo, :intro, :date, :time, :orgnization)
   end
 
   def set_event
     @event = Event.find(params[:id])
-  end
-
-  def method_name
-
   end
 
   # ========mail test=========
@@ -91,10 +70,26 @@ class EventsController < ApplicationController
     @artists = event.artists
     @artists.each do |artist|
       @users = artist.artist_followed
-      @users.each do |user|
+      @users.each do
         UserMailer.artist_new_evnet(@users).deliver_later
       end
     end
+  end
+
+  def build_markers(places)
+    @hash = Gmaps4rails.build_markers(places) do |place, marker|
+      marker.lat place.latitude
+      marker.lng place.longitude
+      marker.infowindow place.name
+    end
+  end
+
+  def haha(params)
+    @events_search = Event.ransack(params)
+    @events = @events_search.result(distinct: true).order(:date)
+
+    return unless params.nil? || params.values[0].blank?
+    @events = Event.where('date >= ?', Date.today).order(date: :asc).limit(8)
   end
 
   # def notice_user_new_event(event)
@@ -106,5 +101,4 @@ class EventsController < ApplicationController
   #     end
   #   end
   # end
-
 end
