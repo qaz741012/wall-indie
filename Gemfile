@@ -81,6 +81,7 @@ gem 'mini_magick'
 gem 'koala'
 gem 'rspotify'
 gem 'spotify-client'
+gem 'ransack'
 #=========mailer 設定===========
 #使用記憶體暫存
 gem 'redis'

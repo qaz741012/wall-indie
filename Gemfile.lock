@@ -204,6 +204,8 @@ GEM
     parser (2.5.0.4)
       ast (~> 2.4.0)
     pg (0.21.0)
+    polyamorous (1.3.3)
+      activerecord (>= 3.0)
     popper_js (1.12.9)
     powerpack (0.1.1)
     public_suffix (3.0.2)
@@ -238,6 +240,12 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rainbow (3.0.0)
     rake (12.3.0)
+    ransack (1.8.8)
+      actionpack (>= 3.0)
+      activerecord (>= 3.0)
+      activesupport (>= 3.0)
+      i18n
+      polyamorous (~> 1.3.2)
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
@@ -358,6 +366,7 @@ DEPENDENCIES
   pg (~> 0.21.0)
   puma (~> 3.7)
   rails (~> 5.1.5)
+  ransack
   redis
   rest-client (~> 1.7)
   rspotify
