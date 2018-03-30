@@ -6,16 +6,14 @@ class EventsController < ApplicationController
     #application template flag
     @fix = true
     @features = Event.all
-    @events = Event.includes(:artists, :places).where('date >= ?', Date.today)
-    .order(date: :asc).limit(9)
     @events_search = Event.ransack(params[:q])
+    @events = @events_search.result(distinct: true).order(:date)
 
-    if @events_search.present?
-      @events = @events_search.result(distinct: true).order(:date)
-    else
+    if params[:q].nil?||params[:q].values[0].blank?
       @events = Event.includes(:artists, :places).where('date >= ?', Date.today)
-      .order(date: :asc).limit(9)
+    .order(date: :asc).limit(8)
     end
+    
     @places = Place.all
     @hash = Gmaps4rails.build_markers(@places) do |place, marker|
       marker.lat place.latitude
