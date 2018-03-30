@@ -31,50 +31,7 @@
     <h2>近期表演資訊</h2>
   </div>
   <% @events.each do |event| %>
-    <div class="recent-event col-md-4">
-      <%= link_to event_path(event) do %>
-        <%= image_tag event.photo, class: "img-fluid mx-auto d-block img-thumbnail"  %>
-      <% end %>
-      <div class="event-detail">
-        <div class="follow-box">
-          <%= render partial: "shared/user_follow_event", locals: {event: event} %>
-        </div>
-        <div class="date">
-          <h3><%= event.date %>(<%= event.week %>)</h3>
-        </div>
-        <div class="name">
-          <%= link_to event_path(event) do %>
-            <h5><%= event.name %></h5>
-          <% end %>
-        </div>
-        <hr>
-        <div class="artist">
-          <span class="badge badge-secondary">演出</span>
-          <div class="artist-list">
-            <% count = event.artists.count - 1 %>
-            <% event.artists.each_with_index do |artist, index| %>
-              <% if index != count %>
-                <%= link_to artist.name, artist_path(artist) %>,
-              <% else %>
-                <%= link_to artist.name, artist_path(artist) %>
-              <% end %>
-            <% end %>
-          </div>
-        </div>
-        <div class="place">
-          <span class="badge badge-secondary">場地</span>
-          <p><%= event.places[0].name %></p>
-        </div>
-        <div class="price">
-          <span class="badge badge-secondary">票價</span>
-          <p><%= event.price %></p>
-        </div>
-        <div class="time">
-          <span class="badge badge-secondary">時間</span>
-          <p><%= event.time %></p>
-        </div>
-      </div>
-    </div>
+    <%= render partial: "shared/event_template", locals: {event: event} %>
   <% end %>
 </div>
 
