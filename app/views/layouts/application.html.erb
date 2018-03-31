@@ -12,7 +12,8 @@
     
     <!-- carousel -->
     <% if @fix %>
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <%#= render partial: "shared/carousel" %>
+    <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
 
       <!-- <ol class="carousel-indicators">
         <% @feature_events.each_with_index do |feature, i| %>
@@ -20,19 +21,12 @@
         <% end %>
       </ol> -->
 
-      <div class="carousel-inner">
-
-        <div class="carousel-item active">
-          <%= image_tag @feature_events[0].photo, class: "img_responsive", alt:"First slide" %>
-        </div>
-
-        <div class="carousel-item">
-          <%= image_tag @feature_events[1].photo, alt:"Second slide" %>
-        </div>
-
-        <div class="carousel-item">
-          <%= image_tag @feature_events[2].photo, alt:"Third slide" %>
-        </div>
+      <div class="carousel-inner" style="background-color: lightgray">
+        <% @feature_events.each_with_index do |feature,i| %>
+          <div class="carousel-item <%= %s(active) if i==0%>">
+            <%= image_tag feature.photo, alt:feature.name %>
+          </div>
+        <% end %>
       </div>
 
       <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
