@@ -40,6 +40,7 @@
   margin: 10px auto;
   text-align: center;
   position: relative;
+  border: 2px solid white;
 }
 
 #oauth-login .oauth-login a {
@@ -61,7 +62,7 @@
 
 #oauth-login .fb-login:hover {
   background-color: white;
-  border: 1px solid #208aFF;
+  border: 2px solid #208aFF;
 }
 
 #oauth-login .fb-login:hover span {
@@ -78,7 +79,7 @@
 
 #oauth-login .spotify-login:hover {
   background-color: white;
-  border: 1px solid #12AD12;
+  border: 2px solid #12AD12;
 }
 
 #oauth-login .spotify-login:hover span {
