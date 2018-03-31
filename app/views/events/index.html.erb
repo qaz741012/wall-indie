@@ -72,30 +72,6 @@
 <div id="mobile-indicator"></div>
 <br />
 
-<!-- 找表演正方形 -->
-<script>
-  function isMobileWidth() {
-    return $('#mobile-indicator').is(':visible');
-  }
-
-  more = document.getElementById("more");
-  if (isMobileWidth()) {
-    more.style.height = more.offsetWidth + "px";
-    more.style.lineHeight = more.offsetWidth + "px";
-
-    window.onresize = function() {
-      if (isMobileWidth()) {
-        more.style.height = more.offsetWidth + "px";
-        more.style.lineHeight = more.offsetWidth + "px";
-      } else {
-        more.style.height = "50px";
-        more.style.lineHeight = "50px";
-      }
-    };
-  }
-</script>
-
-
 <!-- Google Map-->
 <script src="//maps.google.com/maps/api/js?key=AIzaSyC6XOGbKNgafoPUmAC_J3JCATY-4AaGkVE"></script>
 <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
@@ -170,6 +146,37 @@
       handler.map.centerOn([defaultZoom[0], defaultZoom[1]]);
     }
   );
+</script>
+
+<!-- 找表演正方形 -->
+<script>
+  function isMobileWidth() {
+    return $('#mobile-indicator').is(':visible');
+  }
+
+  function changeMore() {
+    if (isMobileWidth()) {
+      more.style.height = more.offsetWidth + "px";
+      more.style.lineHeight = more.offsetWidth + "px";
+    } else {
+      more.style.height = "50px";
+      more.style.lineHeight = "50px";
+    }
+  }
+
+  more = document.getElementById("more");
+  if (isMobileWidth()) {
+    more.style.height = more.offsetWidth + "px";
+    more.style.lineHeight = more.offsetWidth + "px";
+
+    window.onresize = function() {
+      changeMore()
+    };
+  } else {
+    window.onresize = function() {
+      changeMore()
+    };
+  }
 </script>
 
 <%= render partial: "shared/ajax_follow_event" %>
