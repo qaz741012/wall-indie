@@ -32,30 +32,35 @@
 <br />
 
 <!-- 近期表演 -->
-<div id="recent-events" class="container-fluid row">
-  <div class="col-sm-7 text-right">
-    <h2 >近期表演資訊</h2>
-    <%#= params[:q].values[0] %>
-    <%#= @events_search.class %>
-    <%#= @events.first %>
-    <br />
-  </div>
-  <div class="col-sm-5 text-right">
-    <%= search_form_for @events_search do |f|%>
-      <%#= f.label :name_or_intro_or_date_or_time_or_ticket_link_or_price_cont, "搜尋表演" %>
-      <%= f.search_field :name_or_intro_or_date_or_time_or_ticket_link_or_price_cont, placeholder: "搜尋表演" %>
-      <%=f.submit "搜尋"%>
-    <% end %>
-  </div>
-
-
-  <% @events.each do |event| %>
-    <div class="recent-event col-md-4">
-      <%= render partial: "shared/event_template", locals: {event: event} %>
+<div id="recent-events" class="container-fluid">
+  <div class="row justify-content-md-center">
+    <div class="col"></div>
+    <div class="col col-md-auto">
+      <h2 >近期表演資訊</h2>
+      <%#= params[:q].values[0] %>
+      <%#= @events_search.class %>
+      <%#= @events.first %>
+      <br />
     </div>
-  <% end %>
-  <h3><%= link_to "找表演？", all_events_events_path, class: "btn btn-primary float-sm-right" %></h3>
-</div>
+
+    <div class="col text-right">
+      <%= search_form_for @events_search do |f|%>
+        <%#= f.label :name_or_intro_or_date_or_time_or_ticket_link_or_price_cont, "搜尋表演" %>
+        <%= f.search_field :name_or_intro_or_date_or_time_or_ticket_link_or_price_cont, placeholder: "搜尋表演" %>
+        <%=f.submit "搜尋"%>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <% @events.each do |event| %>
+      <div class="recent-event col-md-4">
+        <%= render partial: "shared/event_template", locals: {event: event} %>
+      </div>
+    <% end %>
+    <h3><%= link_to "找表演？", all_events_events_path, class: "btn btn-primary float-sm-right" %></h3>
+    </div>
+  </div>
 <br />
 
 
