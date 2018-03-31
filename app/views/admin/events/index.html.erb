@@ -27,6 +27,7 @@
             <th>Price</th>
             <th>Ticket_link</th>
             <th>Feature?</th>
+            <th>edit</th>
           </tr>
         </thead>
 
@@ -45,7 +46,10 @@
             <td><%= event.organizer %></td>
             <td><%= event.price %></td>
             <td><%= event.ticket_link %></td>
-            <td>checkbox</td>
+            <td><%= event.feature %></td>
+            <td>
+              <%= link_to 'Edit', edit_admin_event_path(event) %>
+            </td>
           </tr>
           <% end %>
         </tbody>
