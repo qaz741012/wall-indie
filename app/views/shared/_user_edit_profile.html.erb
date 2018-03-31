@@ -1,6 +1,6 @@
 <%= form_for @user do |f| %>
     <div class = "box">
-      <%= image_tag @user.avatar, class: "img-responsive img-circle" %>
+      <%= image_tag @user.avatar, class: "img-fluid rounded-circle" %>
       <br />
       <%= f.file_field :avatar %>
     </div>

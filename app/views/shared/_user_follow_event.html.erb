@@ -5,7 +5,7 @@
     <% if !current_user.followed_this_event?(event) %>
       <button type="button" class="follow-a follow-event btn btn-warning btn-sm">Follow</button>
     <% else %>
-      <button type="button" class="unfollow-a follow-event btn btn-warning btn-sm">Unfollow</button>
+      <button type="button" class="unfollow-a follow-event btn btn-outline-warning btn-sm">Unfollow</button>
     <% end %>
   </div>
 <% else %>

@@ -2,11 +2,14 @@
 
   <h1>The Wall後台</h1>
   <div>
-    <!-- 管理者可以瀏覽所有的推播與推播回覆內容
-          管理者可以刪除使用者的推播 -->
+    <%= link_to 'Places', admin_places_path %>
+    |
     <%= link_to 'Events', admin_events_path %>
     |
-    <%= link_to 'Users', admin_users_path %><!-- catogory -->
+    <%#= link_to 'Artists', admin_artists_path %>
+    <!-- | -->
+    <%= link_to 'Users', admin_users_path %>
+
   </div>
 
   <div class="row">

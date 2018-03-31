@@ -1,0 +1,3 @@
+"ruby-lint": {
+    "args": ["--config", "path/to/ruby-lint.yml"]
+}
