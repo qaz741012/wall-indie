@@ -71,8 +71,8 @@
   left: 0px;
   padding: 5px 10px;
   height: 100%;
-  z-index: 1;
-  // display: none;
+  z-index: -1;
+  display: none;
 }
 
 .event-hover .place * {
@@ -107,6 +107,47 @@
 
 .event-detail .name a:hover {
   color: gray;
+}
+
+.more-events {
+  position: relative;
+}
+
+.more-events div {
+  width: 100%;
+  border-radius: 5px;
+  background: -webkit-radial-gradient(circle,white,#EFA500);
+  background: -o-radial-gradient(circle,white,#EFA500);
+  background: -moz-radial-gradient(circle,white,#EFA500);
+  background: radial-gradient(circle,white,#EFA500);
+  text-align: center;
+}
+
+.more-events div:hover {
+  background: -webkit-radial-gradient(circle,white,#FFB510);
+  background: -o-radial-gradient(circle,white,#FFB510);
+  background: -moz-radial-gradient(circle,white,#FFB510);
+  background: radial-gradient(circle,white,#FFB510);
+}
+
+.more-events a {
+  text-decoration: none;
+}
+
+.more-events h3 {
+  color: 	#506070;
+  font-size: 40px;
+  font-weight: bold;
+  display:inline-block;
+  margin: 0;
+}
+
+.more-events div:hover h3 {
+  color: 	#708090;
+}
+
+#mobile-indicator {
+  display: none;
 }
 
 /*Follow按鈕*/
@@ -149,6 +190,12 @@
   .artist-list, .time, .place {
     font-size: 14px;
   }
+
+  .more-events div {
+    height: 50px;
+    line-height: 50px;
+    margin: 10px auto;
+  }
 }
 
 @media (min-width: 385px) and (max-width: 575.98px) {
@@ -171,9 +218,15 @@
   .event-hover .time p {
     display: block;
   }
+
+  .more-events div {
+    height: 50px;
+    line-height: 50px;
+    margin: 10px auto;
+  }
 }
 
-@media (min-width: 575.98px) {
+@media (min-width: 575.98px) and (max-width: 767.98px) {
   .event-hover .price p {
     font-size: 12px;
   }
@@ -184,6 +237,12 @@
 
   .artist-list, .time, .place {
     font-size: 14px;
+  }
+
+  .more-events div {
+    height: 50px;
+    line-height: 50px;
+    margin: 10px auto;
   }
 }
 
@@ -198,6 +257,10 @@
 
   .artist-list, .time, .place {
     font-size: 14px;
+  }
+
+  #mobile-indicator {
+    display: block;
   }
 }
 
@@ -219,6 +282,10 @@
   }
 
   .event-hover .time p {
+    display: block;
+  }
+
+  #mobile-indicator {
     display: block;
   }
 }

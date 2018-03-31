@@ -58,10 +58,40 @@
         <%= render partial: "shared/event_template", locals: {event: event} %>
       </div>
     <% end %>
-    <h3><%= link_to "找表演？", all_events_events_path, class: "btn btn-primary float-sm-right" %></h3>
+    <div class="more-events col-md-4 col-sm-12">
+      <%= link_to all_events_events_path do %>
+        <div id="more" style="width:100%">
+          <h3>More</h3>
+        </div>
+      <% end %>
     </div>
   </div>
+</div>
+<div id="mobile-indicator"></div>
 <br />
+
+<!-- 找表演正方形 -->
+<script>
+  function isMobileWidth() {
+    return $('#mobile-indicator').is(':visible');
+  }
+
+  more = document.getElementById("more");
+  if (isMobileWidth()) {
+    more.style.height = more.offsetWidth + "px";
+    more.style.lineHeight = more.offsetWidth + "px";
+
+    window.onresize = function() {
+      if (isMobileWidth()) {
+        more.style.height = more.offsetWidth + "px";
+        more.style.lineHeight = more.offsetWidth + "px";
+      } else {
+        more.style.height = "50px";
+        more.style.lineHeight = "50px";
+      }
+    };
+  }
+</script>
 
 
 <!-- Google Map-->
