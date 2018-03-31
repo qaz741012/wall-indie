@@ -84,21 +84,11 @@ class EventsController < ApplicationController
     end
   end
 
-  def haha(params)
+  def sorting_event(params)
     @events_search = Event.ransack(params)
     @events = @events_search.result(distinct: true).order(:date)
 
     return unless params.nil? || params.values[0].blank?
     @events = Event.where('date >= ?', Date.today).order(date: :asc).limit(8)
   end
-
-  # def notice_user_new_event(event)
-  #   @artists = event.artists
-  #   @artists.each do |artist|
-  #     @users = artist.artist_followed
-  #     @users.each do |user|
-  #       UserMailer.artist_new_evnet(@users).deliver_later
-  #     end
-  #   end
-  # end
 end
