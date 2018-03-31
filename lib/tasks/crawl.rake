@@ -61,7 +61,7 @@ namespace :crawl do
     page.text.split("\n \n\n").each do |item|
       info = item.split("\n\n")
 
-      photo = "https://static.wixstatic.com/media/0be0c0_6d67fb8e88ba4c8ca2949b70a42fb483.png/v1/fill/w_191,h_143,al_c,usm_0.66_1.00_0.01/0be0c0_6d67fb8e88ba4c8ca2949b70a42fb483.png"
+      photo = "https://d1ekh1oj0tf067.cloudfront.net/indievox_user/150000/137760/pix/137760180X180.jpg?1522354498"
 
       date = "2018/" + info[0][0..4]
 
