@@ -84,7 +84,7 @@ class EventsController < ApplicationController
     end
   end
 
-  def haha(params)
+  def sorting_event(params)
     @events_search = Event.ransack(params)
     @events = @events_search.result(distinct: true).order(:date)
 
