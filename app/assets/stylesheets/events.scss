@@ -155,6 +155,22 @@
   float: right;
 }
 
+.follow-box .unfollow-a {
+  border-width: 2px;
+  font-weight: bold;
+}
+
+.follow-box .follow-a {
+  font-weight: bold;
+  border-width: 2px;
+}
+
+.follow-box .follow-a:hover {
+  background-color: inherit;
+  border-color: #FFCC22;
+  color: #FFCC22;
+}
+
 /*search bar*/
 .search-bar .form-group > div * {
   display: inline-block;

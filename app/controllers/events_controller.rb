@@ -24,7 +24,7 @@ class EventsController < ApplicationController
   end
 
   def unfollow
-    event_followship = @event.where(user_id: current_user.id)[0]
+    event_followship = @event.event_followships.where(user_id: current_user.id)[0]
     event_followship.destroy
     render json: { id: @event.id }
   end
