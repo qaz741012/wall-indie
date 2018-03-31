@@ -6,7 +6,7 @@ class EventsController < ApplicationController
   def index
     # application template flag
     @fix = true
-    @features = Event.all
+    @feature_events = Event.feature
     sorting_event(params[:q])
     @places = Place.all
     build_markers(@places)

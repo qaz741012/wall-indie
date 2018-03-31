@@ -15,23 +15,25 @@
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 
       <ol class="carousel-indicators">
+        <%#= @feature_events.each_with_index do |feature, i| %>
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        <%# end %>
       </ol>
 
       <div class="carousel-inner">
 
         <div class="carousel-item active">
-          <%= image_tag "event0.jpg", class: "img_responsive", alt:"First slide" %>
+          <%= image_tag @feature_events[0].photo, class: "img_responsive", alt:"First slide" %>
         </div>
 
         <div class="carousel-item">
-          <%= image_tag @event[0].photo, alt:"Second slide" %>
+          <%= image_tag @feature_events[0].photo, alt:"Second slide" %>
         </div>
 
         <div class="carousel-item">
-          <%= image_tag "event2.jpg", alt:"Third slide" %>
+          <%= image_tag @feature_events[0].photo, alt:"Third slide" %>
         </div>
       </div>
 
