@@ -33,6 +33,6 @@ class Admin::ArtistsController < Admin::BaseController
   private
 
   def artist_params
-    params.require(:artist).permit(:name, :photo, :youtube_link)
+    params.require(:artist).permit(:name, :photo, :youtube_link, :intro)
   end
 end

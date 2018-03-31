@@ -35,7 +35,7 @@
             <td>[<%= link_to user.name, user_path(user) %>]</td>
             <td><%= image_tag user.avatar, class: "avatar-navi rounded" %></td>
             <td><%= user.email %></td>
-            <td><%= link_to "Delete", admin_user_path(user) %></td>
+            <td><%= link_to "Delete", admin_user_path(user), method: :delete %></td>
           </tr>
           <% end %>
         </tbody>
@@ -49,4 +49,3 @@
 
   </div>
 </div>
-
