@@ -29,64 +29,25 @@
 <div id="recent-events" class="container-fluid row">
   <div class="col-sm-7 text-right">
     <h2 >近期表演資訊</h2>
-  </div> 
+  </div>
   <div class="col-sm-5 text-right">
     <%= search_form_for @events_search do |f|%>
         <%= f.label :name_or_intro_or_date_or_time_or_ticket_link_or_price_cont, "搜尋表演"%>
         <%= f.search_field :name_or_intro_or_date_or_time_or_ticket_link_or_price_cont %>
       <%=f.submit "搜尋"%>
-    <% end %>    
+    <% end %>
   </div>
 
- 
-   
+
+
   <% @events.each do |event| %>
     <div class="recent-event col-md-4">
-      <%= link_to event_path(event) do %>
-        <%= image_tag event.photo, class: "img-fluid mx-auto d-block img-thumbnail"  %>
-      <% end %>
-      <div class="event-detail">
-        <div class="follow-box">
-          <%= render partial: "shared/user_follow_event", locals: {event: event} %>
-        </div>
-        <div class="date">
-          <h3><%= event.date %>(<%= event.week %>)</h3>
-        </div>
-        <div class="name">
-          <%= link_to event_path(event) do %>
-            <h5><%= event.name %></h5>
-          <% end %>
-        </div>
-        <hr>
-        <div class="artist">
-          <span class="badge badge-secondary">演出</span>
-          <div class="artist-list">
-            <% count = event.artists.count - 1 %>
-            <% event.artists.each_with_index do |artist, index| %>
-              <% if index != count %>
-                <%= link_to artist.name, artist_path(artist) %>,
-              <% else %>
-                <%= link_to artist.name, artist_path(artist) %>
-              <% end %>
-            <% end %>
-          </div>
-        </div>
-        <div class="place">
-          <span class="badge badge-secondary">場地</span>
-          <p><%= event.places[0].name %></p>
-        </div>
-        <div class="price">
-          <span class="badge badge-secondary">票價</span>
-          <p><%= event.price %></p>
-        </div>
-        <div class="time">
-          <span class="badge badge-secondary">時間</span>
-          <p><%= event.time %></p>
-        </div>
-      </div>
+      <%= render partial: "shared/event_template", locals: {event: event} %>
     </div>
   <% end %>
+  <h3><%= link_to "看更多...", all_events_events_path, class: "btn btn-primary float-sm-right" %></h3>
 </div>
+<br />
 
 
 <!-- Google Map-->
@@ -95,9 +56,15 @@
   <script src='//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js' type='text/javascript'></script> <!-- only if you need custom infoboxes -->
   <h1>展演地點</h1>
   <div class="row">
-    <div class="col-md-4"><%= link_to '台北' %></div>
-    <div class="col-md-4"><%= link_to '台中' %></div>
-    <div class="col-md-4"><%= link_to '高雄' %></div>
+    <div class="col-md-4">
+      <button type="button" class="location taipei btn btn-secondary">台北</button>
+    </div>
+    <div class="col-md-4">
+      <button type="button" class="location taichung btn btn-secondary">台中</button>
+    </div>
+    <div class="col-md-4">
+      <button type="button" class="location kaohsiung btn btn-secondary">高雄</button>
+    </div>
   </div>
 
 
@@ -117,6 +84,11 @@
         }
       },
       function(){
+        var location = new Map();
+        location.set("Taipei", []);
+        location.set("Taichung", []);
+        location.set("Kaohsiung", [22.642, 120.318, 10]);
+
         markers = handler.addMarkers(<%= raw @hash.to_json %>);
         handler.bounds.extendWith(markers);
         handler.fitMapToBounds();

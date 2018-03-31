@@ -1,0 +1,21 @@
+<%= form_for @user do |f| %>
+    <div class = "box">
+      <%= image_tag @user.avatar, class: "img-responsive img-circle" %>
+      <br />
+      <%= f.file_field :avatar %>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="form-group">
+      <%= f.text_field :name, placeholder: @user.name, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.text_field :email, placeholder: @user.email, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%#= f.text_area :introduction, size: "60x12", placeholder: "Type anything about you here...", class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.submit "Update", class: "btn btn-primary" %>
+    </div>
+  <% end %>

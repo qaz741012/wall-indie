@@ -6,12 +6,15 @@ class EventsController < ApplicationController
     #application template flag
     @fix = true
     @features = Event.all
+    @events = Event.includes(:artists, :places).where('date >= ?', Date.today)
+    .order(date: :asc).limit(9)
     @events_search = Event.ransack(params[:q])
 
     if @events_search.present?
       @events = @events_search.result(distinct: true).order(:date)
     else
-      @events = Event.all.includes(:artists, :places).order(:date)
+      @events = Event.includes(:artists, :places).where('date >= ?', Date.today)
+      .order(date: :asc).limit(9)
     end
     @places = Place.all
     @hash = Gmaps4rails.build_markers(@places) do |place, marker|
@@ -25,7 +28,8 @@ class EventsController < ApplicationController
 
   # 顯示所有event的頁面
   def all_events
-    @events = Event.all.includes(:artists, :places).order(:date)
+    @events = Event.all.includes(:artists, :places).where('date >= ?', Date.today)
+    .order(date: :asc)
   end
 
   def follow
@@ -40,25 +44,27 @@ class EventsController < ApplicationController
     render json: {id: @event.id}
   end
 
-  # ========mail test========= 
-  #If there is something new in event data, 
+  # ========mail test=========
+  #If there is something new in event data,
   #the create method will be triggered.
-  # def create
-  #   @event = Event.new(params[:id])
-  #   respond_to do |format|
-  #     if @event.save
-  #       #trigger
-  #       notice_user_new_event(@event)
-  #       format.html {
-  #         redirect_to(@Event, notice: 'Event was successfully created.') }
-  #       format.json {
-  #         render json: @event, status: :created, location: @event }
-  #     else
-  #       format.html { render action: 'new' }
-  #       format.json { render json: @event.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
+  def create
+    @event = Event.new(params[:id])
+    respond_to do |format|
+      if @event.save
+        #trigger
+        # notice_user_new_event(@event)
+        format.html {
+          redirect_to(@Event, notice: 'Event was successfully created.') }
+        format.json {
+          render json: @event, status: :created, location: @event }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
 
   def show
     @artists = @event.artists
@@ -76,9 +82,19 @@ class EventsController < ApplicationController
   end
 
 
-  # ========mail test========= 
+  # ========mail test=========
   # send to [a,b,c],[e,f],[a,f,h,j]fans
-  # of following A,B,C artist
+  # of following A,B,C artists
+
+  def notice_user_new_event(event)
+    @artists = event.artists
+    @artists.each do |artist|
+      @users = artist.artist_followed
+      @users.each do |user|
+        UserMailer.artist_new_evnet(@users).deliver_later
+      end
+    end
+  end
 
   # def notice_user_new_event(event)
   #   @artists = event.artists

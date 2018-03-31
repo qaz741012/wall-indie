@@ -1,16 +1,16 @@
 class UserMailer < ApplicationMailer
 
   # What's this? Is this the 寄件人？
-  # default from: "My Cart <info@aplphacamp.co>"
+  default from: "My Cart <info@aplphacamp.co>"
 
-  # # Welcome the user by ActiveMailer
-  # # It's worked by devise.
+  # Welcome the user by ActiveMailer
+  # It's worked by devise.
 
-  # def welcome_email(user)
-  #   @user = user
-  #   @url = 'http://example.com/login'
-  #   mail(to: @user.email, subject: 'Welcome to The Wall Indie')
-  # end
+  def welcome_email(user)
+    @user = user
+    @url = 'http://example.com/login'
+    mail(to: @user.email, subject: 'Welcome to The Wall Indie')
+  end
 
   # # When there has new evnet of some artist, notice the fans!
   # # connect with event#create

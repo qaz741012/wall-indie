@@ -17,7 +17,7 @@ namespace :dev do
     100.times do |i|
       name = FFaker::Name::first_name
       file = File.new(Rails.root.join('app', 'assets', 'images', "pic1_#{rand(72).to_s.rjust(3,'0')}.jpg"))
-
+      # file = File.open("#{Rails.root}/public/avatar/user#{(i+1)/19}.jpg")
       user = User.new(
         id: i+3,
         name: name,
@@ -105,7 +105,7 @@ namespace :dev do
       )
       event.save!
       puts event.name
-  
+
   end
 
   task fake_cession: :environment do
@@ -141,10 +141,10 @@ namespace :dev do
 
   task fake_favorit: :environment do
     Favorit.destroy_all
-    num_artists = Artist.count/5
+    num_artists = Artist.count
     rand_artists = Artist.all.sample(num_artists)
     User.all.each do |user|
-      rand(num_artists).times do |i|
+      rand(num_artists/5).times do |i|
         user.favorits.create!(
           user_id: user.id,
           artist_id: rand_artists[i].id)
@@ -160,10 +160,10 @@ namespace :dev do
 
   task fake_artist_followship: :environment do
     ArtistFollowship.destroy_all
-    num_artists = Artist.count/5
+    num_artists = Artist.count
     rand_artists = Artist.all.sample(num_artists)
     User.all.each do |user|
-      rand(num_artists).times do |i|
+      rand(num_artists/5).times do |i|
         user.artist_followships.create!(
           user_id: user.id,
           artist_id: rand_artists[i].id)
@@ -196,6 +196,6 @@ namespace :dev do
     puts "now you have #{EventFollowship.count} event_followships data"
   end
 
-  
+
 
 end

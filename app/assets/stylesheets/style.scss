@@ -23,35 +23,30 @@
   margin-top: 50px;
 }
 
+// avatar img
+.box{
+  min-height: 120px;
+  overflow: inline;
+  /*margin: 40px;*/
+  display: block;
+}
 
-/*surprise*/
-.surprise-container {
+.avatar-navi {
+  height: 40px;
+  width: 40px;
+  /*margin: 0px,80px,-40px,80px;*/
+  display: block;
+}
+
+.avatar-user{
+  width: 120px;
+  float: left;
+  margin: 0px 0px 10px 0px;
+  // display: block;
+}
+
+.avatar .avatar-navi .avatar-user img{
+  height: 100%;
   width: 100%;
-  height: 400px;
-  background-color: white;
-}
-
-.surprise-container.change1 {
-  background-color: yellow;
-  transition-duration: 3s;
-}
-
-.surprise-container.change2 {
-  height: 600px;
-  transition-duration: 1s;
-}
-
-.word-frame {
-  padding-top: 100px;
-}
-
-.word-frame h1 {
-  font-size: 200px;
-  display: inline-block;
-  margin: auto 20px;
-}
-
-.word-frame h3 {
-  padding-top: 50px;
-  font-size: 50px;
+  margin: auto;
 }

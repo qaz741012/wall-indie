@@ -1,1 +1,22 @@
-<h1>我是追蹤的Artist頁面</h1>
+<!-- <h1>我是追蹤的Artist頁面</h1> -->
+<!-- Need @tweets -->
+<!-- <div class="panel panel-default">
+  <div class="panel-body"> -->
+    <% @followed_artists.each do |artist| %>
+    <div class= "box-border">
+      <div class="avatar">
+        <%= image_tag artist.photo, class: "img-responsive img-circle" %>
+      </div>
+      <h4><%= link_to "@#{artist.name}", artist_path(artist) %></h4>
+      <h4><%= artist.intro %></h4>
+      <!-- 使用者能回覆別人的推播 -->
+      <h4><%#= link_to "Reply(#{artist.replies.count})", artist_replies_path(artist) %>
+        <%#= render "shared/like", :artist => artist %></h4>
+    </div>
+    <div class="clearfix"></div>
+    <br />
+
+    <% end %>
+ <!--  </div> 
+</div>
+ -->

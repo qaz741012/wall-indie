@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   end
   resources :users, only: [:index, :show, :edit, :update]
 
+  resources :friendships, only: [:destroy, :create]
+
+
   resources :events, only: [:index, :show] do
     collection do
       get :all_events
