@@ -2,11 +2,20 @@
   <div class="col-md-6">
     <%= form_for  [:admin, @event] do |f| %>
       <div class="form-row">
+
+        <div class='form-group col-md-5 offset-md-1'>
+          <%= f.label :name, 'Name' %>
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
+        <div class='form-group col-md-6'>
+          <%= f.label :organizer, 'Organizer' %>
+          <%= f.text_field :organizer, class: 'form-control' %>
+        </div>
+
         <div class='form-group col-md-7  offset-md-1'>
           <%= f.label :intro, 'Intro' %>
           <%= f.text_field :intro, class: 'form-control' %>
         </div>
-
         <div class='form-group col-md-4 box'>
           <%= image_tag @event.photo, class: 'img-fluid rounded' %>
           <%= f.file_field :photo %>
@@ -25,15 +34,6 @@
           <%= f.text_field :time, class: 'form-control' %>
         </div>
         
-        <div class='form-group col-md-5 offset-md-1'>
-          <%= f.label :name, 'Name' %>
-          <%= f.text_field :name, class: 'form-control' %>
-        </div>
-        <div class='form-group col-md-6'>
-          <%= f.label :organizer, 'Organizer' %>
-          <%= f.text_field :organizer, class: 'form-control' %>
-        </div>
-        
         <div class='form-group col-md-3 offset-md-1'>
           <%= f.label :price, 'Price' %>
           <%= f.text_field :price, class: 'form-control' %>
@@ -47,7 +47,7 @@
           <%= f.check_box :feature, class: 'form-control' %>
         </div>
         
-        <div class='form-group align-self-end'>  
+        <div class='form-group align-self-end offset-md-11'>  
           <%= f.submit 'update', class: 'btn btn-warning' %>
         </div>
       </div>
