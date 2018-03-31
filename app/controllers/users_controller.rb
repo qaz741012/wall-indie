@@ -1,15 +1,12 @@
+# An apple a day keeps the doctor away
 class UsersController < ApplicationController
-
   def index
     redirect_to root_path
   end
 
   def show
-
     @user = User.find(params[:id])
-    if !current_user
-      redirect_to root_path
-    end
+    redirect_to root_path unless current_user
     # ====== mail test ======
     # mail to user when he enter the user#show. It worked!
     # UserMailer.welcome_email(@user).deliver_now
@@ -22,15 +19,12 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    unless @user == current_user
-      redirect_to user_path(@user)
-    end
-      @followed_events = @user.user_followed_events
-      @followed_artists = @user.user_followed_artists
-      @favorited_artists = @user.favorited_artists
-      @friends = @user.friends
-      @followers = @user.followers
-
+    redirect_to user_path(@user) unless @user == current_user
+    @followed_events = @user.user_followed_events
+    @followed_artists = @user.user_followed_artists
+    @favorited_artists = @user.favorited_artists
+    @friends = @user.friends
+    @followers = @user.followers
   end
 
   def update
@@ -48,5 +42,4 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :avatar)
   end
-
 end

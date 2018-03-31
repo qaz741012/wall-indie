@@ -9,30 +9,24 @@
   </head>
 
   <body>
-
+    
     <!-- carousel -->
     <% if @fix %>
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <%#= render partial: "shared/carousel" %>
+    <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
 
-      <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-      </ol>
+      <!-- <ol class="carousel-indicators">
+        <% @feature_events.each_with_index do |feature, i| %>
+          <li data-target="#carouselExampleIndicators" data-slide-to=<%= i%> class=<%= "active" if i==0 %> ></li>
+        <% end %>
+      </ol> -->
 
-      <div class="carousel-inner">
-
-        <div class="carousel-item active">
-          <%= image_tag "event0.jpg", class: "img_responsive", alt:"First slide" %>
-        </div>
-
-        <div class="carousel-item">
-          <%= image_tag "event1.jpg", alt:"Second slide" %>
-        </div>
-
-        <div class="carousel-item">
-          <%= image_tag "event2.jpg", alt:"Third slide" %>
-        </div>
+      <div class="carousel-inner" style="background-color: lightgray">
+        <% @feature_events.each_with_index do |feature,i| %>
+          <div class="carousel-item <%= %s(active) if i==0%>">
+            <%= image_tag feature.photo, alt:feature.name %>
+          </div>
+        <% end %>
       </div>
 
       <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -87,7 +81,7 @@
       </div>
     </nav>
 
-
+    
 
     <% if flash[:notice] %>
       <div class="alert alert-success alert-dismissible fade show" role="alert"><%= notice %>

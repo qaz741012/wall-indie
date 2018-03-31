@@ -1,6 +1,10 @@
 <!-- Event Show -->
 <div class="event-show container row">
-  <div class="info-column offset-sm-1 col-sm-7">
+  <div class="image-column col-sm-4 offset-sm-1">
+    <%= image_tag @event.photo, class: "img-fluid mx-auto d-block" %>
+    <%= render "shared/followed", users: @event_followed %>
+  </div>
+  <div class="info-column col-sm-7">
     <h4><%= @event.date %>(<%= @event.week %>)</h4>
     <div>
       <h3 class="d-inline-block"><%= @event.name %></h3>
@@ -38,9 +42,7 @@
       </div>
     </div>
   </div>
-  <div class="image-column col-sm-4">
-    <%= image_tag @event.photo, class: "img-fluid mx-auto d-block" %>
-  </div>
+  
 </div>
 
 <%= render partial: "shared/ajax_follow_event" %>

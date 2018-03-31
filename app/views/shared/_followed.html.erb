@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-md-12 align-center">
+    <br />
+    <h3>關注我的人</h3>
+  </div>
+  <% users.each do |user| %>
+    <div class="col-md-4">
+      <br />
+      <%= link_to user_path(user) do %>
+        <%= image_tag user.avatar, class: "img-fluid rounded-circle" %>
+      <% end %>
+      <br />
+    </div>
+  <% end %>
+</div>
