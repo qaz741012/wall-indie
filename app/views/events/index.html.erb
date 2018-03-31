@@ -54,7 +54,7 @@
 
   <div class="row">
     <% @events.each do |event| %>
-      <div class="recent-event col-md-4">
+      <div class="recent-event col-md-4 col-sm-6 col-xs-12">
         <%= render partial: "shared/event_template", locals: {event: event} %>
       </div>
     <% end %>

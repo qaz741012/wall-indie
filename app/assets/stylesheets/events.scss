@@ -43,8 +43,8 @@
   position: relative;
 }
 
-.event-img-frame {
-  position: relative;
+.event-img-frame img {
+  width: 100%;
 }
 
 .event-img-frame:hover {
@@ -71,8 +71,8 @@
   left: 0px;
   padding: 5px 10px;
   height: 100%;
-  z-index: -1;
-  display: none;
+  z-index: 1;
+  // display: none;
 }
 
 .event-hover .place * {
@@ -89,6 +89,7 @@
 
 .event-hover p {
   color: #222222;
+  margin-bottom: 0px;
 }
 
 .event-detail {
@@ -133,4 +134,91 @@
 
 .artist a:hover {
   color: gray;
+}
+
+////////////*RWD*/////////////
+@media (max-width: 384.9px) {
+  .event-hover .price p {
+    font-size: 12px;
+  }
+
+  .event-hover > div {
+    margin: 3px auto;
+  }
+
+  .artist-list, .time, .place {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 385px) and (max-width: 575.98px) {
+  .event-hover span {
+    font-size: 16px;
+  }
+
+  .event-hover > div {
+    margin: 7px auto;
+  }
+
+  .event-hover .price p {
+    font-size: 14px;
+  }
+
+  .event-hover .place p {
+    display: block;
+  }
+
+  .event-hover .time p {
+    display: block;
+  }
+}
+
+@media (min-width: 575.98px) {
+  .event-hover .price p {
+    font-size: 12px;
+  }
+
+  .event-hover > div {
+    margin: 3px auto;
+  }
+
+  .artist-list, .time, .place {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 767.98px) and (max-width: 929.9px) {
+  .event-hover .price p {
+    font-size: 12px;
+  }
+
+  .event-hover > div {
+    margin: 3px auto;
+  }
+
+  .artist-list, .time, .place {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 930px) {
+  .event-hover span {
+    font-size: 16px;
+  }
+
+  .event-hover > div {
+    margin: 7px auto;
+  }
+
+  .event-hover .price p {
+    font-size: 14px;
+  }
+
+  .event-hover .place p {
+    display: block;
+  }
+
+  .event-hover .time p {
+    display: block;
+  }
 }
