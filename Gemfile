@@ -42,7 +42,7 @@ group :development, :test do
   gem 'selenium-webdriver', '>= 3.10.0'
   ## heroku database setting
   gem 'sqlite3', '~> 1.3'
-  gem 'capistrano-sidekiq', github: 'seuros/capistrano-sidekiq'
+
 end
 
 group :development do
@@ -90,7 +90,7 @@ gem 'redis'
 #背景工作background job
 gem 'sidekiq'
 #部署sidekiq 避免手動開啟
-
+gem 'capistrano-sidekiq', github: 'seuros/capistrano-sidekiq'
 #設定固定排程
 gem 'whenever', :require => false
 
