@@ -88,7 +88,7 @@ class User < ApplicationRecord
 
   # 處理spotify授權的資料
   def self.from_spotify_omniauth(auth)
-    # Case 1: Find existing user by facebook uid
+    # Case 1: Find existing user by spotify uid
     user = User.find_by_spotify_uid(auth.uid)
     if user
       user.spotify_token = auth.credentials.token
@@ -105,6 +105,9 @@ class User < ApplicationRecord
       existing_user.spotify_uid = auth.uid
       existing_user.spotify_token = auth.credentials.token
       existing_user.follow_artist_from_spotify(auth)
+      if !existing_user.avatar?
+        existing_user.remote_avatar_url = auth.info.image
+      end
       existing_user.skip_confirmation!
       existing_user.save!
       return existing_user
@@ -118,6 +121,7 @@ class User < ApplicationRecord
     user.email = auth.info.email
     user.password = Devise.friendly_token[0,20]
     user.follow_artist_from_spotify(auth)
+    user.remote_avatar_url = auth.info.image
     user.skip_confirmation!
     user.save!
     return user
