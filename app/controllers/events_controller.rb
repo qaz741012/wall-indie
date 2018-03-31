@@ -49,6 +49,7 @@ class EventsController < ApplicationController
 
   def show
     @artists = @event.artists
+    @event_followed = @event.event_followed
     @place = @event.places[0]
   end
 
@@ -65,7 +66,6 @@ class EventsController < ApplicationController
   # ========mail test=========
   # send to [a,b,c],[e,f],[a,f,h,j]fans
   # of following A,B,C artists
-
   def notice_user_new_event(event)
     @artists = event.artists
     @artists.each do |artist|
