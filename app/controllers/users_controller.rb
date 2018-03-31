@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
-  
+
   def index
     redirect_to root_path
   end
 
   def show
-    
+
     @user = User.find(params[:id])
     if !current_user
       redirect_to root_path
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
       @favorited_artists = @user.favorited_artists
       @friends = @user.friends
       @followers = @user.followers
-    
+
   end
 
   def update
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email)
+    params.require(:user).permit(:name, :email, :avatar)
   end
 
 end

@@ -42,10 +42,10 @@
       <%#= @events.first %>
       <br />
     </div>
-  
+
     <div class="col text-right">
       <%= search_form_for @events_search do |f|%>
-        <%#= f.label :name_or_intro_or_date_or_time_or_ticket_link_or_price_cont, "搜尋表演" %> 
+        <%#= f.label :name_or_intro_or_date_or_time_or_ticket_link_or_price_cont, "搜尋表演" %>
         <%= f.search_field :name_or_intro_or_date_or_time_or_ticket_link_or_price_cont, placeholder: "搜尋表演" %>
         <%=f.submit "搜尋"%>
       <% end %>
@@ -70,14 +70,17 @@
   <script src='//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js' type='text/javascript'></script> <!-- only if you need custom infoboxes -->
   <h1>展演地點</h1>
   <div class="row">
-    <div class="col-md-4">
-      <button type="button" class="location taipei btn btn-secondary">台北</button>
+    <div class="col-md-3">
+      <button type="button" class="taipei btn btn-secondary">台北</button>
     </div>
-    <div class="col-md-4">
-      <button type="button" class="location taichung btn btn-secondary">台中</button>
+    <div class="col-md-3">
+      <button type="button" class="taichung btn btn-secondary">台中</button>
     </div>
-    <div class="col-md-4">
-      <button type="button" class="location kaohsiung btn btn-secondary">高雄</button>
+    <div class="col-md-3">
+      <button type="button" class="tainan btn btn-secondary">台南</button>
+    </div>
+    <div class="col-md-3">
+      <button type="button" class="kaohsiung btn btn-secondary">高雄</button>
     </div>
   </div>
 
@@ -98,16 +101,41 @@
         }
       },
       function(){
-        var location = new Map();
-        location.set("Taipei", []);
-        location.set("Taichung", []);
-        location.set("Kaohsiung", [22.642, 120.318, 10]);
+        defaultZoom = [23.5, 121, 7];
+        locate = new Map();
+        locate.set("Taipei", [25.034, 121.547, 13]);
+        locate.set("Taichung", [24.153, 120.676, 13]);
+        locate.set("Tainan", [22.997, 120.213, 13]);
+        locate.set("Kaohsiung", [22.642, 120.318, 13]);
+        $('.taipei').on("click", function(event) {
+          changeMapLocation("Taipei");
+        });
+
+        $('.taichung').on("click", function(event) {
+          changeMapLocation("Taichung");
+        });
+
+        $('.tainan').on("click", function(event) {
+          changeMapLocation("Tainan");
+        });
+
+        $('.kaohsiung').on("click", function(event) {
+          changeMapLocation("Kaohsiung");
+        });
+
+        var changeMapLocation = function(location) {
+          for (var i = 0; i < 3; i++) {
+            defaultZoom[i] = locate.get(location)[i];
+          }
+          handler.getMap().setZoom(defaultZoom[2]);
+          handler.map.centerOn([defaultZoom[0], defaultZoom[1]]);
+        };
 
         markers = handler.addMarkers(<%= raw @hash.to_json %>);
         handler.bounds.extendWith(markers);
         handler.fitMapToBounds();
-        handler.getMap().setZoom(7);
-        handler.map.centerOn([23.5, 121]);
+        handler.getMap().setZoom(defaultZoom[2]);
+        handler.map.centerOn([defaultZoom[0], defaultZoom[1]]);
       }
     );
 

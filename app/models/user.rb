@@ -27,6 +27,8 @@ class User < ApplicationRecord
   has_many :inverse_friendships, class_name: "Friendship", foreign_key: "friend_id"
   has_many :followers, through: :inverse_friendships, source: :user
 
+  after_validation :default_avatar
+
   #若user.role = admin 回傳true
   def admin?
     self.role == "admin"
@@ -50,6 +52,14 @@ class User < ApplicationRecord
   #判斷user是否有follow某個event
   def followed_this_event?(event)
     self.user_followed_events.include?(event)
+  end
+
+  #預設頭像
+  def default_avatar
+    if !self.avatar?
+      self.remote_avatar_url = "http://www.gogecko.com.au/images/avatar.png"
+      self.save
+    end
   end
 
   # 處理facebook授權的資料
@@ -88,7 +98,7 @@ class User < ApplicationRecord
 
   # 處理spotify授權的資料
   def self.from_spotify_omniauth(auth)
-    # Case 1: Find existing user by facebook uid
+    # Case 1: Find existing user by spotify uid
     user = User.find_by_spotify_uid(auth.uid)
     if user
       user.spotify_token = auth.credentials.token
@@ -105,6 +115,9 @@ class User < ApplicationRecord
       existing_user.spotify_uid = auth.uid
       existing_user.spotify_token = auth.credentials.token
       existing_user.follow_artist_from_spotify(auth)
+      if !existing_user.avatar?
+        existing_user.remote_avatar_url = auth.info.image
+      end
       existing_user.skip_confirmation!
       existing_user.save!
       return existing_user
@@ -118,6 +131,7 @@ class User < ApplicationRecord
     user.email = auth.info.email
     user.password = Devise.friendly_token[0,20]
     user.follow_artist_from_spotify(auth)
+    user.remote_avatar_url = auth.info.image
     user.skip_confirmation!
     user.save!
     return user

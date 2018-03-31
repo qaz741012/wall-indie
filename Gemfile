@@ -42,6 +42,7 @@ group :development, :test do
   gem 'selenium-webdriver', '>= 3.10.0'
   ## heroku database setting
   gem 'sqlite3', '~> 1.3'
+
 end
 
 group :development do
