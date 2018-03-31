@@ -6,8 +6,8 @@
     |
     <%= link_to 'Events', admin_events_path %>
     |
-    <%#= link_to 'Artists', admin_artists_path %>
-    <!-- | -->
+    <%= link_to 'Artists', admin_artists_path %>
+    |
     <%= link_to 'Users', admin_users_path %>
 
   </div>
@@ -20,6 +20,7 @@
           <tr>
             <th>ID</th>
             <th>User</th>
+            <th>Photo</th>
             <th>email</th>
             <th>Delete</th>
           </tr>
@@ -31,8 +32,9 @@
             <!-- 推播數量、關注人數、跟隨者人數、推播被like的數量 -->
             <!-- 管理者可以瀏覽站內所有的使用者清單，該清單按推播文數排序 -->
             <th scope="row"><%= user.id %></th>
-            <td>[<%= user.name %>]</td>
-            <td><%= user.email%></td>
+            <td>[<%= link_to user.name, user_path(user) %>]</td>
+            <td><%= image_tag user.avatar, class: "avatar-navi rounded" %></td>
+            <td><%= user.email %></td>
             <td><%= link_to "Delete", admin_user_path(user) %></td>
           </tr>
           <% end %>
