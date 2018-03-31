@@ -421,11 +421,11 @@ def save_data(artists, place_data={}, name, photo, date, week, price, time)
                     place_id: Place.find_by_name(place_data["name"]).id )
     puts "Create cession!"
 
-    # Event有建再存 Show
+    # If Event created than save the Show
     if artists != "Need to Check"
       artists.each do |artist|
-        Show.create( event_id: Event.find_by_name(name).id,
-                     artist_id: Artist.find_by_name(artist).id )
+        Show.create(event_id: Event.find_by_name(name).id,
+                    artist_id: Artist.find_by_name(artist).id)
         puts "Create shows!"
       end
     end
@@ -433,19 +433,19 @@ def save_data(artists, place_data={}, name, photo, date, week, price, time)
   image_square_shave(Event.find_by_name(name).photo)
 end
 
-# 把星期轉成中文
+# Convert Sun into chinese
 def week_convert(week)
-  week_convert_hash = { "Sun" => "日",
-                        "Mon" => "一",
-                        "Tue" => "二",
-                        "Wed" => "三",
-                        "Thu" => "四",
-                        "Fri" => "五",
-                        "Sat" => "六" }
+  week_convert_hash = { 'Sun' => '日',
+                        'Mon' => '一',
+                        'Tue' => '二',
+                        'Wed' => '三',
+                        'Thu' => '四',
+                        'Fri' => '五',
+                        'Sat' => '六' }
   week_convert_hash[week]
 end
 
-# 將圖片剪裁成正方形
+# shave image into square
 def image_square_shave(photo)
   path = photo.path
   image = MiniMagick::Image.new(path)
@@ -459,6 +459,6 @@ def image_square_shave(photo)
       shave_off = (w - h) / 2
       img.shave "#{shave_off}x0"
     end
-    img.resize "400x400"
+    img.resize '400x400'
   end
 end

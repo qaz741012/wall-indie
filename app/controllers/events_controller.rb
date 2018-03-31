@@ -6,7 +6,7 @@ class EventsController < ApplicationController
   def index
     # application template flag
     @fix = true
-    @features = Event.all
+    @feature_events = Event.feature
     sorting_event(params[:q])
     @places = Place.all
     build_markers(@places)
@@ -91,14 +91,4 @@ class EventsController < ApplicationController
     return unless params.nil? || params.values[0].blank?
     @events = Event.where('date >= ?', Date.today).order(date: :asc).limit(8)
   end
-
-  # def notice_user_new_event(event)
-  #   @artists = event.artists
-  #   @artists.each do |artist|
-  #     @users = artist.artist_followed
-  #     @users.each do |user|
-  #       UserMailer.artist_new_evnet(@users).deliver_later
-  #     end
-  #   end
-  # end
 end

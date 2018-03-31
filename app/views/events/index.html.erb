@@ -35,9 +35,6 @@
 <div id="recent-events" class="container-fluid row">
   <div class="col-sm-7 text-right">
     <h2 >近期表演資訊</h2>
-    <%#= params[:q].values[0] %>
-    <%#= @events_search.class %>
-    <%#= @events.first %>
     <br />
   </div>
   <div class="col-sm-5 text-right">
@@ -48,14 +45,15 @@
     <% end %>
   </div>
 
-
-  <% @events.each do |event| %>
-    <div class="recent-event col-md-4">
-      <%= render partial: "shared/event_template", locals: {event: event} %>
+  <div class="row">
+    <% @events.each do |event| %>
+      <div class="recent-event col-md-4">
+        <%= render partial: "shared/event_template", locals: {event: event} %>
+      </div>
+    <% end %>
+    <h3><%= link_to "找表演？", all_events_events_path, class: "btn btn-primary float-sm-right" %></h3>
     </div>
-  <% end %>
-  <h3><%= link_to "找表演？", all_events_events_path, class: "btn btn-primary float-sm-right" %></h3>
-</div>
+  </div>
 <br />
 
 
