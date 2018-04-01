@@ -63,10 +63,6 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 0e34d2fd5419b76d9f4b763a2896f8df38cedbb2
   # ========mail test=========
   # send to [a,b,c],[e,f],[a,f,h,j]fans
   # of following A,B,C artists

@@ -57,12 +57,9 @@ ActiveRecord::Schema.define(version: 20180331064537) do
     t.string "address"
     t.float "latitude"
     t.float "longitude"
-<<<<<<< HEAD
     t.string "week"
     t.string "price"
-=======
     t.boolean "feature"
->>>>>>> 0e34d2fd5419b76d9f4b763a2896f8df38cedbb2
   end
 
   create_table "favorits", force: :cascade do |t|
