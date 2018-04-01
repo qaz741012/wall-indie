@@ -19,13 +19,13 @@
         <span class="badge badge-secondary">場地</span>
         <p><%= event.places[0].name %></p>
       </div>
-      <div class="price">
-        <span class="badge badge-secondary">票價</span>
-        <p><%= event.price %></p>
-      </div>
       <div class="time">
         <span class="badge badge-secondary">時間</span>
         <p><%= event.time %></p>
+      </div>
+      <div class="price">
+        <span class="badge badge-secondary">票價</span>
+        <p><%= truncate(event.price, length: 50) %></p>
       </div>
     </div>
   <% end %>

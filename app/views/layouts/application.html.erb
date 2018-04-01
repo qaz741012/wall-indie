@@ -9,8 +9,41 @@
   </head>
 
   <body>
+    
+    <!-- carousel -->
+    <% if @fix %>
+    <%#= render partial: "shared/carousel" %>
+    <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
+
+      <!-- <ol class="carousel-indicators">
+        <% @feature_events.each_with_index do |feature, i| %>
+          <li data-target="#carouselExampleIndicators" data-slide-to=<%= i%> class=<%= "active" if i==0 %> ></li>
+        <% end %>
+      </ol> -->
+
+      <div class="carousel-inner" style="background-color: lightgray">
+        <% @feature_events.each_with_index do |feature,i| %>
+          <div class="carousel-item <%= %s(active) if i==0%>">
+            <%= image_tag feature.photo, alt:feature.name %>
+          </div>
+        <% end %>
+      </div>
+
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    <% end %>
+    <!-- carousel -->
+
     <!-- 套用Bootstrap 4的navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
       <a class="navbar-brand" href="<%= root_path %>">The Wall</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -20,6 +53,12 @@
         <ul class="navbar-nav float-right">
           <% if current_user %>
 
+            <%= link_to(user_path(current_user)) do %>
+              <div class="avatar-navi">
+                <%= image_tag current_user.avatar, class: "img-fluid rounded" %>
+              </div>
+            <% end %>
+
             <% if current_user.admin? %>
               <li><%= link_to 'Admin', admin_users_path, class: "nav-link" %></li>
             <% end %>
@@ -28,15 +67,12 @@
 
             <li><%= link_to '修改密碼', edit_user_registration_path, class: "nav-link" %></li>
 
-            <%= link_to(user_path(current_user)) do %>
-              <div class="avatar-navi">
-                <%= image_tag current_user.avatar, class: "img-fluid rounded" %>
-              </div>
-            <% end %>
-
           <% else %>
+
             <li><%= link_to '登入', new_user_session_path, class: "nav-link" %></li>
+
           <% end %>
+
         </ul>
         <!-- <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -45,36 +81,7 @@
       </div>
     </nav>
 
-    <!-- carousel -->
-    <% if @fix %>
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-      </ol>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <%= image_tag "event0.jpg", class: "img_responsive", alt:"First slide" %>
-        </div>
-        <div class="carousel-item">
-          <%= image_tag "event1.jpg", alt:"Second slide" %>
-        </div>
-        <div class="carousel-item">
-          <%= image_tag "event2.jpg", alt:"Third slide" %>
-        </div>
-      </div>
-      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div>
-    <% end %>
-    <!-- carousel -->
+    
 
     <% if flash[:notice] %>
       <div class="alert alert-success alert-dismissible fade show" role="alert"><%= notice %>

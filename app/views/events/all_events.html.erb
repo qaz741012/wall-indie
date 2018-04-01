@@ -3,44 +3,10 @@
   </div>
 <div class="row">
   <% @events.each do |event| %>
-    <div class="recent-event col-md-4">
+    <div class="recent-event col-md-4 col-sm-6">
       <%= render partial: "shared/event_template", locals: {event: event} %>
     </div>
   <% end %>
 </div>
 
-
-<!-- <table class="table table-bordered">
-  <thead class="thead-dark">
-    <tr>
-      <th>Poster</th>
-      <th>Event</th>
-      <th colspan="2">Date</th>
-      <th>Artists</th>
-      <th>Price</th>
-      <th>Place</th>
-      <th>Time</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @events.each do |event| %>
-      <tr>
-        <td><%= image_tag event.photo, width: "200px" %></td>
-        <td><%= event.name %></td>
-        <td><%= event.date %></td>
-        <td><%= event.week %></td>
-        <td>
-          <ul>
-            <% event.artists.each do |artist| %>
-              <li><%= artist.name %></li>
-            <% end %>
-          </ul>
-        </td>
-        <td><%= event.price %></td>
-        <td><%= event.places[0].name %></td>
-        <td><%= event.time %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table> -->
+<%= render partial: "shared/ajax_follow_event" %>

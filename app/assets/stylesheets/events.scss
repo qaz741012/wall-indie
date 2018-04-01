@@ -43,8 +43,8 @@
   position: relative;
 }
 
-.event-img-frame {
-  position: relative;
+.event-img-frame img {
+  width: 100%;
 }
 
 .event-img-frame:hover {
@@ -89,6 +89,7 @@
 
 .event-hover p {
   color: #222222;
+  margin-bottom: 0px;
 }
 
 .event-detail {
@@ -108,9 +109,79 @@
   color: gray;
 }
 
+.more-events {
+  position: relative;
+}
+
+.more-events div {
+  width: 100%;
+  border-radius: 5px;
+  background: -webkit-radial-gradient(circle,white,#EFA500);
+  background: -o-radial-gradient(circle,white,#EFA500);
+  background: -moz-radial-gradient(circle,white,#EFA500);
+  background: radial-gradient(circle,white,#EFA500);
+  text-align: center;
+}
+
+.more-events div:hover {
+  background: -webkit-radial-gradient(circle,white,#FFB510);
+  background: -o-radial-gradient(circle,white,#FFB510);
+  background: -moz-radial-gradient(circle,white,#FFB510);
+  background: radial-gradient(circle,white,#FFB510);
+}
+
+.more-events a {
+  text-decoration: none;
+}
+
+.more-events h3 {
+  color: 	#506070;
+  font-size: 40px;
+  font-weight: bold;
+  display:inline-block;
+  margin: 0;
+}
+
+.more-events div:hover h3 {
+  color: 	#708090;
+}
+
+#mobile-indicator {
+  display: none;
+}
+
 /*Follow按鈕*/
 .follow-box {
   float: right;
+}
+
+.follow-box .unfollow-a {
+  border-width: 2px;
+  font-weight: bold;
+}
+
+.follow-box .follow-a {
+  font-weight: bold;
+  border-width: 2px;
+}
+
+.follow-box .follow-a:hover {
+  background-color: inherit;
+  border-color: #FFCC22;
+  color: #FFCC22;
+}
+
+/*search bar*/
+.search-bar .form-group > div * {
+  display: inline-block;
+}
+
+.search-bar .form-group > div {
+  text-align: right;
+}
+
+.search-bar .form-group .form-control {
+  max-width: 200px;
 }
 
 
@@ -133,4 +204,133 @@
 
 .artist a:hover {
   color: gray;
+}
+
+////////////*RWD*/////////////
+@media (max-width: 384.9px) {
+  .event-hover .price p {
+    font-size: 12px;
+  }
+
+  .event-hover > div {
+    margin: 3px auto;
+  }
+
+  .artist-list, .time, .place {
+    font-size: 14px;
+  }
+
+  .more-events div {
+    height: 50px;
+    line-height: 50px;
+    margin: 10px auto;
+  }
+
+  .search-bar .form-group > div {
+    text-align: center;
+  }
+
+  .search-bar .form-group .form-control {
+    max-width: 150px;
+  }
+}
+
+@media (min-width: 385px) and (max-width: 575.98px) {
+  .event-hover span {
+    font-size: 16px;
+  }
+
+  .event-hover > div {
+    margin: 7px auto;
+  }
+
+  .event-hover .price p {
+    font-size: 14px;
+  }
+
+  .event-hover .place p {
+    display: block;
+  }
+
+  .event-hover .time p {
+    display: block;
+  }
+
+  .more-events div {
+    height: 50px;
+    line-height: 50px;
+    margin: 10px auto;
+  }
+
+  .search-bar .form-group > div {
+    text-align: center;
+  }
+}
+
+@media (min-width: 575.98px) and (max-width: 767.98px) {
+  .event-hover .price p {
+    font-size: 12px;
+  }
+
+  .event-hover > div {
+    margin: 3px auto;
+  }
+
+  .artist-list, .time, .place {
+    font-size: 14px;
+  }
+
+  .more-events div {
+    height: 50px;
+    line-height: 50px;
+    margin: 10px auto;
+  }
+
+  .search-bar .form-group > div {
+    text-align: center;
+  }
+}
+
+@media (min-width: 767.98px) and (max-width: 929.9px) {
+  .event-hover .price p {
+    font-size: 12px;
+  }
+
+  .event-hover > div {
+    margin: 3px auto;
+  }
+
+  .artist-list, .time, .place {
+    font-size: 14px;
+  }
+
+  #mobile-indicator {
+    display: block;
+  }
+}
+
+@media (min-width: 930px) {
+  .event-hover span {
+    font-size: 16px;
+  }
+
+  .event-hover > div {
+    margin: 7px auto;
+  }
+
+  .event-hover .price p {
+    font-size: 14px;
+  }
+
+  .event-hover .place p {
+    display: block;
+  }
+
+  .event-hover .time p {
+    display: block;
+  }
+
+  #mobile-indicator {
+    display: block;
+  }
 }

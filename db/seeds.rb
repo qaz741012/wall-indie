@@ -16,7 +16,11 @@ User.create(
   email: "qwe@qwe.qwe",
   password: "qweqwe",
   role: "admin",
+<<<<<<< HEAD
   avatar: File.open("#{Rails.root}/app/assets/images/pic1_008.jpg"),
+=======
+  avatar: File.new(Rails.root.join('app', 'assets', 'images', "pic1_008.jpg")),
+>>>>>>> 0e34d2fd5419b76d9f4b763a2896f8df38cedbb2
   # 繞過使用者email認證
   confirmed_at: Time.now
   )
@@ -30,7 +34,11 @@ User.create(
   email: "123@123.123",
   password: "123123",
   role: "normal",
+<<<<<<< HEAD
   avatar: File.open("#{Rails.root}/app/assets/images/pic1_008.jpg"),
+=======
+  avatar: File.new(Rails.root.join('app', 'assets', 'images', "pic1_012.jpg")),
+>>>>>>> 0e34d2fd5419b76d9f4b763a2896f8df38cedbb2
   # 繞過使用者email認證
   confirmed_at: Time.now
   )

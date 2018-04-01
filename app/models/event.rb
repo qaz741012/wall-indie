@@ -1,11 +1,13 @@
+# Event
 class Event < ApplicationRecord
-  #carrierwave掛載
+  scope :feature, -> { where(feature: true) }
+  # carrierwave mount
   mount_uploader :photo, PhotoUploader
 
   has_many :shows, dependent: :destroy
   has_many :artists, through: :shows
 
-  #user follow event
+  # user follow event
   has_many :event_followships, dependent: :destroy
   has_many :event_followed, through: :event_followships, source: :user
 
@@ -13,7 +15,6 @@ class Event < ApplicationRecord
   has_many :places, through: :cessions
 
   def gmaps4rails_infowindow
-    "#{self.name}"
+    " #{name} "
   end
-
 end

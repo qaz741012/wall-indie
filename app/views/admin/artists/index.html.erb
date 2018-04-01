@@ -18,37 +18,31 @@
       <table class="table table-striped table-bordered">
         <thead>
           <tr>
-            <th class = "w-6">ID</th>
-            <th>Event</th>
+            <th>ID</th>
+            <th>Artist</th>
             <th>Photo</th>
-            <th>intro</th>
-            <th colspan="3">Time</th>
-            <th>Organizer</th>
-            <th>Price</th>
-            <th>Ticket_link</th>
-            <th>Feature?</th>
-            <th>edit</th>
+            <th>Intro</th>
+            <th>Followed</th>
+            <th>Favorited</th>
+            <th>Youtube</th>
+            <th>Edit</th>
           </tr>
         </thead>
 
         <tbody>
-          <% @events.each do |event| %>
+          <% @artists.each do |artist| %>
           <tr>
             <!-- 推播數量、關注人數、跟隨者人數、推播被like的數量 -->
             <!-- 管理者可以瀏覽站內所有的使用者清單，該清單按推播文數排序 -->
-            <th scope="row"><%= event.id %></th>
-            <td>[<%= link_to event.name, event_path(event) %>]</td>
-            <td><%= image_tag event.photo, class: 'avatar-navi rounded' %></td>
-            <td><%= event.intro %></td>
-            <td><%= event.date %></td>
-            <td><%= event.week %></td>
-            <td><%= event.time %></td>
-            <td><%= event.organizer %></td>
-            <td><%= event.price %></td>
-            <td><%= event.ticket_link %></td>
-            <td><%= event.feature %></td>
+            <th scope="row"><%= artist.id %></th>
+            <td>[<%= link_to artist.name, artist_path(artist) %>]</td>
+            <td><%= image_tag artist.photo, class: "avatar-navi rounded" %></td>
+            <td><%= artist.intro%></td>
+            <td><%= artist.artist_followships_count %></td>
+            <td><%= artist.favorits_count %></td>
+            <td><%= artist.youtube_link %></td>
             <td>
-              <%= link_to 'Edit', edit_admin_event_path(event) %>
+              <%= link_to 'Edit', edit_admin_artist_path(artist) %>
             </td>
           </tr>
           <% end %>
