@@ -1,10 +1,40 @@
-<div class="row">
-  <% @followed_events.each do |event| %>
+<!-- carousel -->
+<%#= render "shared/carousel", events: ? %>
+<%#= render partial: "shared/carousel" %>
+<div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
+  <div class="carousel-inner">
+    <% for item in 0..events.length/3-1 %>
+      <div class="carousel-item <%= %s(active) if item==0 %>">
+        <div class="row">
+          <% events[item*3,3].each do |event| %>
+            <div class="col-md-4">
+              <%= render partial: "shared/event_template", locals: {event: event}%>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev" style="color: yellow">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+<!-- carousel -->
+
+<!-- <div class="row">
+  <%# events.each do |event| %>
     <div class="col-md-4">
-      <%= render partial: "shared/event_template", locals: {event: event} %>
+      <%#= render partial: "shared/event_template", locals: {event: event} %>
     </div>
-  <% end %>
+  <%# end %>
 </div>
 
 <div class="clearfix"></div>
-<br />
+<br /> -->
+
