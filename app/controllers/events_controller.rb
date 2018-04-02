@@ -95,6 +95,6 @@ class EventsController < ApplicationController
   end
 
   def ransack_params
-    params.require(:q).permit(*DATA_QUERIES)
+    params.require(:q).permit(*DATA_QUERIES) if params[:q].present?
   end
 end
