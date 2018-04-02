@@ -3,11 +3,13 @@ class EventsController < ApplicationController
   before_action :set_event, only: %i[follow unfollow show]
   before_action :authenticate_user!, only: %i[follow unfollow]
 
+  DATA_QUERIES = %w[s name_cont intro_cont date_cont time_cont ticket_link_cont price_cont name_or_intro_or_date_or_time_or_ticket_link_or_price_cont].freeze
+
   def index
     # application template flag
     @fix = true
     @feature_events = Event.feature
-    sorting_event(params[:q])
+    sorting_event(ransack_params)
     @places = Place.all
     build_markers(@places)
   end
@@ -90,5 +92,9 @@ class EventsController < ApplicationController
 
     return unless params.nil? || params.values[0].blank?
     @events = Event.where('date >= ?', Date.today).order(date: :asc).limit(8)
+  end
+
+  def ransack_params
+    params.require(:q).permit(*DATA_QUERIES) if params[:q].present?
   end
 end

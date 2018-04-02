@@ -54,11 +54,11 @@ ActiveRecord::Schema.define(version: 20180331064537) do
     t.string "organizer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "week"
-    t.string "price"
     t.string "address"
     t.float "latitude"
     t.float "longitude"
+    t.string "week"
+    t.string "price"
     t.boolean "feature"
   end
 

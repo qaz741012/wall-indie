@@ -1,16 +1,15 @@
+# 1234
 class FriendshipsController < ApplicationController
   def create
     @user = User.find(params[:friend_id])
     unless @user == current_user
-      @friendship = current_user.friendships.build(friend_id: params[:friend_id])
-      
+      @friendship = current_user.build(friend_id: params[:friend_id])
       if @friendship.save
         flash[:notice] = "Successfully friended #{@friendship.friend.name}"
-        redirect_back(fallback_location: root_path)
       else
         flash[:alert] = @friendship.errors.full_messages.to_sentence
-        redirect_back(fallback_location: root_path)
       end
+      redirect_back(fallback_location: root_path)
     else
       flash[:notice] = "You can't follow yourself."
       redirect_back(fallback_location: root_path)
