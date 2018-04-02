@@ -25,9 +25,11 @@
 
       <div class="carousel-inner" style="background-color: lightgray">
         <% @feature_events.each_with_index do |feature,i| %>
-          <div class="carousel-item <%= %s(active) if i==0%>">
-            <%= image_tag feature.photo, alt:feature.name %>
-          </div>
+          <%= link_to event_path(feature) do%>
+            <div class="carousel-item <%= %s(active) if i==0%>">
+              <%= image_tag feature.photo, alt:feature.name %>
+            </div>
+            <% end %>
         <% end %>
       </div>
 
