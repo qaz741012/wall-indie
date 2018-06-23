@@ -62,7 +62,7 @@
 首先將Rails專案透過git clone下載到本地端(local)
 
 ```
-  $ git clone 
+  $ git clone
 ```
 
 並執行`bundle install`安裝它。
@@ -95,7 +95,7 @@
 ```
   spotify_config = Rails.application.config_for(:spotify)
   config.omniauth :spotify,
-  spotify_config["client_id"], 
+  spotify_config["client_id"],
   spotify_config["client_secret"],
   scope: 'user-read-private playlist-read-private user-read-email user-follow-modify user-library-modify'
 ```
@@ -143,5 +143,4 @@ development:
 
 <h2 id="D">D. Website</h2>
 
-[The wall indie 音樂展演資訊平台]()
-
+[The wall indie 音樂展演資訊平台](https://wall-indie-mth.herokuapp.com/artists/171)
