@@ -143,4 +143,4 @@ development:
 
 <h2 id="D">D. Website</h2>
 
-[The wall indie 音樂展演資訊平台](https://wall-indie-mth.herokuapp.com/artists/171)
+[The wall indie 音樂展演資訊平台](https://wall-indie-mth.herokuapp.com/)
